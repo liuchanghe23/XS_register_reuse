@@ -1,0 +1,2 @@
+int_regs,float_regs,slices,geometric_mean_ipc_ratio,max_ipc_loss,mean_standalone_fraction
+224,256,1,1.0,0.0,0.19646687697160883

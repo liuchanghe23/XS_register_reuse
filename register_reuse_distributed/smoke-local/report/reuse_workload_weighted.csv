@@ -1,0 +1,3 @@
+workload,int_regs,float_regs,matched_slices,expected_slices,selected_weight,expected_selected_weight,complete,off_cpi,certain_cpi,speedup,change_percent
+bwaves,192,208,1,1,0.706046,0.706046,True,0.3905414187871819,0.3767934809778533,1.0364866657821414,3.6486665782141436
+bwaves,224,256,1,1,0.706046,0.706046,True,0.3961905714142879,0.3872419137129431,1.0231087012651692,2.3108701265169174

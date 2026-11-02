@@ -1,0 +1,27 @@
+{
+  "revision": "9c35c169c9b6acba4605f73861ef5d4ef2009a77",
+  "binary": "/nfs/home/liuchanghe/register_reuse/register_reuse_feature/build/RISCV/gem5.opt",
+  "binary_sha256": "e382453a2ec19d1adeb83d7a133385a505c934a4b0623586dff06088879a25b7",
+  "source_files": {
+    "src/cpu/o3/BaseO3CPU.py": "c8644c1ac576ad296523e127d654e3435c8ea7b7eca14b796256297ce142d5db",
+    "src/cpu/o3/SConscript": "d5fee952e6f1a7cf73ca0971d926f7f53cf107a1c859a13ffd3e7482282ca620",
+    "src/cpu/o3/commit.cc": "efba6fbdeb29203ff7f11e30c950a735c28daf9aa7f4422d72b8b88154890cda",
+    "src/cpu/o3/cpu.cc": "3bb00d8c4d34894eceaaa0f0d9cff4ad3f31257b13034dd33773fbebd3fb2965",
+    "src/cpu/o3/cpu.hh": "3bbe5899cc593e9113663219c4328e2989a54335318a660e04c93c8578a4fc7f",
+    "src/cpu/o3/dyn_inst.hh": "ea575fa9d7e593f7cafe38b01ee13e86aa77b960c33ef0136102ab787f486c4a",
+    "src/cpu/o3/iew.cc": "640b92035cef9225a34aa5908ab76a3a17362d3eac9747956ebe2122dceb2a8a",
+    "src/cpu/o3/inst_queue.cc": "0815c15867402b67a64b719e5d56c8555eeef7ac6e9533a03eb6163535c0559b",
+    "src/cpu/o3/regfile.cc": "58bf88699d6566b6a091451dee502446884dfca58b9bc81d58178906e333010a",
+    "src/cpu/o3/regfile.hh": "b9232a77c9b9a400576b71095628512d7e2c39160d351f0d4eb8399ba2cf0975",
+    "src/cpu/o3/register_pressure.cc": "184316e7a0d907d06d77343617001d2bbb4f7b89025f6e26bdd71fb5ac7fa499",
+    "src/cpu/o3/register_pressure.hh": "5e28b7957a9d6150a63ba6270bd921957903421bdea1b0952ea93413e6367d04",
+    "src/cpu/o3/register_reuse.cc": "0d7400b5855727d90be90c834f7fa66f972b93fa6fcdf591c062444664d888d2",
+    "src/cpu/o3/register_reuse.hh": "46684cdf74352344ae7a318d7c14b41aab349dee53cd368513d395d529bb049f",
+    "src/cpu/o3/register_reuse_state.hh": "92f053e70c45cfe19bfe8838b0405ad858c1354904c74b648d5fb80f72dde72e",
+    "src/cpu/o3/register_reuse_state.test.cc": "94baa715aae273c7ce6ead304f592630b6e7045989a4bae8a57f89a23e700b1f",
+    "src/cpu/o3/rename.cc": "37ade6debd76a4d07d0fec0a7752a1d1bce9250759fae2c334e44fbc94aa2e35",
+    "src/cpu/o3/rename.hh": "e02f9baf90fd02e1afd6933e754370003223512b7171db6dc3d81a5afb126573",
+    "src/cpu/reg_class.hh": "080b20feddb7867911de7d4886af0bd91878a772ecb7d8d8ca3dfdfb5fb049f7",
+    "tests/test-progs/register-reuse/reuse.S": "d3f1f814551bafa75732c6fbe9c5a74f2f7f33126ffc88ee27469f93996de323"
+  }
+}

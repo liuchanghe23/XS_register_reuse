@@ -1,0 +1,52 @@
+# Build outputs and local tooling.
+/build/
+/GEM5/build/
+**/__pycache__/
+*.py[cod]
+**/.venv*/
+**/.pytest_cache/
+**/.mypy_cache/
+*.log
+*.elf
+*.bin
+*.o
+*.a
+*.so
+*.so.*
+*.core
+core
+
+# External checkouts, datasets, and downloaded tools.
+/XiangShan-RTL/
+/XiangShan-IntER/
+/xs-env/
+/zstd-checkpoint-0-0-0
+/parallel-20261022/
+/parallel-latest.tar.bz2
+/A_Novel_Register_Renaming_Technique_for_Out-of-Order_Processors.pdf
+/GEM5/ext/dramsim3/DRAMsim3
+/dramsim3.json
+/dramsim3.txt
+
+# Capacity experiments: keep root summaries/manifests, omit per-run trees.
+/register_reuse_analysis/*/*/
+!/register_reuse_analysis/large-launcher-smoke/capacity-summary/
+
+# Feature experiments: keep source, validation, and summary files.
+/register_reuse_feature/build/
+/register_reuse_feature/reuse-state-tests
+/register_reuse_feature/*-tests/
+/register_reuse_feature/old-binary-baseline*/
+/register_reuse_feature/performance-*/*/
+/register_reuse_feature/spec-smoke/*/
+/register_reuse_feature/mechanism-proof/*/
+
+# Distributed batches: keep plans, launchers, reports, and derived figures.
+/register_reuse_distributed/*/results/
+/register_reuse_distributed/*/shards/
+
+# Last-consumer screening: keep analyses, omit raw traces and simulator output.
+/register_reuse_last_consumer/probe/
+/register_reuse_last_consumer/slices-1m/*/
+!/register_reuse_last_consumer/slices-1m/opportunity-summary/
+/register_reuse_last_consumer/synthetic-validation/*/

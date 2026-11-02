@@ -1,0 +1,3 @@
+workload,variant,slices,selected_weight,weighted_cpi,weighted_ipc,weighted_regfull_fraction
+mcf,baseline,1,0.137576,2.29235,0.43623355944772835,0.0
+mcf,large,1,0.137576,2.273835476709534,0.4397855562738863,0.0

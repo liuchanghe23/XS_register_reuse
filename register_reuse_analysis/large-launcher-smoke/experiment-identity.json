@@ -1,0 +1,28 @@
+{
+  "repo": "/nfs/home/liuchanghe/register_reuse/GEM5",
+  "gem5": "/nfs/home/liuchanghe/register_reuse/build/RISCV/gem5.opt",
+  "binary_sha256": "e02bb0357d99cbb178ba2fa6f51ec3523e4167d54994b2e94fe7e18b7c1b8a37",
+  "checkpoints": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0",
+  "checkpoint_metadata_sha256": "02b9351b8ca867cf001073869c5fcaa9f01fced3d943da225ffddbbd060b5806",
+  "reference": "/nfs/home/share/gem5_ci/ref/normal/riscv64-nemu-interpreter-so",
+  "reference_sha256": "3650e3ce267e333593c5a04f69640ee27e83d8a8352bdebaa0e1ac2e54bc8df9",
+  "difftest": true,
+  "trace": false,
+  "capacity_points": [
+    [
+      "baseline",
+      224,
+      256
+    ]
+  ],
+  "selected": [
+    {
+      "workload": "bwaves",
+      "point": "37801",
+      "weight": 0.706046,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bwaves/37801/_37801_0.706046_.zstd"
+    }
+  ],
+  "warmup": 10000,
+  "measure": 20000
+}

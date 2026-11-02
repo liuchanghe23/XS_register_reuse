@@ -1,0 +1,9 @@
+workload,point,variant,ipc_speedup,baseline_regfull_fraction,variant_regfull_fraction
+GemsFDTD,30385,large,1.0074949193828198,0.0,0.0
+bwaves,37801,large,1.0216805959821478,0.0,0.0
+bzip2_combined,7116,large,1.02817719782143,0.0,0.0
+gcc_166,2766,large,1.0185521069501993,0.0,0.0
+hmmer_nph3,2887,large,1.0068506768536063,0.0,0.0
+leslie3d,68289,large,1.010487595237806,0.0,0.0
+libquantum,64624,large,0.9829766137508199,0.0,0.0
+mcf,12253,large,1.0081424199244433,0.0,0.0

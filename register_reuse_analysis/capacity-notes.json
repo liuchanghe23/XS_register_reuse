@@ -1,0 +1,10 @@
+{
+  "observer_correction": "Legacy RegFull attributes capacity-check failures to ROB/LSQ head stall reasons and undercounts physical-capacity backpressure. Use observer schema >=2 for new experiments.",
+  "measurement": "same checkpoint, warmup 1M instructions, measure 1M instructions",
+  "coarse_points": "224/256 baseline; 512/512 high reference; joint 192,160,128,96,64",
+  "thresholds": {
+    "pressure": "standalone capacity blocked cycles >=1% of total cycles",
+    "performance": "IPC loss >1% and >5% versus the same-slice default configuration"
+  },
+  "limits": "selected top-weight slice per workload, not full SPEC; simulator capacity only, no area or clock modeling"
+}

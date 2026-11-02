@@ -1,0 +1,42 @@
+{
+  "case": "certain",
+  "command": [
+    "/nfs/home/liuchanghe/register_reuse/register_reuse_feature/build/RISCV/gem5.opt",
+    "--outdir=/nfs/home/liuchanghe/register_reuse/register_reuse_feature/tests/certain",
+    "/nfs/home/liuchanghe/register_reuse/GEM5/configs/example/kmhv3.py",
+    "--raw-cpt",
+    "--generic-rv-cpt=/nfs/home/liuchanghe/register_reuse/register_reuse_feature/reuse.bin",
+    "--warmup-insts-no-switch=0",
+    "--maxinsts=100000",
+    "--difftest-ref-so=/nfs/home/share/gem5_ci/ref/normal/riscv64-nemu-interpreter-so",
+    "--param",
+    "system.cpu[0].enableRegisterReuse=True",
+    "--param",
+    "system.cpu[0].regReusePrediction=False",
+    "--param",
+    "system.cpu[0].regReuseShadowCopies=3",
+    "--param",
+    "system.cpu[0].numPhysIntRegs=224",
+    "--param",
+    "system.cpu[0].numPhysFloatRegs=256"
+  ],
+  "returncode": 0,
+  "elapsed": 5.1243911646306515,
+  "ok": true,
+  "cycles": 10193.0,
+  "instructions": 5711.0,
+  "reuse_stats": {
+    "allocatedSlots": 11601.0,
+    "sharedVersions": 4698.0,
+    "deterministicReuses": 4698.0,
+    "predictedReuses": 0.0,
+    "predictionMisses": 0.0,
+    "repairCopies": 0.0,
+    "repairWaitCycles": 0.0,
+    "aliasRejects": 0.0,
+    "versionLimitRejects": 1381.0,
+    "squashEvents": 136.0,
+    "restoredGroups": 1934.0,
+    "returnedSlots": 11584.0
+  }
+}

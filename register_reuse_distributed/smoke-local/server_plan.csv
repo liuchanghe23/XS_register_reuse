@@ -1,0 +1,2 @@
+shard,runs,capacity,reuse,max_runs_per_server,waves,nominal_hours,budget_hours
+0,8,4,4,8,4,0.011111111111111112,0.013888888888888888

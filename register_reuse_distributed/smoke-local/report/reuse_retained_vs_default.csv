@@ -1,0 +1,2 @@
+workload,int_regs,float_regs,matched_slices,expected_slices,complete,selected_weight,default_off_cpi,reduced_certain_cpi,ipc_ratio_to_default_off,change_percent
+bwaves,192,208,1,1,True,0.706046,0.3961905714142879,0.3767934809778533,1.0514793684489852,5.147936844898515

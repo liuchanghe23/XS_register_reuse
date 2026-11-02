@@ -1,0 +1,3621 @@
+{
+  "repo": "/nfs/home/liuchanghe/register_reuse/GEM5",
+  "gem5": "/nfs/home/liuchanghe/register_reuse/build/RISCV/gem5.opt",
+  "binary_sha256": "e02bb0357d99cbb178ba2fa6f51ec3523e4167d54994b2e94fe7e18b7c1b8a37",
+  "checkpoints": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0",
+  "checkpoint_metadata_sha256": "02b9351b8ca867cf001073869c5fcaa9f01fced3d943da225ffddbbd060b5806",
+  "reference": "/nfs/home/share/gem5_ci/ref/normal/riscv64-nemu-interpreter-so",
+  "reference_sha256": "3650e3ce267e333593c5a04f69640ee27e83d8a8352bdebaa0e1ac2e54bc8df9",
+  "difftest": true,
+  "trace": false,
+  "capacity_points": [
+    [
+      "baseline",
+      224,
+      256
+    ],
+    [
+      "large",
+      512,
+      512
+    ],
+    [
+      "int128",
+      128,
+      256
+    ],
+    [
+      "int160",
+      160,
+      256
+    ],
+    [
+      "int176",
+      176,
+      256
+    ],
+    [
+      "int192",
+      192,
+      256
+    ],
+    [
+      "int208",
+      208,
+      256
+    ],
+    [
+      "int256",
+      256,
+      256
+    ],
+    [
+      "int288",
+      288,
+      256
+    ],
+    [
+      "int320",
+      320,
+      256
+    ],
+    [
+      "fp160",
+      224,
+      160
+    ],
+    [
+      "fp176",
+      224,
+      176
+    ],
+    [
+      "fp192",
+      224,
+      192
+    ],
+    [
+      "fp208",
+      224,
+      208
+    ],
+    [
+      "fp224",
+      224,
+      224
+    ],
+    [
+      "fp240",
+      224,
+      240
+    ],
+    [
+      "fp272",
+      224,
+      272
+    ],
+    [
+      "fp288",
+      224,
+      288
+    ],
+    [
+      "fp320",
+      224,
+      320
+    ],
+    [
+      "mixed192_208",
+      192,
+      208
+    ]
+  ],
+  "selected": [
+    {
+      "workload": "GemsFDTD",
+      "point": "30385",
+      "weight": 0.26818,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/GemsFDTD/30385/_30385_0.268180_.zstd"
+    },
+    {
+      "workload": "GemsFDTD",
+      "point": "59041",
+      "weight": 0.203022,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/GemsFDTD/59041/_59041_0.203022_.zstd"
+    },
+    {
+      "workload": "GemsFDTD",
+      "point": "28980",
+      "weight": 0.0442305,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/GemsFDTD/28980/_28980_0.044230_.zstd"
+    },
+    {
+      "workload": "GemsFDTD",
+      "point": "37781",
+      "weight": 0.0419781,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/GemsFDTD/37781/_37781_0.041978_.zstd"
+    },
+    {
+      "workload": "GemsFDTD",
+      "point": "12860",
+      "weight": 0.0400351,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/GemsFDTD/12860/_12860_0.040035_.zstd"
+    },
+    {
+      "workload": "GemsFDTD",
+      "point": "46587",
+      "weight": 0.0376962,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/GemsFDTD/46587/_46587_0.037696_.zstd"
+    },
+    {
+      "workload": "GemsFDTD",
+      "point": "24123",
+      "weight": 0.0337978,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/GemsFDTD/24123/_24123_0.033798_.zstd"
+    },
+    {
+      "workload": "GemsFDTD",
+      "point": "24844",
+      "weight": 0.0296644,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/GemsFDTD/24844/_24844_0.029664_.zstd"
+    },
+    {
+      "workload": "GemsFDTD",
+      "point": "18871",
+      "weight": 0.0296644,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/GemsFDTD/18871/_18871_0.029664_.zstd"
+    },
+    {
+      "workload": "GemsFDTD",
+      "point": "42698",
+      "weight": 0.0293797,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/GemsFDTD/42698/_42698_0.029380_.zstd"
+    },
+    {
+      "workload": "GemsFDTD",
+      "point": "28687",
+      "weight": 0.0280308,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/GemsFDTD/28687/_28687_0.028031_.zstd"
+    },
+    {
+      "workload": "GemsFDTD",
+      "point": "76905",
+      "weight": 0.0264838,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/GemsFDTD/76905/_76905_0.026484_.zstd"
+    },
+    {
+      "workload": "astar_biglakes",
+      "point": "3267",
+      "weight": 0.388983,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/astar_biglakes/3267/_3267_0.388983_.zstd"
+    },
+    {
+      "workload": "astar_biglakes",
+      "point": "562",
+      "weight": 0.202736,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/astar_biglakes/562/_562_0.202736_.zstd"
+    },
+    {
+      "workload": "astar_biglakes",
+      "point": "13437",
+      "weight": 0.10817,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/astar_biglakes/13437/_13437_0.108170_.zstd"
+    },
+    {
+      "workload": "astar_biglakes",
+      "point": "7756",
+      "weight": 0.106396,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/astar_biglakes/7756/_7756_0.106396_.zstd"
+    },
+    {
+      "workload": "astar_rivers",
+      "point": "9999",
+      "weight": 0.357816,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/astar_rivers/9999/_9999_0.357816_.zstd"
+    },
+    {
+      "workload": "astar_rivers",
+      "point": "3208",
+      "weight": 0.233246,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/astar_rivers/3208/_3208_0.233246_.zstd"
+    },
+    {
+      "workload": "astar_rivers",
+      "point": "17784",
+      "weight": 0.135475,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/astar_rivers/17784/_17784_0.135475_.zstd"
+    },
+    {
+      "workload": "astar_rivers",
+      "point": "26625",
+      "weight": 0.0828058,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/astar_rivers/26625/_26625_0.082806_.zstd"
+    },
+    {
+      "workload": "bwaves",
+      "point": "37801",
+      "weight": 0.706046,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bwaves/37801/_37801_0.706046_.zstd"
+    },
+    {
+      "workload": "bwaves",
+      "point": "23357",
+      "weight": 0.0626023,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bwaves/23357/_23357_0.062602_.zstd"
+    },
+    {
+      "workload": "bwaves",
+      "point": "28874",
+      "weight": 0.0394916,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bwaves/28874/_28874_0.039492_.zstd"
+    },
+    {
+      "workload": "bzip2_chicken",
+      "point": "2820",
+      "weight": 0.251106,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_chicken/2820/_2820_0.251106_.zstd"
+    },
+    {
+      "workload": "bzip2_chicken",
+      "point": "3301",
+      "weight": 0.196239,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_chicken/3301/_3301_0.196239_.zstd"
+    },
+    {
+      "workload": "bzip2_chicken",
+      "point": "3610",
+      "weight": 0.165265,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_chicken/3610/_3610_0.165265_.zstd"
+    },
+    {
+      "workload": "bzip2_chicken",
+      "point": "4612",
+      "weight": 0.0644912,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_chicken/4612/_4612_0.064491_.zstd"
+    },
+    {
+      "workload": "bzip2_chicken",
+      "point": "4358",
+      "weight": 0.0507743,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_chicken/4358/_4358_0.050774_.zstd"
+    },
+    {
+      "workload": "bzip2_chicken",
+      "point": "813",
+      "weight": 0.0445796,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_chicken/813/_813_0.044580_.zstd"
+    },
+    {
+      "workload": "bzip2_chicken",
+      "point": "6137",
+      "weight": 0.0412611,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_chicken/6137/_6137_0.041261_.zstd"
+    },
+    {
+      "workload": "bzip2_combined",
+      "point": "7116",
+      "weight": 0.197169,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_combined/7116/_7116_0.197169_.zstd"
+    },
+    {
+      "workload": "bzip2_combined",
+      "point": "12694",
+      "weight": 0.14641,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_combined/12694/_12694_0.146410_.zstd"
+    },
+    {
+      "workload": "bzip2_combined",
+      "point": "16712",
+      "weight": 0.104337,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_combined/16712/_16712_0.104337_.zstd"
+    },
+    {
+      "workload": "bzip2_combined",
+      "point": "2144",
+      "weight": 0.0662117,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_combined/2144/_2144_0.066212_.zstd"
+    },
+    {
+      "workload": "bzip2_combined",
+      "point": "5721",
+      "weight": 0.0548192,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_combined/5721/_5721_0.054819_.zstd"
+    },
+    {
+      "workload": "bzip2_combined",
+      "point": "8340",
+      "weight": 0.0547064,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_combined/8340/_8340_0.054706_.zstd"
+    },
+    {
+      "workload": "bzip2_combined",
+      "point": "3615",
+      "weight": 0.0484462,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_combined/3615/_3615_0.048446_.zstd"
+    },
+    {
+      "workload": "bzip2_combined",
+      "point": "3734",
+      "weight": 0.0362078,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_combined/3734/_3734_0.036208_.zstd"
+    },
+    {
+      "workload": "bzip2_combined",
+      "point": "1118",
+      "weight": 0.0322599,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_combined/1118/_1118_0.032260_.zstd"
+    },
+    {
+      "workload": "bzip2_combined",
+      "point": "6624",
+      "weight": 0.0273532,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_combined/6624/_6624_0.027353_.zstd"
+    },
+    {
+      "workload": "bzip2_combined",
+      "point": "10759",
+      "weight": 0.0261689,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_combined/10759/_10759_0.026169_.zstd"
+    },
+    {
+      "workload": "bzip2_combined",
+      "point": "4027",
+      "weight": 0.0218262,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_combined/4027/_4027_0.021826_.zstd"
+    },
+    {
+      "workload": "bzip2_html",
+      "point": "12894",
+      "weight": 0.292959,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_html/12894/_12894_0.292959_.zstd"
+    },
+    {
+      "workload": "bzip2_html",
+      "point": "9573",
+      "weight": 0.165534,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_html/9573/_9573_0.165534_.zstd"
+    },
+    {
+      "workload": "bzip2_html",
+      "point": "2892",
+      "weight": 0.08373,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_html/2892/_2892_0.083730_.zstd"
+    },
+    {
+      "workload": "bzip2_html",
+      "point": "18566",
+      "weight": 0.0829045,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_html/18566/_18566_0.082905_.zstd"
+    },
+    {
+      "workload": "bzip2_html",
+      "point": "29915",
+      "weight": 0.0735217,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_html/29915/_29915_0.073522_.zstd"
+    },
+    {
+      "workload": "bzip2_html",
+      "point": "12420",
+      "weight": 0.0550863,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_html/12420/_12420_0.055086_.zstd"
+    },
+    {
+      "workload": "bzip2_html",
+      "point": "34556",
+      "weight": 0.0415211,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_html/34556/_34556_0.041521_.zstd"
+    },
+    {
+      "workload": "bzip2_html",
+      "point": "22657",
+      "weight": 0.0252318,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_html/22657/_22657_0.025232_.zstd"
+    },
+    {
+      "workload": "bzip2_liberty",
+      "point": "4623",
+      "weight": 0.329457,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_liberty/4623/_4623_0.329457_.zstd"
+    },
+    {
+      "workload": "bzip2_liberty",
+      "point": "14837",
+      "weight": 0.140586,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_liberty/14837/_14837_0.140586_.zstd"
+    },
+    {
+      "workload": "bzip2_liberty",
+      "point": "8743",
+      "weight": 0.0752858,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_liberty/8743/_8743_0.075286_.zstd"
+    },
+    {
+      "workload": "bzip2_liberty",
+      "point": "10140",
+      "weight": 0.0710156,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_liberty/10140/_10140_0.071016_.zstd"
+    },
+    {
+      "workload": "bzip2_liberty",
+      "point": "6736",
+      "weight": 0.0677309,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_liberty/6736/_6736_0.067731_.zstd"
+    },
+    {
+      "workload": "bzip2_liberty",
+      "point": "1028",
+      "weight": 0.0671397,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_liberty/1028/_1028_0.067140_.zstd"
+    },
+    {
+      "workload": "bzip2_liberty",
+      "point": "8695",
+      "weight": 0.0564972,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_liberty/8695/_8695_0.056497_.zstd"
+    },
+    {
+      "workload": "bzip2_program",
+      "point": "16771",
+      "weight": 0.176121,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_program/16771/_16771_0.176121_.zstd"
+    },
+    {
+      "workload": "bzip2_program",
+      "point": "19673",
+      "weight": 0.104288,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_program/19673/_19673_0.104288_.zstd"
+    },
+    {
+      "workload": "bzip2_program",
+      "point": "1805",
+      "weight": 0.0897391,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_program/1805/_1805_0.089739_.zstd"
+    },
+    {
+      "workload": "bzip2_program",
+      "point": "1370",
+      "weight": 0.0870812,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_program/1370/_1370_0.087081_.zstd"
+    },
+    {
+      "workload": "bzip2_program",
+      "point": "1766",
+      "weight": 0.0646289,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_program/1766/_1766_0.064629_.zstd"
+    },
+    {
+      "workload": "bzip2_program",
+      "point": "5583",
+      "weight": 0.0592082,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_program/5583/_5583_0.059208_.zstd"
+    },
+    {
+      "workload": "bzip2_program",
+      "point": "26044",
+      "weight": 0.0571798,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_program/26044/_26044_0.057180_.zstd"
+    },
+    {
+      "workload": "bzip2_program",
+      "point": "15007",
+      "weight": 0.0522837,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_program/15007/_15007_0.052284_.zstd"
+    },
+    {
+      "workload": "bzip2_program",
+      "point": "10605",
+      "weight": 0.0510946,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_program/10605/_10605_0.051095_.zstd"
+    },
+    {
+      "workload": "bzip2_program",
+      "point": "9160",
+      "weight": 0.0383647,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_program/9160/_9160_0.038365_.zstd"
+    },
+    {
+      "workload": "bzip2_program",
+      "point": "13476",
+      "weight": 0.0315101,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_program/13476/_13476_0.031510_.zstd"
+    },
+    {
+      "workload": "bzip2_source",
+      "point": "8439",
+      "weight": 0.308769,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_source/8439/_8439_0.308769_.zstd"
+    },
+    {
+      "workload": "bzip2_source",
+      "point": "22151",
+      "weight": 0.0928459,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_source/22151/_22151_0.092846_.zstd"
+    },
+    {
+      "workload": "bzip2_source",
+      "point": "5008",
+      "weight": 0.0682664,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_source/5008/_5008_0.068266_.zstd"
+    },
+    {
+      "workload": "bzip2_source",
+      "point": "16593",
+      "weight": 0.0649024,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_source/16593/_16593_0.064902_.zstd"
+    },
+    {
+      "workload": "bzip2_source",
+      "point": "5655",
+      "weight": 0.0519399,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_source/5655/_5655_0.051940_.zstd"
+    },
+    {
+      "workload": "bzip2_source",
+      "point": "4063",
+      "weight": 0.0470509,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_source/4063/_4063_0.047051_.zstd"
+    },
+    {
+      "workload": "bzip2_source",
+      "point": "11803",
+      "weight": 0.0451671,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_source/11803/_11803_0.045167_.zstd"
+    },
+    {
+      "workload": "bzip2_source",
+      "point": "1947",
+      "weight": 0.0336398,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_source/1947/_1947_0.033640_.zstd"
+    },
+    {
+      "workload": "bzip2_source",
+      "point": "5329",
+      "weight": 0.032967,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_source/5329/_5329_0.032967_.zstd"
+    },
+    {
+      "workload": "bzip2_source",
+      "point": "10285",
+      "weight": 0.028706,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_source/10285/_10285_0.028706_.zstd"
+    },
+    {
+      "workload": "bzip2_source",
+      "point": "13103",
+      "weight": 0.027495,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bzip2_source/13103/_13103_0.027495_.zstd"
+    },
+    {
+      "workload": "cactusADM",
+      "point": "128904",
+      "weight": 0.670681,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/cactusADM/128904/_128904_0.670681_.zstd"
+    },
+    {
+      "workload": "cactusADM",
+      "point": "8673",
+      "weight": 0.280681,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/cactusADM/8673/_8673_0.280681_.zstd"
+    },
+    {
+      "workload": "calculix",
+      "point": "13476",
+      "weight": 0.16078,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/calculix/13476/_13476_0.160780_.zstd"
+    },
+    {
+      "workload": "calculix",
+      "point": "28512",
+      "weight": 0.138631,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/calculix/28512/_28512_0.138631_.zstd"
+    },
+    {
+      "workload": "calculix",
+      "point": "3486",
+      "weight": 0.0949495,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/calculix/3486/_3486_0.094950_.zstd"
+    },
+    {
+      "workload": "calculix",
+      "point": "132524",
+      "weight": 0.0794648,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/calculix/132524/_132524_0.079465_.zstd"
+    },
+    {
+      "workload": "calculix",
+      "point": "190163",
+      "weight": 0.068452,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/calculix/190163/_190163_0.068452_.zstd"
+    },
+    {
+      "workload": "calculix",
+      "point": "178881",
+      "weight": 0.0588735,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/calculix/178881/_178881_0.058874_.zstd"
+    },
+    {
+      "workload": "calculix",
+      "point": "17481",
+      "weight": 0.0528532,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/calculix/17481/_17481_0.052853_.zstd"
+    },
+    {
+      "workload": "calculix",
+      "point": "2011",
+      "weight": 0.0475729,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/calculix/2011/_2011_0.047573_.zstd"
+    },
+    {
+      "workload": "calculix",
+      "point": "106060",
+      "weight": 0.0406985,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/calculix/106060/_106060_0.040698_.zstd"
+    },
+    {
+      "workload": "calculix",
+      "point": "218917",
+      "weight": 0.0392505,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/calculix/218917/_218917_0.039251_.zstd"
+    },
+    {
+      "workload": "calculix",
+      "point": "52759",
+      "weight": 0.0369758,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/calculix/52759/_52759_0.036976_.zstd"
+    },
+    {
+      "workload": "dealII",
+      "point": "55586",
+      "weight": 0.124194,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/dealII/55586/_55586_0.124194_.zstd"
+    },
+    {
+      "workload": "dealII",
+      "point": "5820",
+      "weight": 0.110044,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/dealII/5820/_5820_0.110044_.zstd"
+    },
+    {
+      "workload": "dealII",
+      "point": "29521",
+      "weight": 0.100244,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/dealII/29521/_29521_0.100244_.zstd"
+    },
+    {
+      "workload": "dealII",
+      "point": "46368",
+      "weight": 0.0975817,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/dealII/46368/_46368_0.097582_.zstd"
+    },
+    {
+      "workload": "dealII",
+      "point": "14902",
+      "weight": 0.0776399,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/dealII/14902/_14902_0.077640_.zstd"
+    },
+    {
+      "workload": "dealII",
+      "point": "3654",
+      "weight": 0.0772145,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/dealII/3654/_3654_0.077215_.zstd"
+    },
+    {
+      "workload": "dealII",
+      "point": "5489",
+      "weight": 0.0763361,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/dealII/5489/_5489_0.076336_.zstd"
+    },
+    {
+      "workload": "dealII",
+      "point": "14830",
+      "weight": 0.0566413,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/dealII/14830/_14830_0.056641_.zstd"
+    },
+    {
+      "workload": "dealII",
+      "point": "20227",
+      "weight": 0.0435893,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/dealII/20227/_20227_0.043589_.zstd"
+    },
+    {
+      "workload": "dealII",
+      "point": "23676",
+      "weight": 0.0415717,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/dealII/23676/_23676_0.041572_.zstd"
+    },
+    {
+      "workload": "gamess_cytosine",
+      "point": "43625",
+      "weight": 0.083133,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gamess_cytosine/43625/_43625_0.083133_.zstd"
+    },
+    {
+      "workload": "gamess_cytosine",
+      "point": "49357",
+      "weight": 0.0811089,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gamess_cytosine/49357/_49357_0.081109_.zstd"
+    },
+    {
+      "workload": "gamess_cytosine",
+      "point": "60738",
+      "weight": 0.0766336,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gamess_cytosine/60738/_60738_0.076634_.zstd"
+    },
+    {
+      "workload": "gamess_cytosine",
+      "point": "52071",
+      "weight": 0.0713518,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gamess_cytosine/52071/_52071_0.071352_.zstd"
+    },
+    {
+      "workload": "gamess_cytosine",
+      "point": "3449",
+      "weight": 0.0666867,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gamess_cytosine/3449/_3449_0.066687_.zstd"
+    },
+    {
+      "workload": "gamess_cytosine",
+      "point": "51785",
+      "weight": 0.0647258,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gamess_cytosine/51785/_51785_0.064726_.zstd"
+    },
+    {
+      "workload": "gamess_cytosine",
+      "point": "36534",
+      "weight": 0.0628756,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gamess_cytosine/36534/_36534_0.062876_.zstd"
+    },
+    {
+      "workload": "gamess_cytosine",
+      "point": "26402",
+      "weight": 0.0584003,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gamess_cytosine/26402/_26402_0.058400_.zstd"
+    },
+    {
+      "workload": "gamess_cytosine",
+      "point": "54066",
+      "weight": 0.0544468,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gamess_cytosine/54066/_54066_0.054447_.zstd"
+    },
+    {
+      "workload": "gamess_cytosine",
+      "point": "39277",
+      "weight": 0.0513315,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gamess_cytosine/39277/_39277_0.051332_.zstd"
+    },
+    {
+      "workload": "gamess_cytosine",
+      "point": "56612",
+      "weight": 0.0480897,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gamess_cytosine/56612/_56612_0.048090_.zstd"
+    },
+    {
+      "workload": "gamess_cytosine",
+      "point": "44684",
+      "weight": 0.0462237,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gamess_cytosine/44684/_44684_0.046224_.zstd"
+    },
+    {
+      "workload": "gamess_cytosine",
+      "point": "6302",
+      "weight": 0.0444209,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gamess_cytosine/6302/_6302_0.044421_.zstd"
+    },
+    {
+      "workload": "gamess_gradient",
+      "point": "39862",
+      "weight": 0.11873,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gamess_gradient/39862/_39862_0.118730_.zstd"
+    },
+    {
+      "workload": "gamess_gradient",
+      "point": "33957",
+      "weight": 0.0960057,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gamess_gradient/33957/_33957_0.096006_.zstd"
+    },
+    {
+      "workload": "gamess_gradient",
+      "point": "32473",
+      "weight": 0.0898009,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gamess_gradient/32473/_32473_0.089801_.zstd"
+    },
+    {
+      "workload": "gamess_gradient",
+      "point": "16837",
+      "weight": 0.0775907,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gamess_gradient/16837/_16837_0.077591_.zstd"
+    },
+    {
+      "workload": "gamess_gradient",
+      "point": "24975",
+      "weight": 0.06558,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gamess_gradient/24975/_24975_0.065580_.zstd"
+    },
+    {
+      "workload": "gamess_gradient",
+      "point": "30179",
+      "weight": 0.0624476,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gamess_gradient/30179/_30179_0.062448_.zstd"
+    },
+    {
+      "workload": "gamess_gradient",
+      "point": "6989",
+      "weight": 0.0603527,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gamess_gradient/6989/_6989_0.060353_.zstd"
+    },
+    {
+      "workload": "gamess_gradient",
+      "point": "16223",
+      "weight": 0.0509557,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gamess_gradient/16223/_16223_0.050956_.zstd"
+    },
+    {
+      "workload": "gamess_gradient",
+      "point": "44593",
+      "weight": 0.0499182,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gamess_gradient/44593/_44593_0.049918_.zstd"
+    },
+    {
+      "workload": "gamess_gradient",
+      "point": "10637",
+      "weight": 0.0494992,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gamess_gradient/10637/_10637_0.049499_.zstd"
+    },
+    {
+      "workload": "gamess_gradient",
+      "point": "24982",
+      "weight": 0.0368301,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gamess_gradient/24982/_24982_0.036830_.zstd"
+    },
+    {
+      "workload": "gamess_gradient",
+      "point": "24692",
+      "weight": 0.0295679,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gamess_gradient/24692/_24692_0.029568_.zstd"
+    },
+    {
+      "workload": "gamess_gradient",
+      "point": "46374",
+      "weight": 0.0290092,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gamess_gradient/46374/_46374_0.029009_.zstd"
+    },
+    {
+      "workload": "gamess_triazolium",
+      "point": "193880",
+      "weight": 0.109002,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gamess_triazolium/193880/_193880_0.109002_.zstd"
+    },
+    {
+      "workload": "gamess_triazolium",
+      "point": "48031",
+      "weight": 0.0998406,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gamess_triazolium/48031/_48031_0.099841_.zstd"
+    },
+    {
+      "workload": "gamess_triazolium",
+      "point": "63874",
+      "weight": 0.0812589,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gamess_triazolium/63874/_63874_0.081259_.zstd"
+    },
+    {
+      "workload": "gamess_triazolium",
+      "point": "175608",
+      "weight": 0.0779786,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gamess_triazolium/175608/_175608_0.077979_.zstd"
+    },
+    {
+      "workload": "gamess_triazolium",
+      "point": "121985",
+      "weight": 0.0706115,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gamess_triazolium/121985/_121985_0.070611_.zstd"
+    },
+    {
+      "workload": "gamess_triazolium",
+      "point": "5891",
+      "weight": 0.054831,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gamess_triazolium/5891/_5891_0.054831_.zstd"
+    },
+    {
+      "workload": "gamess_triazolium",
+      "point": "104427",
+      "weight": 0.0545719,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gamess_triazolium/104427/_104427_0.054572_.zstd"
+    },
+    {
+      "workload": "gamess_triazolium",
+      "point": "13151",
+      "weight": 0.0530808,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gamess_triazolium/13151/_13151_0.053081_.zstd"
+    },
+    {
+      "workload": "gamess_triazolium",
+      "point": "52813",
+      "weight": 0.0480944,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gamess_triazolium/52813/_52813_0.048094_.zstd"
+    },
+    {
+      "workload": "gamess_triazolium",
+      "point": "14485",
+      "weight": 0.0461145,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gamess_triazolium/14485/_14485_0.046115_.zstd"
+    },
+    {
+      "workload": "gamess_triazolium",
+      "point": "168589",
+      "weight": 0.0428685,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gamess_triazolium/168589/_168589_0.042868_.zstd"
+    },
+    {
+      "workload": "gamess_triazolium",
+      "point": "201860",
+      "weight": 0.0381754,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gamess_triazolium/201860/_201860_0.038175_.zstd"
+    },
+    {
+      "workload": "gamess_triazolium",
+      "point": "127682",
+      "weight": 0.0366208,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gamess_triazolium/127682/_127682_0.036621_.zstd"
+    },
+    {
+      "workload": "gcc_166",
+      "point": "2766",
+      "weight": 0.161613,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_166/2766/_2766_0.161613_.zstd"
+    },
+    {
+      "workload": "gcc_166",
+      "point": "2274",
+      "weight": 0.148349,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_166/2274/_2274_0.148349_.zstd"
+    },
+    {
+      "workload": "gcc_166",
+      "point": "1894",
+      "weight": 0.132377,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_166/1894/_1894_0.132377_.zstd"
+    },
+    {
+      "workload": "gcc_166",
+      "point": "1237",
+      "weight": 0.123714,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_166/1237/_1237_0.123714_.zstd"
+    },
+    {
+      "workload": "gcc_166",
+      "point": "3512",
+      "weight": 0.0709258,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_166/3512/_3512_0.070926_.zstd"
+    },
+    {
+      "workload": "gcc_166",
+      "point": "1361",
+      "weight": 0.0584732,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_166/1361/_1361_0.058473_.zstd"
+    },
+    {
+      "workload": "gcc_166",
+      "point": "3117",
+      "weight": 0.0584732,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_166/3117/_3117_0.058473_.zstd"
+    },
+    {
+      "workload": "gcc_166",
+      "point": "1475",
+      "weight": 0.044667,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_166/1475/_1475_0.044667_.zstd"
+    },
+    {
+      "workload": "gcc_166",
+      "point": "2569",
+      "weight": 0.0433135,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_166/2569/_2569_0.043313_.zstd"
+    },
+    {
+      "workload": "gcc_200",
+      "point": "4784",
+      "weight": 0.195895,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_200/4784/_4784_0.195895_.zstd"
+    },
+    {
+      "workload": "gcc_200",
+      "point": "1562",
+      "weight": 0.115416,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_200/1562/_1562_0.115416_.zstd"
+    },
+    {
+      "workload": "gcc_200",
+      "point": "6317",
+      "weight": 0.100054,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_200/6317/_6317_0.100054_.zstd"
+    },
+    {
+      "workload": "gcc_200",
+      "point": "5114",
+      "weight": 0.0856444,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_200/5114/_5114_0.085644_.zstd"
+    },
+    {
+      "workload": "gcc_200",
+      "point": "1595",
+      "weight": 0.0831974,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_200/1595/_1595_0.083197_.zstd"
+    },
+    {
+      "workload": "gcc_200",
+      "point": "4470",
+      "weight": 0.0660685,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_200/4470/_4470_0.066069_.zstd"
+    },
+    {
+      "workload": "gcc_200",
+      "point": "2872",
+      "weight": 0.057776,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_200/2872/_2872_0.057776_.zstd"
+    },
+    {
+      "workload": "gcc_200",
+      "point": "492",
+      "weight": 0.0523382,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_200/492/_492_0.052338_.zstd"
+    },
+    {
+      "workload": "gcc_200",
+      "point": "5849",
+      "weight": 0.0373844,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_200/5849/_5849_0.037384_.zstd"
+    },
+    {
+      "workload": "gcc_200",
+      "point": "6170",
+      "weight": 0.0367047,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_200/6170/_6170_0.036705_.zstd"
+    },
+    {
+      "workload": "gcc_cpdecl",
+      "point": "2233",
+      "weight": 0.212393,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_cpdecl/2233/_2233_0.212393_.zstd"
+    },
+    {
+      "workload": "gcc_cpdecl",
+      "point": "1410",
+      "weight": 0.113462,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_cpdecl/1410/_1410_0.113462_.zstd"
+    },
+    {
+      "workload": "gcc_cpdecl",
+      "point": "494",
+      "weight": 0.103419,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_cpdecl/494/_494_0.103419_.zstd"
+    },
+    {
+      "workload": "gcc_cpdecl",
+      "point": "4620",
+      "weight": 0.101496,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_cpdecl/4620/_4620_0.101496_.zstd"
+    },
+    {
+      "workload": "gcc_cpdecl",
+      "point": "4360",
+      "weight": 0.0816239,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_cpdecl/4360/_4360_0.081624_.zstd"
+    },
+    {
+      "workload": "gcc_cpdecl",
+      "point": "4171",
+      "weight": 0.0587607,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_cpdecl/4171/_4171_0.058761_.zstd"
+    },
+    {
+      "workload": "gcc_cpdecl",
+      "point": "1305",
+      "weight": 0.0536325,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_cpdecl/1305/_1305_0.053632_.zstd"
+    },
+    {
+      "workload": "gcc_cpdecl",
+      "point": "3665",
+      "weight": 0.0470085,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_cpdecl/3665/_3665_0.047009_.zstd"
+    },
+    {
+      "workload": "gcc_cpdecl",
+      "point": "2212",
+      "weight": 0.0382479,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_cpdecl/2212/_2212_0.038248_.zstd"
+    },
+    {
+      "workload": "gcc_expr",
+      "point": "1935",
+      "weight": 0.169612,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_expr/1935/_1935_0.169612_.zstd"
+    },
+    {
+      "workload": "gcc_expr",
+      "point": "2549",
+      "weight": 0.130042,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_expr/2549/_2549_0.130042_.zstd"
+    },
+    {
+      "workload": "gcc_expr",
+      "point": "906",
+      "weight": 0.126585,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_expr/906/_906_0.126585_.zstd"
+    },
+    {
+      "workload": "gcc_expr",
+      "point": "5093",
+      "weight": 0.108721,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_expr/5093/_5093_0.108721_.zstd"
+    },
+    {
+      "workload": "gcc_expr",
+      "point": "4337",
+      "weight": 0.103534,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_expr/4337/_4337_0.103534_.zstd"
+    },
+    {
+      "workload": "gcc_expr",
+      "point": "4656",
+      "weight": 0.0681905,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_expr/4656/_4656_0.068191_.zstd"
+    },
+    {
+      "workload": "gcc_expr",
+      "point": "3097",
+      "weight": 0.0482136,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_expr/3097/_3097_0.048214_.zstd"
+    },
+    {
+      "workload": "gcc_expr",
+      "point": "241",
+      "weight": 0.0318863,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_expr/241/_241_0.031886_.zstd"
+    },
+    {
+      "workload": "gcc_expr",
+      "point": "1650",
+      "weight": 0.0297733,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_expr/1650/_1650_0.029773_.zstd"
+    },
+    {
+      "workload": "gcc_expr2",
+      "point": "2551",
+      "weight": 0.190476,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_expr2/2551/_2551_0.190476_.zstd"
+    },
+    {
+      "workload": "gcc_expr2",
+      "point": "1803",
+      "weight": 0.132511,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_expr2/1803/_1803_0.132511_.zstd"
+    },
+    {
+      "workload": "gcc_expr2",
+      "point": "6943",
+      "weight": 0.111111,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_expr2/6943/_6943_0.111111_.zstd"
+    },
+    {
+      "workload": "gcc_expr2",
+      "point": "6791",
+      "weight": 0.104025,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_expr2/6791/_6791_0.104025_.zstd"
+    },
+    {
+      "workload": "gcc_expr2",
+      "point": "4031",
+      "weight": 0.0615079,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_expr2/4031/_4031_0.061508_.zstd"
+    },
+    {
+      "workload": "gcc_expr2",
+      "point": "5749",
+      "weight": 0.0486111,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_expr2/5749/_5749_0.048611_.zstd"
+    },
+    {
+      "workload": "gcc_expr2",
+      "point": "6119",
+      "weight": 0.0418084,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_expr2/6119/_6119_0.041808_.zstd"
+    },
+    {
+      "workload": "gcc_expr2",
+      "point": "2948",
+      "weight": 0.0376984,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_expr2/2948/_2948_0.037698_.zstd"
+    },
+    {
+      "workload": "gcc_expr2",
+      "point": "6639",
+      "weight": 0.0362812,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_expr2/6639/_6639_0.036281_.zstd"
+    },
+    {
+      "workload": "gcc_expr2",
+      "point": "4347",
+      "weight": 0.0328798,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_expr2/4347/_4347_0.032880_.zstd"
+    },
+    {
+      "workload": "gcc_expr2",
+      "point": "4116",
+      "weight": 0.0308957,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_expr2/4116/_4116_0.030896_.zstd"
+    },
+    {
+      "workload": "gcc_g23",
+      "point": "8992",
+      "weight": 0.177049,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_g23/8992/_8992_0.177049_.zstd"
+    },
+    {
+      "workload": "gcc_g23",
+      "point": "3559",
+      "weight": 0.132538,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_g23/3559/_3559_0.132538_.zstd"
+    },
+    {
+      "workload": "gcc_g23",
+      "point": "535",
+      "weight": 0.125469,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_g23/535/_535_0.125469_.zstd"
+    },
+    {
+      "workload": "gcc_g23",
+      "point": "7011",
+      "weight": 0.0954274,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_g23/7011/_7011_0.095427_.zstd"
+    },
+    {
+      "workload": "gcc_g23",
+      "point": "4059",
+      "weight": 0.0809587,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_g23/4059/_4059_0.080959_.zstd"
+    },
+    {
+      "workload": "gcc_g23",
+      "point": "6891",
+      "weight": 0.0609675,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_g23/6891/_6891_0.060968_.zstd"
+    },
+    {
+      "workload": "gcc_g23",
+      "point": "1442",
+      "weight": 0.0584272,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_g23/1442/_1442_0.058427_.zstd"
+    },
+    {
+      "workload": "gcc_g23",
+      "point": "6364",
+      "weight": 0.0515794,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_g23/6364/_6364_0.051579_.zstd"
+    },
+    {
+      "workload": "gcc_g23",
+      "point": "1841",
+      "weight": 0.0328032,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_g23/1841/_1841_0.032803_.zstd"
+    },
+    {
+      "workload": "gcc_s04",
+      "point": "6031",
+      "weight": 0.195783,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_s04/6031/_6031_0.195783_.zstd"
+    },
+    {
+      "workload": "gcc_s04",
+      "point": "7945",
+      "weight": 0.123745,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_s04/7945/_7945_0.123745_.zstd"
+    },
+    {
+      "workload": "gcc_s04",
+      "point": "1315",
+      "weight": 0.117972,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_s04/1315/_1315_0.117972_.zstd"
+    },
+    {
+      "workload": "gcc_s04",
+      "point": "1824",
+      "weight": 0.0854669,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_s04/1824/_1824_0.085467_.zstd"
+    },
+    {
+      "workload": "gcc_s04",
+      "point": "4558",
+      "weight": 0.0790663,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_s04/4558/_4558_0.079066_.zstd"
+    },
+    {
+      "workload": "gcc_s04",
+      "point": "4887",
+      "weight": 0.0507028,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_s04/4887/_4887_0.050703_.zstd"
+    },
+    {
+      "workload": "gcc_s04",
+      "point": "379",
+      "weight": 0.0445532,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_s04/379/_379_0.044553_.zstd"
+    },
+    {
+      "workload": "gcc_s04",
+      "point": "2957",
+      "weight": 0.0367721,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_s04/2957/_2957_0.036772_.zstd"
+    },
+    {
+      "workload": "gcc_s04",
+      "point": "6393",
+      "weight": 0.03125,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_s04/6393/_6393_0.031250_.zstd"
+    },
+    {
+      "workload": "gcc_s04",
+      "point": "7663",
+      "weight": 0.029493,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_s04/7663/_7663_0.029493_.zstd"
+    },
+    {
+      "workload": "gcc_s04",
+      "point": "5449",
+      "weight": 0.028991,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_s04/5449/_5449_0.028991_.zstd"
+    },
+    {
+      "workload": "gcc_scilab",
+      "point": "2811",
+      "weight": 0.193582,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_scilab/2811/_2811_0.193582_.zstd"
+    },
+    {
+      "workload": "gcc_scilab",
+      "point": "2089",
+      "weight": 0.107081,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_scilab/2089/_2089_0.107081_.zstd"
+    },
+    {
+      "workload": "gcc_scilab",
+      "point": "1438",
+      "weight": 0.106034,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_scilab/1438/_1438_0.106034_.zstd"
+    },
+    {
+      "workload": "gcc_scilab",
+      "point": "258",
+      "weight": 0.0722009,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_scilab/258/_258_0.072201_.zstd"
+    },
+    {
+      "workload": "gcc_scilab",
+      "point": "2693",
+      "weight": 0.0683641,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_scilab/2693/_2693_0.068364_.zstd"
+    },
+    {
+      "workload": "gcc_scilab",
+      "point": "405",
+      "weight": 0.0648762,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_scilab/405/_405_0.064876_.zstd"
+    },
+    {
+      "workload": "gcc_scilab",
+      "point": "881",
+      "weight": 0.0505755,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_scilab/881/_881_0.050576_.zstd"
+    },
+    {
+      "workload": "gcc_scilab",
+      "point": "643",
+      "weight": 0.0467388,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_scilab/643/_643_0.046739_.zstd"
+    },
+    {
+      "workload": "gcc_scilab",
+      "point": "248",
+      "weight": 0.0435996,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_scilab/248/_248_0.043600_.zstd"
+    },
+    {
+      "workload": "gcc_scilab",
+      "point": "1040",
+      "weight": 0.0355773,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_scilab/1040/_1040_0.035577_.zstd"
+    },
+    {
+      "workload": "gcc_scilab",
+      "point": "956",
+      "weight": 0.0282525,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_scilab/956/_956_0.028252_.zstd"
+    },
+    {
+      "workload": "gcc_typeck",
+      "point": "830",
+      "weight": 0.213933,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_typeck/830/_830_0.213933_.zstd"
+    },
+    {
+      "workload": "gcc_typeck",
+      "point": "2716",
+      "weight": 0.167439,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_typeck/2716/_2716_0.167439_.zstd"
+    },
+    {
+      "workload": "gcc_typeck",
+      "point": "1843",
+      "weight": 0.114303,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_typeck/1843/_1843_0.114303_.zstd"
+    },
+    {
+      "workload": "gcc_typeck",
+      "point": "3453",
+      "weight": 0.0926784,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_typeck/3453/_3453_0.092678_.zstd"
+    },
+    {
+      "workload": "gcc_typeck",
+      "point": "4224",
+      "weight": 0.0719802,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_typeck/4224/_4224_0.071980_.zstd"
+    },
+    {
+      "workload": "gcc_typeck",
+      "point": "93",
+      "weight": 0.0451035,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_typeck/93/_93_0.045103_.zstd"
+    },
+    {
+      "workload": "gcc_typeck",
+      "point": "4439",
+      "weight": 0.0344455,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_typeck/4439/_4439_0.034445_.zstd"
+    },
+    {
+      "workload": "gcc_typeck",
+      "point": "1331",
+      "weight": 0.034291,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_typeck/1331/_1331_0.034291_.zstd"
+    },
+    {
+      "workload": "gcc_typeck",
+      "point": "6197",
+      "weight": 0.0284214,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gcc_typeck/6197/_6197_0.028421_.zstd"
+    },
+    {
+      "workload": "gobmk_13x13",
+      "point": "6366",
+      "weight": 0.127036,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_13x13/6366/_6366_0.127036_.zstd"
+    },
+    {
+      "workload": "gobmk_13x13",
+      "point": "8061",
+      "weight": 0.121121,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_13x13/8061/_8061_0.121121_.zstd"
+    },
+    {
+      "workload": "gobmk_13x13",
+      "point": "6530",
+      "weight": 0.0938211,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_13x13/6530/_6530_0.093821_.zstd"
+    },
+    {
+      "workload": "gobmk_13x13",
+      "point": "5433",
+      "weight": 0.0866321,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_13x13/5433/_5433_0.086632_.zstd"
+    },
+    {
+      "workload": "gobmk_13x13",
+      "point": "10647",
+      "weight": 0.0753481,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_13x13/10647/_10647_0.075348_.zstd"
+    },
+    {
+      "workload": "gobmk_13x13",
+      "point": "8294",
+      "weight": 0.0696151,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_13x13/8294/_8294_0.069615_.zstd"
+    },
+    {
+      "workload": "gobmk_13x13",
+      "point": "9907",
+      "weight": 0.0670671,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_13x13/9907/_9907_0.067067_.zstd"
+    },
+    {
+      "workload": "gobmk_13x13",
+      "point": "4280",
+      "weight": 0.0601511,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_13x13/4280/_4280_0.060151_.zstd"
+    },
+    {
+      "workload": "gobmk_13x13",
+      "point": "8199",
+      "weight": 0.0542361,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_13x13/8199/_8199_0.054236_.zstd"
+    },
+    {
+      "workload": "gobmk_13x13",
+      "point": "7194",
+      "weight": 0.0525071,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_13x13/7194/_7194_0.052507_.zstd"
+    },
+    {
+      "workload": "gobmk_nngs",
+      "point": "5856",
+      "weight": 0.131659,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_nngs/5856/_5856_0.131659_.zstd"
+    },
+    {
+      "workload": "gobmk_nngs",
+      "point": "24124",
+      "weight": 0.116234,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_nngs/24124/_24124_0.116234_.zstd"
+    },
+    {
+      "workload": "gobmk_nngs",
+      "point": "18098",
+      "weight": 0.115927,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_nngs/18098/_18098_0.115927_.zstd"
+    },
+    {
+      "workload": "gobmk_nngs",
+      "point": "10574",
+      "weight": 0.0945637,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_nngs/10574/_10574_0.094564_.zstd"
+    },
+    {
+      "workload": "gobmk_nngs",
+      "point": "4348",
+      "weight": 0.0807085,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_nngs/4348/_4348_0.080709_.zstd"
+    },
+    {
+      "workload": "gobmk_nngs",
+      "point": "25453",
+      "weight": 0.0795482,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_nngs/25453/_25453_0.079548_.zstd"
+    },
+    {
+      "workload": "gobmk_nngs",
+      "point": "20382",
+      "weight": 0.07733,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_nngs/20382/_20382_0.077330_.zstd"
+    },
+    {
+      "workload": "gobmk_nngs",
+      "point": "25428",
+      "weight": 0.067877,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_nngs/25428/_25428_0.067877_.zstd"
+    },
+    {
+      "workload": "gobmk_nngs",
+      "point": "19491",
+      "weight": 0.0591748,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_nngs/19491/_19491_0.059175_.zstd"
+    },
+    {
+      "workload": "gobmk_score2",
+      "point": "13713",
+      "weight": 0.140442,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_score2/13713/_13713_0.140442_.zstd"
+    },
+    {
+      "workload": "gobmk_score2",
+      "point": "11729",
+      "weight": 0.0907989,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_score2/11729/_11729_0.090799_.zstd"
+    },
+    {
+      "workload": "gobmk_score2",
+      "point": "8112",
+      "weight": 0.0859495,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_score2/8112/_8112_0.085949_.zstd"
+    },
+    {
+      "workload": "gobmk_score2",
+      "point": "4597",
+      "weight": 0.078803,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_score2/4597/_4597_0.078803_.zstd"
+    },
+    {
+      "workload": "gobmk_score2",
+      "point": "14133",
+      "weight": 0.0710822,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_score2/14133/_14133_0.071082_.zstd"
+    },
+    {
+      "workload": "gobmk_score2",
+      "point": "14402",
+      "weight": 0.0644461,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_score2/14402/_14402_0.064446_.zstd"
+    },
+    {
+      "workload": "gobmk_score2",
+      "point": "13056",
+      "weight": 0.0602986,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_score2/13056/_13056_0.060299_.zstd"
+    },
+    {
+      "workload": "gobmk_score2",
+      "point": "15236",
+      "weight": 0.060171,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_score2/15236/_15236_0.060171_.zstd"
+    },
+    {
+      "workload": "gobmk_score2",
+      "point": "14788",
+      "weight": 0.0593415,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_score2/14788/_14788_0.059341_.zstd"
+    },
+    {
+      "workload": "gobmk_score2",
+      "point": "13979",
+      "weight": 0.0576825,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_score2/13979/_13979_0.057682_.zstd"
+    },
+    {
+      "workload": "gobmk_score2",
+      "point": "14717",
+      "weight": 0.0483027,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_score2/14717/_14717_0.048303_.zstd"
+    },
+    {
+      "workload": "gobmk_trevorc",
+      "point": "2978",
+      "weight": 0.106385,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_trevorc/2978/_2978_0.106385_.zstd"
+    },
+    {
+      "workload": "gobmk_trevorc",
+      "point": "6458",
+      "weight": 0.0856965,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_trevorc/6458/_6458_0.085696_.zstd"
+    },
+    {
+      "workload": "gobmk_trevorc",
+      "point": "9654",
+      "weight": 0.0807027,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_trevorc/9654/_9654_0.080703_.zstd"
+    },
+    {
+      "workload": "gobmk_trevorc",
+      "point": "7017",
+      "weight": 0.0679508,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_trevorc/7017/_7017_0.067951_.zstd"
+    },
+    {
+      "workload": "gobmk_trevorc",
+      "point": "7916",
+      "weight": 0.0675941,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_trevorc/7916/_7916_0.067594_.zstd"
+    },
+    {
+      "workload": "gobmk_trevorc",
+      "point": "7777",
+      "weight": 0.0601034,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_trevorc/7777/_7777_0.060103_.zstd"
+    },
+    {
+      "workload": "gobmk_trevorc",
+      "point": "10771",
+      "weight": 0.0574282,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_trevorc/10771/_10771_0.057428_.zstd"
+    },
+    {
+      "workload": "gobmk_trevorc",
+      "point": "6207",
+      "weight": 0.0554664,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_trevorc/6207/_6207_0.055466_.zstd"
+    },
+    {
+      "workload": "gobmk_trevorc",
+      "point": "7873",
+      "weight": 0.0535937,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_trevorc/7873/_7873_0.053594_.zstd"
+    },
+    {
+      "workload": "gobmk_trevorc",
+      "point": "1093",
+      "weight": 0.0486,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_trevorc/1093/_1093_0.048600_.zstd"
+    },
+    {
+      "workload": "gobmk_trevorc",
+      "point": "4605",
+      "weight": 0.0469057,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_trevorc/4605/_4605_0.046906_.zstd"
+    },
+    {
+      "workload": "gobmk_trevorc",
+      "point": "9643",
+      "weight": 0.0442304,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_trevorc/9643/_9643_0.044230_.zstd"
+    },
+    {
+      "workload": "gobmk_trevorc",
+      "point": "5257",
+      "weight": 0.035848,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_trevorc/5257/_5257_0.035848_.zstd"
+    },
+    {
+      "workload": "gobmk_trevord",
+      "point": "7886",
+      "weight": 0.136275,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_trevord/7886/_7886_0.136275_.zstd"
+    },
+    {
+      "workload": "gobmk_trevord",
+      "point": "4165",
+      "weight": 0.107105,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_trevord/4165/_4165_0.107105_.zstd"
+    },
+    {
+      "workload": "gobmk_trevord",
+      "point": "10532",
+      "weight": 0.0955869,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_trevord/10532/_10532_0.095587_.zstd"
+    },
+    {
+      "workload": "gobmk_trevord",
+      "point": "5970",
+      "weight": 0.0798748,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_trevord/5970/_5970_0.079875_.zstd"
+    },
+    {
+      "workload": "gobmk_trevord",
+      "point": "1111",
+      "weight": 0.0777465,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_trevord/1111/_1111_0.077746_.zstd"
+    },
+    {
+      "workload": "gobmk_trevord",
+      "point": "7593",
+      "weight": 0.0647887,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_trevord/7593/_7593_0.064789_.zstd"
+    },
+    {
+      "workload": "gobmk_trevord",
+      "point": "12670",
+      "weight": 0.0647261,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_trevord/12670/_12670_0.064726_.zstd"
+    },
+    {
+      "workload": "gobmk_trevord",
+      "point": "2050",
+      "weight": 0.0632864,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_trevord/2050/_2050_0.063286_.zstd"
+    },
+    {
+      "workload": "gobmk_trevord",
+      "point": "1515",
+      "weight": 0.046698,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_trevord/1515/_1515_0.046698_.zstd"
+    },
+    {
+      "workload": "gobmk_trevord",
+      "point": "13872",
+      "weight": 0.0452582,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_trevord/13872/_13872_0.045258_.zstd"
+    },
+    {
+      "workload": "gobmk_trevord",
+      "point": "13978",
+      "weight": 0.0448826,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gobmk_trevord/13978/_13978_0.044883_.zstd"
+    },
+    {
+      "workload": "gromacs",
+      "point": "35112",
+      "weight": 0.129118,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gromacs/35112/_35112_0.129118_.zstd"
+    },
+    {
+      "workload": "gromacs",
+      "point": "2830",
+      "weight": 0.0861876,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gromacs/2830/_2830_0.086188_.zstd"
+    },
+    {
+      "workload": "gromacs",
+      "point": "1290",
+      "weight": 0.0624047,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gromacs/1290/_1290_0.062405_.zstd"
+    },
+    {
+      "workload": "gromacs",
+      "point": "20417",
+      "weight": 0.0508166,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gromacs/20417/_20417_0.050817_.zstd"
+    },
+    {
+      "workload": "gromacs",
+      "point": "25739",
+      "weight": 0.0424172,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gromacs/25739/_25739_0.042417_.zstd"
+    },
+    {
+      "workload": "gromacs",
+      "point": "7065",
+      "weight": 0.0392441,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gromacs/7065/_7065_0.039244_.zstd"
+    },
+    {
+      "workload": "gromacs",
+      "point": "5873",
+      "weight": 0.0325712,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gromacs/5873/_5873_0.032571_.zstd"
+    },
+    {
+      "workload": "gromacs",
+      "point": "55088",
+      "weight": 0.0293825,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gromacs/55088/_55088_0.029382_.zstd"
+    },
+    {
+      "workload": "gromacs",
+      "point": "453",
+      "weight": 0.0286825,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gromacs/453/_453_0.028682_.zstd"
+    },
+    {
+      "workload": "gromacs",
+      "point": "8751",
+      "weight": 0.0278737,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gromacs/8751/_8751_0.027874_.zstd"
+    },
+    {
+      "workload": "gromacs",
+      "point": "7283",
+      "weight": 0.0274848,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gromacs/7283/_7283_0.027485_.zstd"
+    },
+    {
+      "workload": "gromacs",
+      "point": "62980",
+      "weight": 0.0272982,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gromacs/62980/_62980_0.027298_.zstd"
+    },
+    {
+      "workload": "gromacs",
+      "point": "34992",
+      "weight": 0.0256338,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gromacs/34992/_34992_0.025634_.zstd"
+    },
+    {
+      "workload": "gromacs",
+      "point": "2550",
+      "weight": 0.0225852,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gromacs/2550/_2550_0.022585_.zstd"
+    },
+    {
+      "workload": "gromacs",
+      "point": "1560",
+      "weight": 0.0208742,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gromacs/1560/_1560_0.020874_.zstd"
+    },
+    {
+      "workload": "gromacs",
+      "point": "59118",
+      "weight": 0.0166433,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gromacs/59118/_59118_0.016643_.zstd"
+    },
+    {
+      "workload": "gromacs",
+      "point": "36326",
+      "weight": 0.0159278,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gromacs/36326/_36326_0.015928_.zstd"
+    },
+    {
+      "workload": "gromacs",
+      "point": "34637",
+      "weight": 0.0154767,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gromacs/34637/_34637_0.015477_.zstd"
+    },
+    {
+      "workload": "gromacs",
+      "point": "5661",
+      "weight": 0.0154145,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gromacs/5661/_5661_0.015414_.zstd"
+    },
+    {
+      "workload": "gromacs",
+      "point": "40673",
+      "weight": 0.0136258,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gromacs/40673/_40673_0.013626_.zstd"
+    },
+    {
+      "workload": "gromacs",
+      "point": "49742",
+      "weight": 0.0131125,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gromacs/49742/_49742_0.013112_.zstd"
+    },
+    {
+      "workload": "gromacs",
+      "point": "46408",
+      "weight": 0.0129258,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gromacs/46408/_46408_0.012926_.zstd"
+    },
+    {
+      "workload": "gromacs",
+      "point": "51431",
+      "weight": 0.0120392,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gromacs/51431/_51431_0.012039_.zstd"
+    },
+    {
+      "workload": "gromacs",
+      "point": "61011",
+      "weight": 0.0119925,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gromacs/61011/_61011_0.011992_.zstd"
+    },
+    {
+      "workload": "gromacs",
+      "point": "186",
+      "weight": 0.011977,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gromacs/186/_186_0.011977_.zstd"
+    },
+    {
+      "workload": "gromacs",
+      "point": "25500",
+      "weight": 0.0117748,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/gromacs/25500/_25500_0.011775_.zstd"
+    },
+    {
+      "workload": "h264ref_foreman.baseline",
+      "point": "793",
+      "weight": 0.139477,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/h264ref_foreman.baseline/793/_793_0.139477_.zstd"
+    },
+    {
+      "workload": "h264ref_foreman.baseline",
+      "point": "369",
+      "weight": 0.0950515,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/h264ref_foreman.baseline/369/_369_0.095051_.zstd"
+    },
+    {
+      "workload": "h264ref_foreman.baseline",
+      "point": "17931",
+      "weight": 0.0787722,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/h264ref_foreman.baseline/17931/_17931_0.078772_.zstd"
+    },
+    {
+      "workload": "h264ref_foreman.baseline",
+      "point": "1062",
+      "weight": 0.0756152,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/h264ref_foreman.baseline/1062/_1062_0.075615_.zstd"
+    },
+    {
+      "workload": "h264ref_foreman.baseline",
+      "point": "15239",
+      "weight": 0.073257,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/h264ref_foreman.baseline/15239/_15239_0.073257_.zstd"
+    },
+    {
+      "workload": "h264ref_foreman.baseline",
+      "point": "20138",
+      "weight": 0.0725724,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/h264ref_foreman.baseline/20138/_20138_0.072572_.zstd"
+    },
+    {
+      "workload": "h264ref_foreman.baseline",
+      "point": "20048",
+      "weight": 0.07223,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/h264ref_foreman.baseline/20048/_20048_0.072230_.zstd"
+    },
+    {
+      "workload": "h264ref_foreman.baseline",
+      "point": "5042",
+      "weight": 0.0637481,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/h264ref_foreman.baseline/5042/_5042_0.063748_.zstd"
+    },
+    {
+      "workload": "h264ref_foreman.baseline",
+      "point": "5512",
+      "weight": 0.0618843,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/h264ref_foreman.baseline/5512/_5512_0.061884_.zstd"
+    },
+    {
+      "workload": "h264ref_foreman.baseline",
+      "point": "20899",
+      "weight": 0.0468982,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/h264ref_foreman.baseline/20899/_20899_0.046898_.zstd"
+    },
+    {
+      "workload": "h264ref_foreman.baseline",
+      "point": "15388",
+      "weight": 0.0464417,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/h264ref_foreman.baseline/15388/_15388_0.046442_.zstd"
+    },
+    {
+      "workload": "h264ref_foreman.main",
+      "point": "16107",
+      "weight": 0.0930709,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/h264ref_foreman.main/16107/_16107_0.093071_.zstd"
+    },
+    {
+      "workload": "h264ref_foreman.main",
+      "point": "3807",
+      "weight": 0.0753887,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/h264ref_foreman.main/3807/_3807_0.075389_.zstd"
+    },
+    {
+      "workload": "h264ref_foreman.main",
+      "point": "13468",
+      "weight": 0.0702931,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/h264ref_foreman.main/13468/_13468_0.070293_.zstd"
+    },
+    {
+      "workload": "h264ref_foreman.main",
+      "point": "12369",
+      "weight": 0.068551,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/h264ref_foreman.main/12369/_12369_0.068551_.zstd"
+    },
+    {
+      "workload": "h264ref_foreman.main",
+      "point": "22387",
+      "weight": 0.0650669,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/h264ref_foreman.main/22387/_22387_0.065067_.zstd"
+    },
+    {
+      "workload": "h264ref_foreman.main",
+      "point": "1495",
+      "weight": 0.0562258,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/h264ref_foreman.main/1495/_1495_0.056226_.zstd"
+    },
+    {
+      "workload": "h264ref_foreman.main",
+      "point": "12419",
+      "weight": 0.0533949,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/h264ref_foreman.main/12419/_12419_0.053395_.zstd"
+    },
+    {
+      "workload": "h264ref_foreman.main",
+      "point": "8751",
+      "weight": 0.0509995,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/h264ref_foreman.main/8751/_8751_0.051000_.zstd"
+    },
+    {
+      "workload": "h264ref_foreman.main",
+      "point": "20206",
+      "weight": 0.0499107,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/h264ref_foreman.main/20206/_20206_0.049911_.zstd"
+    },
+    {
+      "workload": "h264ref_foreman.main",
+      "point": "21701",
+      "weight": 0.0489526,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/h264ref_foreman.main/21701/_21701_0.048953_.zstd"
+    },
+    {
+      "workload": "h264ref_foreman.main",
+      "point": "12537",
+      "weight": 0.0482993,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/h264ref_foreman.main/12537/_12537_0.048299_.zstd"
+    },
+    {
+      "workload": "h264ref_foreman.main",
+      "point": "7140",
+      "weight": 0.0449458,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/h264ref_foreman.main/7140/_7140_0.044946_.zstd"
+    },
+    {
+      "workload": "h264ref_foreman.main",
+      "point": "4387",
+      "weight": 0.0429424,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/h264ref_foreman.main/4387/_4387_0.042942_.zstd"
+    },
+    {
+      "workload": "h264ref_foreman.main",
+      "point": "854",
+      "weight": 0.041331,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/h264ref_foreman.main/854/_854_0.041331_.zstd"
+    },
+    {
+      "workload": "h264ref_sss",
+      "point": "94143",
+      "weight": 0.125254,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/h264ref_sss/94143/_94143_0.125254_.zstd"
+    },
+    {
+      "workload": "h264ref_sss",
+      "point": "23954",
+      "weight": 0.0650214,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/h264ref_sss/23954/_23954_0.065021_.zstd"
+    },
+    {
+      "workload": "h264ref_sss",
+      "point": "184465",
+      "weight": 0.0633887,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/h264ref_sss/184465/_184465_0.063389_.zstd"
+    },
+    {
+      "workload": "h264ref_sss",
+      "point": "62882",
+      "weight": 0.0607356,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/h264ref_sss/62882/_62882_0.060736_.zstd"
+    },
+    {
+      "workload": "h264ref_sss",
+      "point": "5682",
+      "weight": 0.0604794,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/h264ref_sss/5682/_5682_0.060479_.zstd"
+    },
+    {
+      "workload": "h264ref_sss",
+      "point": "13382",
+      "weight": 0.0597769,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/h264ref_sss/13382/_13382_0.059777_.zstd"
+    },
+    {
+      "workload": "h264ref_sss",
+      "point": "27815",
+      "weight": 0.0592121,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/h264ref_sss/27815/_27815_0.059212_.zstd"
+    },
+    {
+      "workload": "h264ref_sss",
+      "point": "82971",
+      "weight": 0.0590033,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/h264ref_sss/82971/_82971_0.059003_.zstd"
+    },
+    {
+      "workload": "h264ref_sss",
+      "point": "13378",
+      "weight": 0.0577504,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/h264ref_sss/13378/_13378_0.057750_.zstd"
+    },
+    {
+      "workload": "h264ref_sss",
+      "point": "13369",
+      "weight": 0.0555292,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/h264ref_sss/13369/_13369_0.055529_.zstd"
+    },
+    {
+      "workload": "h264ref_sss",
+      "point": "123456",
+      "weight": 0.055477,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/h264ref_sss/123456/_123456_0.055477_.zstd"
+    },
+    {
+      "workload": "h264ref_sss",
+      "point": "9170",
+      "weight": 0.0539867,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/h264ref_sss/9170/_9170_0.053987_.zstd"
+    },
+    {
+      "workload": "h264ref_sss",
+      "point": "109686",
+      "weight": 0.0523351,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/h264ref_sss/109686/_109686_0.052335_.zstd"
+    },
+    {
+      "workload": "hmmer_nph3",
+      "point": "2887",
+      "weight": 0.236683,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/hmmer_nph3/2887/_2887_0.236683_.zstd"
+    },
+    {
+      "workload": "hmmer_nph3",
+      "point": "9545",
+      "weight": 0.231614,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/hmmer_nph3/9545/_9545_0.231614_.zstd"
+    },
+    {
+      "workload": "hmmer_nph3",
+      "point": "33586",
+      "weight": 0.172456,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/hmmer_nph3/33586/_33586_0.172456_.zstd"
+    },
+    {
+      "workload": "hmmer_nph3",
+      "point": "19180",
+      "weight": 0.159425,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/hmmer_nph3/19180/_19180_0.159425_.zstd"
+    },
+    {
+      "workload": "hmmer_retro",
+      "point": "67522",
+      "weight": 0.103126,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/hmmer_retro/67522/_67522_0.103126_.zstd"
+    },
+    {
+      "workload": "hmmer_retro",
+      "point": "12637",
+      "weight": 0.101057,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/hmmer_retro/12637/_12637_0.101057_.zstd"
+    },
+    {
+      "workload": "hmmer_retro",
+      "point": "95209",
+      "weight": 0.0949077,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/hmmer_retro/95209/_95209_0.094908_.zstd"
+    },
+    {
+      "workload": "hmmer_retro",
+      "point": "77093",
+      "weight": 0.0915236,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/hmmer_retro/77093/_77093_0.091524_.zstd"
+    },
+    {
+      "workload": "hmmer_retro",
+      "point": "34987",
+      "weight": 0.0860276,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/hmmer_retro/34987/_34987_0.086028_.zstd"
+    },
+    {
+      "workload": "hmmer_retro",
+      "point": "36287",
+      "weight": 0.0804298,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/hmmer_retro/36287/_36287_0.080430_.zstd"
+    },
+    {
+      "workload": "hmmer_retro",
+      "point": "47447",
+      "weight": 0.0749084,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/hmmer_retro/47447/_47447_0.074908_.zstd"
+    },
+    {
+      "workload": "hmmer_retro",
+      "point": "37583",
+      "weight": 0.0673344,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/hmmer_retro/37583/_37583_0.067334_.zstd"
+    },
+    {
+      "workload": "hmmer_retro",
+      "point": "80018",
+      "weight": 0.0594382,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/hmmer_retro/80018/_80018_0.059438_.zstd"
+    },
+    {
+      "workload": "hmmer_retro",
+      "point": "25627",
+      "weight": 0.0546801,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/hmmer_retro/25627/_25627_0.054680_.zstd"
+    },
+    {
+      "workload": "lbm",
+      "point": "7139",
+      "weight": 0.400131,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/lbm/7139/_7139_0.400131_.zstd"
+    },
+    {
+      "workload": "lbm",
+      "point": "12578",
+      "weight": 0.23143,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/lbm/12578/_12578_0.231430_.zstd"
+    },
+    {
+      "workload": "lbm",
+      "point": "37647",
+      "weight": 0.126309,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/lbm/37647/_37647_0.126309_.zstd"
+    },
+    {
+      "workload": "lbm",
+      "point": "42866",
+      "weight": 0.0831919,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/lbm/42866/_42866_0.083192_.zstd"
+    },
+    {
+      "workload": "leslie3d",
+      "point": "68289",
+      "weight": 0.182714,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/leslie3d/68289/_68289_0.182714_.zstd"
+    },
+    {
+      "workload": "leslie3d",
+      "point": "80645",
+      "weight": 0.178993,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/leslie3d/80645/_80645_0.178993_.zstd"
+    },
+    {
+      "workload": "leslie3d",
+      "point": "4360",
+      "weight": 0.168096,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/leslie3d/4360/_4360_0.168096_.zstd"
+    },
+    {
+      "workload": "leslie3d",
+      "point": "58382",
+      "weight": 0.0545911,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/leslie3d/58382/_58382_0.054591_.zstd"
+    },
+    {
+      "workload": "leslie3d",
+      "point": "53625",
+      "weight": 0.042266,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/leslie3d/53625/_53625_0.042266_.zstd"
+    },
+    {
+      "workload": "leslie3d",
+      "point": "60675",
+      "weight": 0.0321735,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/leslie3d/60675/_60675_0.032174_.zstd"
+    },
+    {
+      "workload": "leslie3d",
+      "point": "91481",
+      "weight": 0.0293497,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/leslie3d/91481/_91481_0.029350_.zstd"
+    },
+    {
+      "workload": "leslie3d",
+      "point": "4005",
+      "weight": 0.027005,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/leslie3d/4005/_4005_0.027005_.zstd"
+    },
+    {
+      "workload": "leslie3d",
+      "point": "42369",
+      "weight": 0.0268215,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/leslie3d/42369/_42369_0.026822_.zstd"
+    },
+    {
+      "workload": "leslie3d",
+      "point": "51437",
+      "weight": 0.0235899,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/leslie3d/51437/_51437_0.023590_.zstd"
+    },
+    {
+      "workload": "leslie3d",
+      "point": "64597",
+      "weight": 0.0231209,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/leslie3d/64597/_64597_0.023121_.zstd"
+    },
+    {
+      "workload": "leslie3d",
+      "point": "77463",
+      "weight": 0.0216529,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/leslie3d/77463/_77463_0.021653_.zstd"
+    },
+    {
+      "workload": "libquantum",
+      "point": "64624",
+      "weight": 0.24316,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/libquantum/64624/_64624_0.243160_.zstd"
+    },
+    {
+      "workload": "libquantum",
+      "point": "72640",
+      "weight": 0.114092,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/libquantum/72640/_72640_0.114092_.zstd"
+    },
+    {
+      "workload": "libquantum",
+      "point": "22269",
+      "weight": 0.0864361,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/libquantum/22269/_22269_0.086436_.zstd"
+    },
+    {
+      "workload": "libquantum",
+      "point": "15361",
+      "weight": 0.0684355,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/libquantum/15361/_15361_0.068435_.zstd"
+    },
+    {
+      "workload": "libquantum",
+      "point": "54695",
+      "weight": 0.0678444,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/libquantum/54695/_54695_0.067844_.zstd"
+    },
+    {
+      "workload": "libquantum",
+      "point": "97821",
+      "weight": 0.0648098,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/libquantum/97821/_97821_0.064810_.zstd"
+    },
+    {
+      "workload": "libquantum",
+      "point": "25990",
+      "weight": 0.0635782,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/libquantum/25990/_25990_0.063578_.zstd"
+    },
+    {
+      "workload": "libquantum",
+      "point": "37989",
+      "weight": 0.049903,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/libquantum/37989/_37989_0.049903_.zstd"
+    },
+    {
+      "workload": "libquantum",
+      "point": "58444",
+      "weight": 0.0497946,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/libquantum/58444/_58444_0.049795_.zstd"
+    },
+    {
+      "workload": "mcf",
+      "point": "12253",
+      "weight": 0.137576,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/mcf/12253/_12253_0.137576_.zstd"
+    },
+    {
+      "workload": "mcf",
+      "point": "10688",
+      "weight": 0.135073,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/mcf/10688/_10688_0.135073_.zstd"
+    },
+    {
+      "workload": "mcf",
+      "point": "9294",
+      "weight": 0.130425,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/mcf/9294/_9294_0.130425_.zstd"
+    },
+    {
+      "workload": "mcf",
+      "point": "9578",
+      "weight": 0.112621,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/mcf/9578/_9578_0.112621_.zstd"
+    },
+    {
+      "workload": "mcf",
+      "point": "5171",
+      "weight": 0.0886664,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/mcf/5171/_5171_0.088666_.zstd"
+    },
+    {
+      "workload": "mcf",
+      "point": "11392",
+      "weight": 0.0818019,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/mcf/11392/_11392_0.081802_.zstd"
+    },
+    {
+      "workload": "mcf",
+      "point": "5405",
+      "weight": 0.0531284,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/mcf/5405/_5405_0.053128_.zstd"
+    },
+    {
+      "workload": "mcf",
+      "point": "3283",
+      "weight": 0.0529138,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/mcf/3283/_3283_0.052914_.zstd"
+    },
+    {
+      "workload": "mcf",
+      "point": "8336",
+      "weight": 0.048838,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/mcf/8336/_8336_0.048838_.zstd"
+    },
+    {
+      "workload": "milc",
+      "point": "17368",
+      "weight": 0.149566,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/milc/17368/_17368_0.149566_.zstd"
+    },
+    {
+      "workload": "milc",
+      "point": "31721",
+      "weight": 0.115315,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/milc/31721/_31721_0.115315_.zstd"
+    },
+    {
+      "workload": "milc",
+      "point": "5116",
+      "weight": 0.0653177,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/milc/5116/_5116_0.065318_.zstd"
+    },
+    {
+      "workload": "milc",
+      "point": "12654",
+      "weight": 0.0619327,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/milc/12654/_12654_0.061933_.zstd"
+    },
+    {
+      "workload": "milc",
+      "point": "8973",
+      "weight": 0.0536081,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/milc/8973/_8973_0.053608_.zstd"
+    },
+    {
+      "workload": "milc",
+      "point": "8279",
+      "weight": 0.0489444,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/milc/8279/_8279_0.048944_.zstd"
+    },
+    {
+      "workload": "milc",
+      "point": "1309",
+      "weight": 0.0454842,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/milc/1309/_1309_0.045484_.zstd"
+    },
+    {
+      "workload": "milc",
+      "point": "13996",
+      "weight": 0.0432275,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/milc/13996/_13996_0.043228_.zstd"
+    },
+    {
+      "workload": "milc",
+      "point": "30826",
+      "weight": 0.0430269,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/milc/30826/_30826_0.043027_.zstd"
+    },
+    {
+      "workload": "milc",
+      "point": "27406",
+      "weight": 0.0377614,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/milc/27406/_27406_0.037761_.zstd"
+    },
+    {
+      "workload": "milc",
+      "point": "4947",
+      "weight": 0.0354044,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/milc/4947/_4947_0.035404_.zstd"
+    },
+    {
+      "workload": "milc",
+      "point": "30974",
+      "weight": 0.0339251,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/milc/30974/_30974_0.033925_.zstd"
+    },
+    {
+      "workload": "milc",
+      "point": "8124",
+      "weight": 0.0281079,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/milc/8124/_8124_0.028108_.zstd"
+    },
+    {
+      "workload": "milc",
+      "point": "178",
+      "weight": 0.0268041,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/milc/178/_178_0.026804_.zstd"
+    },
+    {
+      "workload": "milc",
+      "point": "14196",
+      "weight": 0.0266787,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/milc/14196/_14196_0.026679_.zstd"
+    },
+    {
+      "workload": "namd",
+      "point": "13387",
+      "weight": 0.0692055,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/namd/13387/_13387_0.069206_.zstd"
+    },
+    {
+      "workload": "namd",
+      "point": "41738",
+      "weight": 0.0651491,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/namd/41738/_41738_0.065149_.zstd"
+    },
+    {
+      "workload": "namd",
+      "point": "58329",
+      "weight": 0.0520122,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/namd/58329/_58329_0.052012_.zstd"
+    },
+    {
+      "workload": "namd",
+      "point": "29146",
+      "weight": 0.0498399,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/namd/29146/_29146_0.049840_.zstd"
+    },
+    {
+      "workload": "namd",
+      "point": "6460",
+      "weight": 0.0474617,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/namd/6460/_6460_0.047462_.zstd"
+    },
+    {
+      "workload": "namd",
+      "point": "68104",
+      "weight": 0.0455261,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/namd/68104/_68104_0.045526_.zstd"
+    },
+    {
+      "workload": "namd",
+      "point": "68819",
+      "weight": 0.0453511,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/namd/68819/_68819_0.045351_.zstd"
+    },
+    {
+      "workload": "namd",
+      "point": "68716",
+      "weight": 0.04322,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/namd/68716/_68716_0.043220_.zstd"
+    },
+    {
+      "workload": "namd",
+      "point": "55073",
+      "weight": 0.042942,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/namd/55073/_55073_0.042942_.zstd"
+    },
+    {
+      "workload": "namd",
+      "point": "6094",
+      "weight": 0.0414492,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/namd/6094/_6094_0.041449_.zstd"
+    },
+    {
+      "workload": "namd",
+      "point": "7165",
+      "weight": 0.035797,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/namd/7165/_7165_0.035797_.zstd"
+    },
+    {
+      "workload": "namd",
+      "point": "81157",
+      "weight": 0.034541,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/namd/81157/_81157_0.034541_.zstd"
+    },
+    {
+      "workload": "namd",
+      "point": "16602",
+      "weight": 0.0332644,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/namd/16602/_16602_0.033264_.zstd"
+    },
+    {
+      "workload": "namd",
+      "point": "34025",
+      "weight": 0.0311641,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/namd/34025/_34025_0.031164_.zstd"
+    },
+    {
+      "workload": "namd",
+      "point": "33064",
+      "weight": 0.0307214,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/namd/33064/_33064_0.030721_.zstd"
+    },
+    {
+      "workload": "namd",
+      "point": "7984",
+      "weight": 0.0305464,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/namd/7984/_7984_0.030546_.zstd"
+    },
+    {
+      "workload": "namd",
+      "point": "78040",
+      "weight": 0.0301346,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/namd/78040/_78040_0.030135_.zstd"
+    },
+    {
+      "workload": "namd",
+      "point": "9327",
+      "weight": 0.0300213,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/namd/9327/_9327_0.030021_.zstd"
+    },
+    {
+      "workload": "namd",
+      "point": "15635",
+      "weight": 0.0290433,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/namd/15635/_15635_0.029043_.zstd"
+    },
+    {
+      "workload": "namd",
+      "point": "26010",
+      "weight": 0.0277666,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/namd/26010/_26010_0.027767_.zstd"
+    },
+    {
+      "workload": "omnetpp",
+      "point": "20261",
+      "weight": 0.361193,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/omnetpp/20261/_20261_0.361193_.zstd"
+    },
+    {
+      "workload": "omnetpp",
+      "point": "16482",
+      "weight": 0.269784,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/omnetpp/16482/_16482_0.269784_.zstd"
+    },
+    {
+      "workload": "omnetpp",
+      "point": "19013",
+      "weight": 0.178502,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/omnetpp/19013/_19013_0.178502_.zstd"
+    },
+    {
+      "workload": "perlbench_checkspam",
+      "point": "31059",
+      "weight": 0.134132,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/perlbench_checkspam/31059/_31059_0.134132_.zstd"
+    },
+    {
+      "workload": "perlbench_checkspam",
+      "point": "20915",
+      "weight": 0.130776,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/perlbench_checkspam/20915/_20915_0.130776_.zstd"
+    },
+    {
+      "workload": "perlbench_checkspam",
+      "point": "32626",
+      "weight": 0.107572,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/perlbench_checkspam/32626/_32626_0.107572_.zstd"
+    },
+    {
+      "workload": "perlbench_checkspam",
+      "point": "25976",
+      "weight": 0.0974844,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/perlbench_checkspam/25976/_25976_0.097484_.zstd"
+    },
+    {
+      "workload": "perlbench_checkspam",
+      "point": "9118",
+      "weight": 0.0863934,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/perlbench_checkspam/9118/_9118_0.086393_.zstd"
+    },
+    {
+      "workload": "perlbench_checkspam",
+      "point": "21626",
+      "weight": 0.0796622,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/perlbench_checkspam/21626/_21626_0.079662_.zstd"
+    },
+    {
+      "workload": "perlbench_checkspam",
+      "point": "24350",
+      "weight": 0.0771995,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/perlbench_checkspam/24350/_24350_0.077200_.zstd"
+    },
+    {
+      "workload": "perlbench_checkspam",
+      "point": "36950",
+      "weight": 0.0668381,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/perlbench_checkspam/36950/_36950_0.066838_.zstd"
+    },
+    {
+      "workload": "perlbench_checkspam",
+      "point": "40895",
+      "weight": 0.0648315,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/perlbench_checkspam/40895/_40895_0.064832_.zstd"
+    },
+    {
+      "workload": "perlbench_diffmail",
+      "point": "18104",
+      "weight": 0.59204,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/perlbench_diffmail/18104/_18104_0.592040_.zstd"
+    },
+    {
+      "workload": "perlbench_diffmail",
+      "point": "3138",
+      "weight": 0.226378,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/perlbench_diffmail/3138/_3138_0.226378_.zstd"
+    },
+    {
+      "workload": "perlbench_splitmail",
+      "point": "25006",
+      "weight": 0.476437,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/perlbench_splitmail/25006/_25006_0.476437_.zstd"
+    },
+    {
+      "workload": "perlbench_splitmail",
+      "point": "22905",
+      "weight": 0.21875,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/perlbench_splitmail/22905/_22905_0.218750_.zstd"
+    },
+    {
+      "workload": "perlbench_splitmail",
+      "point": "14833",
+      "weight": 0.0815397,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/perlbench_splitmail/14833/_14833_0.081540_.zstd"
+    },
+    {
+      "workload": "perlbench_splitmail",
+      "point": "3686",
+      "weight": 0.0739416,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/perlbench_splitmail/3686/_3686_0.073942_.zstd"
+    },
+    {
+      "workload": "povray",
+      "point": "10202",
+      "weight": 0.10066,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/povray/10202/_10202_0.100660_.zstd"
+    },
+    {
+      "workload": "povray",
+      "point": "13677",
+      "weight": 0.0880916,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/povray/13677/_13677_0.088092_.zstd"
+    },
+    {
+      "workload": "povray",
+      "point": "37386",
+      "weight": 0.0604006,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/povray/37386/_37386_0.060401_.zstd"
+    },
+    {
+      "workload": "povray",
+      "point": "34014",
+      "weight": 0.0598723,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/povray/34014/_34014_0.059872_.zstd"
+    },
+    {
+      "workload": "povray",
+      "point": "26628",
+      "weight": 0.0570108,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/povray/26628/_26628_0.057011_.zstd"
+    },
+    {
+      "workload": "povray",
+      "point": "39053",
+      "weight": 0.0565485,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/povray/39053/_39053_0.056549_.zstd"
+    },
+    {
+      "workload": "povray",
+      "point": "29604",
+      "weight": 0.0563064,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/povray/29604/_29604_0.056306_.zstd"
+    },
+    {
+      "workload": "povray",
+      "point": "21308",
+      "weight": 0.0552058,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/povray/21308/_21308_0.055206_.zstd"
+    },
+    {
+      "workload": "povray",
+      "point": "21900",
+      "weight": 0.0548756,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/povray/21900/_21900_0.054876_.zstd"
+    },
+    {
+      "workload": "povray",
+      "point": "9239",
+      "weight": 0.0546995,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/povray/9239/_9239_0.054699_.zstd"
+    },
+    {
+      "workload": "povray",
+      "point": "38516",
+      "weight": 0.0488664,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/povray/38516/_38516_0.048866_.zstd"
+    },
+    {
+      "workload": "povray",
+      "point": "1618",
+      "weight": 0.0487563,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/povray/1618/_1618_0.048756_.zstd"
+    },
+    {
+      "workload": "povray",
+      "point": "15593",
+      "weight": 0.0475237,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/povray/15593/_15593_0.047524_.zstd"
+    },
+    {
+      "workload": "povray",
+      "point": "5911",
+      "weight": 0.0420207,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/povray/5911/_5911_0.042021_.zstd"
+    },
+    {
+      "workload": "sjeng",
+      "point": "84999",
+      "weight": 0.143722,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/sjeng/84999/_84999_0.143722_.zstd"
+    },
+    {
+      "workload": "sjeng",
+      "point": "983",
+      "weight": 0.128528,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/sjeng/983/_983_0.128528_.zstd"
+    },
+    {
+      "workload": "sjeng",
+      "point": "82720",
+      "weight": 0.120833,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/sjeng/82720/_82720_0.120833_.zstd"
+    },
+    {
+      "workload": "sjeng",
+      "point": "24973",
+      "weight": 0.106769,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/sjeng/24973/_24973_0.106769_.zstd"
+    },
+    {
+      "workload": "sjeng",
+      "point": "66175",
+      "weight": 0.102409,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/sjeng/66175/_66175_0.102409_.zstd"
+    },
+    {
+      "workload": "sjeng",
+      "point": "101665",
+      "weight": 0.0835929,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/sjeng/101665/_101665_0.083593_.zstd"
+    },
+    {
+      "workload": "sjeng",
+      "point": "26662",
+      "weight": 0.0799459,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/sjeng/26662/_26662_0.079946_.zstd"
+    },
+    {
+      "workload": "sjeng",
+      "point": "58471",
+      "weight": 0.064891,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/sjeng/58471/_58471_0.064891_.zstd"
+    },
+    {
+      "workload": "soplex_pds-50",
+      "point": "6802",
+      "weight": 0.0838684,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/soplex_pds-50/6802/_6802_0.083868_.zstd"
+    },
+    {
+      "workload": "soplex_pds-50",
+      "point": "16031",
+      "weight": 0.0783077,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/soplex_pds-50/16031/_16031_0.078308_.zstd"
+    },
+    {
+      "workload": "soplex_pds-50",
+      "point": "5746",
+      "weight": 0.0724031,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/soplex_pds-50/5746/_5746_0.072403_.zstd"
+    },
+    {
+      "workload": "soplex_pds-50",
+      "point": "2406",
+      "weight": 0.0668998,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/soplex_pds-50/2406/_2406_0.066900_.zstd"
+    },
+    {
+      "workload": "soplex_pds-50",
+      "point": "6499",
+      "weight": 0.0666132,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/soplex_pds-50/6499/_6499_0.066613_.zstd"
+    },
+    {
+      "workload": "soplex_pds-50",
+      "point": "16596",
+      "weight": 0.0617978,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/soplex_pds-50/16596/_16596_0.061798_.zstd"
+    },
+    {
+      "workload": "soplex_pds-50",
+      "point": "8684",
+      "weight": 0.0609952,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/soplex_pds-50/8684/_8684_0.060995_.zstd"
+    },
+    {
+      "workload": "soplex_pds-50",
+      "point": "9645",
+      "weight": 0.0580142,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/soplex_pds-50/9645/_9645_0.058014_.zstd"
+    },
+    {
+      "workload": "soplex_pds-50",
+      "point": "777",
+      "weight": 0.057441,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/soplex_pds-50/777/_777_0.057441_.zstd"
+    },
+    {
+      "workload": "soplex_pds-50",
+      "point": "6090",
+      "weight": 0.054288,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/soplex_pds-50/6090/_6090_0.054288_.zstd"
+    },
+    {
+      "workload": "soplex_pds-50",
+      "point": "12805",
+      "weight": 0.0500459,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/soplex_pds-50/12805/_12805_0.050046_.zstd"
+    },
+    {
+      "workload": "soplex_pds-50",
+      "point": "5038",
+      "weight": 0.0419629,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/soplex_pds-50/5038/_5038_0.041963_.zstd"
+    },
+    {
+      "workload": "soplex_pds-50",
+      "point": "10016",
+      "weight": 0.0396698,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/soplex_pds-50/10016/_10016_0.039670_.zstd"
+    },
+    {
+      "workload": "soplex_pds-50",
+      "point": "11015",
+      "weight": 0.0345104,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/soplex_pds-50/11015/_11015_0.034510_.zstd"
+    },
+    {
+      "workload": "soplex_ref",
+      "point": "14255",
+      "weight": 0.329014,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/soplex_ref/14255/_14255_0.329014_.zstd"
+    },
+    {
+      "workload": "soplex_ref",
+      "point": "12912",
+      "weight": 0.0669269,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/soplex_ref/12912/_12912_0.066927_.zstd"
+    },
+    {
+      "workload": "soplex_ref",
+      "point": "6670",
+      "weight": 0.0587041,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/soplex_ref/6670/_6670_0.058704_.zstd"
+    },
+    {
+      "workload": "soplex_ref",
+      "point": "5",
+      "weight": 0.0493885,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/soplex_ref/5/_5_0.049389_.zstd"
+    },
+    {
+      "workload": "soplex_ref",
+      "point": "11847",
+      "weight": 0.0442363,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/soplex_ref/11847/_11847_0.044236_.zstd"
+    },
+    {
+      "workload": "soplex_ref",
+      "point": "6948",
+      "weight": 0.0388238,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/soplex_ref/6948/_6948_0.038824_.zstd"
+    },
+    {
+      "workload": "soplex_ref",
+      "point": "5848",
+      "weight": 0.0376269,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/soplex_ref/5848/_5848_0.037627_.zstd"
+    },
+    {
+      "workload": "soplex_ref",
+      "point": "6013",
+      "weight": 0.0362737,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/soplex_ref/6013/_6013_0.036274_.zstd"
+    },
+    {
+      "workload": "soplex_ref",
+      "point": "5925",
+      "weight": 0.0324226,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/soplex_ref/5925/_5925_0.032423_.zstd"
+    },
+    {
+      "workload": "soplex_ref",
+      "point": "3823",
+      "weight": 0.0312776,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/soplex_ref/3823/_3823_0.031278_.zstd"
+    },
+    {
+      "workload": "soplex_ref",
+      "point": "7022",
+      "weight": 0.0295602,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/soplex_ref/7022/_7022_0.029560_.zstd"
+    },
+    {
+      "workload": "soplex_ref",
+      "point": "14593",
+      "weight": 0.0252927,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/soplex_ref/14593/_14593_0.025293_.zstd"
+    },
+    {
+      "workload": "soplex_ref",
+      "point": "6389",
+      "weight": 0.0238355,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/soplex_ref/6389/_6389_0.023835_.zstd"
+    },
+    {
+      "workload": "sphinx3",
+      "point": "82338",
+      "weight": 0.0994892,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/sphinx3/82338/_82338_0.099489_.zstd"
+    },
+    {
+      "workload": "sphinx3",
+      "point": "142675",
+      "weight": 0.0883778,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/sphinx3/142675/_142675_0.088378_.zstd"
+    },
+    {
+      "workload": "sphinx3",
+      "point": "182227",
+      "weight": 0.0733317,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/sphinx3/182227/_182227_0.073332_.zstd"
+    },
+    {
+      "workload": "sphinx3",
+      "point": "41852",
+      "weight": 0.0724912,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/sphinx3/41852/_41852_0.072491_.zstd"
+    },
+    {
+      "workload": "sphinx3",
+      "point": "79825",
+      "weight": 0.0669082,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/sphinx3/79825/_79825_0.066908_.zstd"
+    },
+    {
+      "workload": "sphinx3",
+      "point": "83273",
+      "weight": 0.0662424,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/sphinx3/83273/_83273_0.066242_.zstd"
+    },
+    {
+      "workload": "sphinx3",
+      "point": "89528",
+      "weight": 0.0639285,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/sphinx3/89528/_89528_0.063928_.zstd"
+    },
+    {
+      "workload": "sphinx3",
+      "point": "112315",
+      "weight": 0.0615709,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/sphinx3/112315/_112315_0.061571_.zstd"
+    },
+    {
+      "workload": "sphinx3",
+      "point": "125850",
+      "weight": 0.0578926,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/sphinx3/125850/_125850_0.057893_.zstd"
+    },
+    {
+      "workload": "sphinx3",
+      "point": "114791",
+      "weight": 0.0569702,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/sphinx3/114791/_114791_0.056970_.zstd"
+    },
+    {
+      "workload": "sphinx3",
+      "point": "21871",
+      "weight": 0.0562226,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/sphinx3/21871/_21871_0.056223_.zstd"
+    },
+    {
+      "workload": "sphinx3",
+      "point": "28689",
+      "weight": 0.0477526,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/sphinx3/28689/_28689_0.047753_.zstd"
+    },
+    {
+      "workload": "tonto",
+      "point": "23672",
+      "weight": 0.114033,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/tonto/23672/_23672_0.114033_.zstd"
+    },
+    {
+      "workload": "tonto",
+      "point": "70839",
+      "weight": 0.0880291,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/tonto/70839/_70839_0.088029_.zstd"
+    },
+    {
+      "workload": "tonto",
+      "point": "50255",
+      "weight": 0.0743642,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/tonto/50255/_50255_0.074364_.zstd"
+    },
+    {
+      "workload": "tonto",
+      "point": "111730",
+      "weight": 0.0729691,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/tonto/111730/_111730_0.072969_.zstd"
+    },
+    {
+      "workload": "tonto",
+      "point": "9067",
+      "weight": 0.0663229,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/tonto/9067/_9067_0.066323_.zstd"
+    },
+    {
+      "workload": "tonto",
+      "point": "32430",
+      "weight": 0.0533079,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/tonto/32430/_32430_0.053308_.zstd"
+    },
+    {
+      "workload": "tonto",
+      "point": "104377",
+      "weight": 0.0508557,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/tonto/104377/_104377_0.050856_.zstd"
+    },
+    {
+      "workload": "tonto",
+      "point": "55023",
+      "weight": 0.0466704,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/tonto/55023/_55023_0.046670_.zstd"
+    },
+    {
+      "workload": "tonto",
+      "point": "105665",
+      "weight": 0.0451627,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/tonto/105665/_105665_0.045163_.zstd"
+    },
+    {
+      "workload": "tonto",
+      "point": "12608",
+      "weight": 0.0416013,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/tonto/12608/_12608_0.041601_.zstd"
+    },
+    {
+      "workload": "tonto",
+      "point": "24331",
+      "weight": 0.0396603,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/tonto/24331/_24331_0.039660_.zstd"
+    },
+    {
+      "workload": "tonto",
+      "point": "40014",
+      "weight": 0.0379533,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/tonto/40014/_40014_0.037953_.zstd"
+    },
+    {
+      "workload": "tonto",
+      "point": "48081",
+      "weight": 0.0350158,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/tonto/48081/_48081_0.035016_.zstd"
+    },
+    {
+      "workload": "tonto",
+      "point": "69620",
+      "weight": 0.0322256,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/tonto/69620/_69620_0.032226_.zstd"
+    },
+    {
+      "workload": "tonto",
+      "point": "114419",
+      "weight": 0.0293661,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/tonto/114419/_114419_0.029366_.zstd"
+    },
+    {
+      "workload": "wrf",
+      "point": "102864",
+      "weight": 0.11641,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/wrf/102864/_102864_0.116410_.zstd"
+    },
+    {
+      "workload": "wrf",
+      "point": "35600",
+      "weight": 0.0871054,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/wrf/35600/_35600_0.087105_.zstd"
+    },
+    {
+      "workload": "wrf",
+      "point": "125157",
+      "weight": 0.0671993,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/wrf/125157/_125157_0.067199_.zstd"
+    },
+    {
+      "workload": "wrf",
+      "point": "8021",
+      "weight": 0.0652165,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/wrf/8021/_8021_0.065216_.zstd"
+    },
+    {
+      "workload": "wrf",
+      "point": "698",
+      "weight": 0.0632338,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/wrf/698/_698_0.063234_.zstd"
+    },
+    {
+      "workload": "wrf",
+      "point": "90729",
+      "weight": 0.0574159,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/wrf/90729/_90729_0.057416_.zstd"
+    },
+    {
+      "workload": "wrf",
+      "point": "54845",
+      "weight": 0.0561766,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/wrf/54845/_54845_0.056177_.zstd"
+    },
+    {
+      "workload": "wrf",
+      "point": "111663",
+      "weight": 0.0492565,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/wrf/111663/_111663_0.049257_.zstd"
+    },
+    {
+      "workload": "wrf",
+      "point": "123545",
+      "weight": 0.0459953,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/wrf/123545/_123545_0.045995_.zstd"
+    },
+    {
+      "workload": "wrf",
+      "point": "150025",
+      "weight": 0.0373011,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/wrf/150025/_150025_0.037301_.zstd"
+    },
+    {
+      "workload": "wrf",
+      "point": "127235",
+      "weight": 0.0359379,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/wrf/127235/_127235_0.035938_.zstd"
+    },
+    {
+      "workload": "wrf",
+      "point": "6453",
+      "weight": 0.0332246,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/wrf/6453/_6453_0.033225_.zstd"
+    },
+    {
+      "workload": "wrf",
+      "point": "99411",
+      "weight": 0.028959,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/wrf/99411/_99411_0.028959_.zstd"
+    },
+    {
+      "workload": "wrf",
+      "point": "87949",
+      "weight": 0.0289199,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/wrf/87949/_87949_0.028920_.zstd"
+    },
+    {
+      "workload": "wrf",
+      "point": "145049",
+      "weight": 0.0236955,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/wrf/145049/_145049_0.023696_.zstd"
+    },
+    {
+      "workload": "wrf",
+      "point": "69989",
+      "weight": 0.0224041,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/wrf/69989/_69989_0.022404_.zstd"
+    },
+    {
+      "workload": "xalancbmk",
+      "point": "8082",
+      "weight": 0.0971231,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/xalancbmk/8082/_8082_0.097123_.zstd"
+    },
+    {
+      "workload": "xalancbmk",
+      "point": "3933",
+      "weight": 0.0617017,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/xalancbmk/3933/_3933_0.061702_.zstd"
+    },
+    {
+      "workload": "xalancbmk",
+      "point": "25293",
+      "weight": 0.051215,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/xalancbmk/25293/_25293_0.051215_.zstd"
+    },
+    {
+      "workload": "xalancbmk",
+      "point": "13669",
+      "weight": 0.0408806,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/xalancbmk/13669/_13669_0.040881_.zstd"
+    },
+    {
+      "workload": "xalancbmk",
+      "point": "6580",
+      "weight": 0.0330346,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/xalancbmk/6580/_6580_0.033035_.zstd"
+    },
+    {
+      "workload": "xalancbmk",
+      "point": "36054",
+      "weight": 0.031181,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/xalancbmk/36054/_36054_0.031181_.zstd"
+    },
+    {
+      "workload": "xalancbmk",
+      "point": "30438",
+      "weight": 0.0309017,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/xalancbmk/30438/_30438_0.030902_.zstd"
+    },
+    {
+      "workload": "xalancbmk",
+      "point": "38579",
+      "weight": 0.0305208,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/xalancbmk/38579/_38579_0.030521_.zstd"
+    },
+    {
+      "workload": "xalancbmk",
+      "point": "16845",
+      "weight": 0.0289719,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/xalancbmk/16845/_16845_0.028972_.zstd"
+    },
+    {
+      "workload": "xalancbmk",
+      "point": "35819",
+      "weight": 0.0273468,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/xalancbmk/35819/_35819_0.027347_.zstd"
+    },
+    {
+      "workload": "xalancbmk",
+      "point": "1720",
+      "weight": 0.0261788,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/xalancbmk/1720/_1720_0.026179_.zstd"
+    },
+    {
+      "workload": "xalancbmk",
+      "point": "29930",
+      "weight": 0.0261534,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/xalancbmk/29930/_29930_0.026153_.zstd"
+    },
+    {
+      "workload": "xalancbmk",
+      "point": "12634",
+      "weight": 0.0243506,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/xalancbmk/12634/_12634_0.024351_.zstd"
+    },
+    {
+      "workload": "xalancbmk",
+      "point": "2499",
+      "weight": 0.024249,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/xalancbmk/2499/_2499_0.024249_.zstd"
+    },
+    {
+      "workload": "xalancbmk",
+      "point": "30003",
+      "weight": 0.0233095,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/xalancbmk/30003/_30003_0.023310_.zstd"
+    },
+    {
+      "workload": "xalancbmk",
+      "point": "8926",
+      "weight": 0.022497,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/xalancbmk/8926/_8926_0.022497_.zstd"
+    },
+    {
+      "workload": "xalancbmk",
+      "point": "33880",
+      "weight": 0.0224208,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/xalancbmk/33880/_33880_0.022421_.zstd"
+    },
+    {
+      "workload": "xalancbmk",
+      "point": "16112",
+      "weight": 0.0220654,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/xalancbmk/16112/_16112_0.022065_.zstd"
+    },
+    {
+      "workload": "xalancbmk",
+      "point": "645",
+      "weight": 0.0219638,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/xalancbmk/645/_645_0.021964_.zstd"
+    },
+    {
+      "workload": "xalancbmk",
+      "point": "20515",
+      "weight": 0.0212528,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/xalancbmk/20515/_20515_0.021253_.zstd"
+    },
+    {
+      "workload": "xalancbmk",
+      "point": "12428",
+      "weight": 0.021202,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/xalancbmk/12428/_12428_0.021202_.zstd"
+    },
+    {
+      "workload": "xalancbmk",
+      "point": "22901",
+      "weight": 0.0207704,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/xalancbmk/22901/_22901_0.020770_.zstd"
+    },
+    {
+      "workload": "xalancbmk",
+      "point": "31957",
+      "weight": 0.0199071,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/xalancbmk/31957/_31957_0.019907_.zstd"
+    },
+    {
+      "workload": "xalancbmk",
+      "point": "23047",
+      "weight": 0.0196024,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/xalancbmk/23047/_23047_0.019602_.zstd"
+    },
+    {
+      "workload": "xalancbmk",
+      "point": "34239",
+      "weight": 0.0195262,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/xalancbmk/34239/_34239_0.019526_.zstd"
+    },
+    {
+      "workload": "xalancbmk",
+      "point": "38737",
+      "weight": 0.0191961,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/xalancbmk/38737/_38737_0.019196_.zstd"
+    },
+    {
+      "workload": "xalancbmk",
+      "point": "20929",
+      "weight": 0.0182566,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/xalancbmk/20929/_20929_0.018257_.zstd"
+    },
+    {
+      "workload": "zeusmp",
+      "point": "78888",
+      "weight": 0.0862944,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/zeusmp/78888/_78888_0.086294_.zstd"
+    },
+    {
+      "workload": "zeusmp",
+      "point": "42748",
+      "weight": 0.0669393,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/zeusmp/42748/_42748_0.066939_.zstd"
+    },
+    {
+      "workload": "zeusmp",
+      "point": "29834",
+      "weight": 0.0657873,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/zeusmp/29834/_29834_0.065787_.zstd"
+    },
+    {
+      "workload": "zeusmp",
+      "point": "16125",
+      "weight": 0.0639645,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/zeusmp/16125/_16125_0.063964_.zstd"
+    },
+    {
+      "workload": "zeusmp",
+      "point": "60362",
+      "weight": 0.0636606,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/zeusmp/60362/_60362_0.063661_.zstd"
+    },
+    {
+      "workload": "zeusmp",
+      "point": "60111",
+      "weight": 0.0626859,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/zeusmp/60111/_60111_0.062686_.zstd"
+    },
+    {
+      "workload": "zeusmp",
+      "point": "35850",
+      "weight": 0.0559515,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/zeusmp/35850/_35850_0.055952_.zstd"
+    },
+    {
+      "workload": "zeusmp",
+      "point": "25550",
+      "weight": 0.0496475,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/zeusmp/25550/_25550_0.049647_.zstd"
+    },
+    {
+      "workload": "zeusmp",
+      "point": "53614",
+      "weight": 0.0471157,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/zeusmp/53614/_53614_0.047116_.zstd"
+    },
+    {
+      "workload": "zeusmp",
+      "point": "23412",
+      "weight": 0.0431156,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/zeusmp/23412/_23412_0.043116_.zstd"
+    },
+    {
+      "workload": "zeusmp",
+      "point": "7822",
+      "weight": 0.0427358,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/zeusmp/7822/_7822_0.042736_.zstd"
+    },
+    {
+      "workload": "zeusmp",
+      "point": "26266",
+      "weight": 0.0322797,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/zeusmp/26266/_26266_0.032280_.zstd"
+    },
+    {
+      "workload": "zeusmp",
+      "point": "56926",
+      "weight": 0.0311024,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/zeusmp/56926/_56926_0.031102_.zstd"
+    },
+    {
+      "workload": "zeusmp",
+      "point": "31741",
+      "weight": 0.030748,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/zeusmp/31741/_31741_0.030748_.zstd"
+    },
+    {
+      "workload": "zeusmp",
+      "point": "55901",
+      "weight": 0.0290771,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/zeusmp/55901/_55901_0.029077_.zstd"
+    },
+    {
+      "workload": "zeusmp",
+      "point": "44810",
+      "weight": 0.0283428,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/zeusmp/44810/_44810_0.028343_.zstd"
+    },
+    {
+      "workload": "zeusmp",
+      "point": "25455",
+      "weight": 0.0256845,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/zeusmp/25455/_25455_0.025684_.zstd"
+    }
+  ],
+  "warmup": 20000000,
+  "measure": 20000000
+}

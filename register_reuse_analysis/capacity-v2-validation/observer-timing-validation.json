@@ -1,0 +1,7 @@
+{
+  "workload": "bwaves/37801",
+  "same_simInsts": true,
+  "same_cycles": true,
+  "cycles": 62976.0,
+  "instructions": 200005.0
+}

@@ -1,0 +1,30 @@
+[
+  {
+    "workload": "mcf",
+    "point": "12253",
+    "weight": 0.137576,
+    "selected_workload_coverage": 0.137576,
+    "variant": "small",
+    "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/mcf/12253/_12253_0.137576_.zstd",
+    "warmup": 100000,
+    "measure": 200000,
+    "command": [
+      "/nfs/home/liuchanghe/register_reuse/build/RISCV/gem5.opt",
+      "--outdir=/nfs/home/liuchanghe/register_reuse/register_reuse_analysis/results-small64-smoke/mcf/12253/small",
+      "/nfs/home/liuchanghe/register_reuse/GEM5/configs/example/kmhv3.py",
+      "--generic-rv-cpt=/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/mcf/12253/_12253_0.137576_.zstd",
+      "--warmup-insts-no-switch=100000",
+      "--maxinsts=300000",
+      "--difftest-ref-so=/nfs/home/share/gem5_ci/ref/normal/riscv64-nemu-interpreter-so",
+      "--param",
+      "system.cpu[0].enableRegPressureStats=True",
+      "--param",
+      "system.cpu[0].regPressureTrace='reg-pressure.csv'",
+      "--param",
+      "system.cpu[0].numPhysIntRegs=64",
+      "--param",
+      "system.cpu[0].numPhysFloatRegs=64"
+    ],
+    "out": "/nfs/home/liuchanghe/register_reuse/register_reuse_analysis/results-small64-smoke/mcf/12253/small"
+  }
+]

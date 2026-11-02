@@ -1,0 +1,14 @@
+{
+  "single": {
+    "int_chain_begin": 2147483696,
+    "fp_chain_begin": 2147483952,
+    "int_chain_end": 2147483952,
+    "fp_chain_end": 2147484016
+  },
+  "multi": {
+    "int_chain_begin": 2147483696,
+    "fp_chain_begin": 2147484208,
+    "int_chain_end": 2147484208,
+    "fp_chain_end": 2147484336
+  }
+}

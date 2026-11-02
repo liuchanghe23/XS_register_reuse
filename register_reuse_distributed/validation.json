@@ -1,0 +1,19 @@
+{
+  "generated": "2026-11-01T17:23:47+08:00",
+  "distributed_tests": 8,
+  "analysis_tests": 11,
+  "real_checkpoint_smoke_runs": 8,
+  "real_checkpoint_smoke_all_passed": true,
+  "resume_skipped_runs": 8,
+  "relocated_report_passed": true,
+  "cancellation_and_timeout_process_group_cleanup_tested": true,
+  "imported_capacity_successes": 160,
+  "long_tests_started": false,
+  "full_plan_id": "e37c5c85366b7d9e4020ae4941520605fb134aa2a5ca162995363e30b5bb59b6",
+  "full_plan_runs": 14016,
+  "files": {
+    "experiment.py": "55c5e31b54dceb701e30128764c6b4514f2fe3ad53dd74e7e73a9fe56c041b7a",
+    "test_experiment.py": "500e40078f8422cd5748421ef87281cb0d9040a565d752db81e567257fa6ebe2"
+  },
+  "smoke_report": "/nfs/home/liuchanghe/register_reuse/register_reuse_distributed/smoke-local/report/report.md"
+}

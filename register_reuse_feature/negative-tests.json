@@ -1,0 +1,22 @@
+[
+  {
+    "case": "shadow-limit",
+    "ok": true,
+    "returncode": -6
+  },
+  {
+    "case": "observer",
+    "ok": true,
+    "returncode": -6
+  },
+  {
+    "case": "compressed",
+    "ok": true,
+    "returncode": -6
+  },
+  {
+    "case": "predictor",
+    "ok": true,
+    "returncode": -6
+  }
+]

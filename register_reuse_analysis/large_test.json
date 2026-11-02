@@ -1,0 +1,48 @@
+{
+  "profile": "threshold",
+  "repo": "../GEM5",
+  "gem5": "../build/RISCV/gem5.opt",
+  "checkpoints": "../zstd-checkpoint-0-0-0",
+  "out": "large-capacity-coverage80",
+  "coverage": 0.8,
+  "warmup": 20000000,
+  "measure": 20000000,
+  "jobs": 16,
+  "timeout": 21600,
+  "reference": "/nfs/home/share/gem5_ci/ref/normal/riscv64-nemu-interpreter-so",
+  "difftest": true,
+  "trace": false,
+  "profiles": {
+    "baseline": [
+      ["baseline", 224, 256]
+    ],
+    "screen": [
+      ["baseline", 224, 256],
+      ["large", 512, 512],
+      ["int192", 192, 256],
+      ["fp208", 224, 208]
+    ],
+    "threshold": [
+      ["baseline", 224, 256],
+      ["large", 512, 512],
+      ["int128", 128, 256],
+      ["int160", 160, 256],
+      ["int176", 176, 256],
+      ["int192", 192, 256],
+      ["int208", 208, 256],
+      ["int256", 256, 256],
+      ["int288", 288, 256],
+      ["int320", 320, 256],
+      ["fp160", 224, 160],
+      ["fp176", 224, 176],
+      ["fp192", 224, 192],
+      ["fp208", 224, 208],
+      ["fp224", 224, 224],
+      ["fp240", 224, 240],
+      ["fp272", 224, 272],
+      ["fp288", 224, 288],
+      ["fp320", 224, 320],
+      ["mixed192_208", 192, 208]
+    ]
+  }
+}

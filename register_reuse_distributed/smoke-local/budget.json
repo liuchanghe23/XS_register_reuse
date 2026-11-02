@@ -1,0 +1,13 @@
+{
+  "total_runs": 8,
+  "shard_counts": [
+    8
+  ],
+  "jobs_per_server": 2,
+  "seconds_per_run": 10.0,
+  "runtime_factor": 1.25,
+  "max_runs_per_server": 8,
+  "waves": 4,
+  "nominal_hours": 0.011111111111111112,
+  "budget_hours": 0.013888888888888888
+}

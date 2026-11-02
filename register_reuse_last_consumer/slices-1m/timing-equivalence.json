@@ -1,0 +1,181 @@
+{
+  "all_equal": true,
+  "runs": [
+    {
+      "workload": "GemsFDTD",
+      "int_regs": 192,
+      "float_regs": 208,
+      "binary_equal": true,
+      "window_equal": true,
+      "instructions_equal": true,
+      "cycles_equal": true,
+      "trace_cycles": 219496.0,
+      "old_cycles": 219496.0
+    },
+    {
+      "workload": "GemsFDTD",
+      "int_regs": 224,
+      "float_regs": 256,
+      "binary_equal": true,
+      "window_equal": true,
+      "instructions_equal": true,
+      "cycles_equal": true,
+      "trace_cycles": 219602.0,
+      "old_cycles": 219602.0
+    },
+    {
+      "workload": "bwaves",
+      "int_regs": 192,
+      "float_regs": 208,
+      "binary_equal": true,
+      "window_equal": true,
+      "instructions_equal": true,
+      "cycles_equal": true,
+      "trace_cycles": 301554.0,
+      "old_cycles": 301554.0
+    },
+    {
+      "workload": "bwaves",
+      "int_regs": 224,
+      "float_regs": 256,
+      "binary_equal": true,
+      "window_equal": true,
+      "instructions_equal": true,
+      "cycles_equal": true,
+      "trace_cycles": 287354.0,
+      "old_cycles": 287354.0
+    },
+    {
+      "workload": "bzip2_combined",
+      "int_regs": 192,
+      "float_regs": 208,
+      "binary_equal": true,
+      "window_equal": true,
+      "instructions_equal": true,
+      "cycles_equal": true,
+      "trace_cycles": 828747.0,
+      "old_cycles": 828747.0
+    },
+    {
+      "workload": "bzip2_combined",
+      "int_regs": 224,
+      "float_regs": 256,
+      "binary_equal": true,
+      "window_equal": true,
+      "instructions_equal": true,
+      "cycles_equal": true,
+      "trace_cycles": 831727.0,
+      "old_cycles": 831727.0
+    },
+    {
+      "workload": "gcc_166",
+      "int_regs": 192,
+      "float_regs": 208,
+      "binary_equal": true,
+      "window_equal": true,
+      "instructions_equal": true,
+      "cycles_equal": true,
+      "trace_cycles": 625884.0,
+      "old_cycles": 625884.0
+    },
+    {
+      "workload": "gcc_166",
+      "int_regs": 224,
+      "float_regs": 256,
+      "binary_equal": true,
+      "window_equal": true,
+      "instructions_equal": true,
+      "cycles_equal": true,
+      "trace_cycles": 601685.0,
+      "old_cycles": 601685.0
+    },
+    {
+      "workload": "hmmer_nph3",
+      "int_regs": 192,
+      "float_regs": 208,
+      "binary_equal": true,
+      "window_equal": true,
+      "instructions_equal": true,
+      "cycles_equal": true,
+      "trace_cycles": 160947.0,
+      "old_cycles": 160947.0
+    },
+    {
+      "workload": "hmmer_nph3",
+      "int_regs": 224,
+      "float_regs": 256,
+      "binary_equal": true,
+      "window_equal": true,
+      "instructions_equal": true,
+      "cycles_equal": true,
+      "trace_cycles": 158354.0,
+      "old_cycles": 158354.0
+    },
+    {
+      "workload": "leslie3d",
+      "int_regs": 192,
+      "float_regs": 208,
+      "binary_equal": true,
+      "window_equal": true,
+      "instructions_equal": true,
+      "cycles_equal": true,
+      "trace_cycles": 238218.0,
+      "old_cycles": 238218.0
+    },
+    {
+      "workload": "leslie3d",
+      "int_regs": 224,
+      "float_regs": 256,
+      "binary_equal": true,
+      "window_equal": true,
+      "instructions_equal": true,
+      "cycles_equal": true,
+      "trace_cycles": 226878.0,
+      "old_cycles": 226878.0
+    },
+    {
+      "workload": "libquantum",
+      "int_regs": 192,
+      "float_regs": 208,
+      "binary_equal": true,
+      "window_equal": true,
+      "instructions_equal": true,
+      "cycles_equal": true,
+      "trace_cycles": 177742.0,
+      "old_cycles": 177742.0
+    },
+    {
+      "workload": "libquantum",
+      "int_regs": 224,
+      "float_regs": 256,
+      "binary_equal": true,
+      "window_equal": true,
+      "instructions_equal": true,
+      "cycles_equal": true,
+      "trace_cycles": 177636.0,
+      "old_cycles": 177636.0
+    },
+    {
+      "workload": "mcf",
+      "int_regs": 192,
+      "float_regs": 208,
+      "binary_equal": true,
+      "window_equal": true,
+      "instructions_equal": true,
+      "cycles_equal": true,
+      "trace_cycles": 2189128.0,
+      "old_cycles": 2189128.0
+    },
+    {
+      "workload": "mcf",
+      "int_regs": 224,
+      "float_regs": 256,
+      "binary_equal": true,
+      "window_equal": true,
+      "instructions_equal": true,
+      "cycles_equal": true,
+      "trace_cycles": 2127437.0,
+      "old_cycles": 2127437.0
+    }
+  ]
+}

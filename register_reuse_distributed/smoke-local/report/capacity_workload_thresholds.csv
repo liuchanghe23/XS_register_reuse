@@ -1,0 +1,3 @@
+workload,axis,safe_1pct,safe_5pct,largest_tested_count_with_1pct_pressure,next_larger_count_under_1pct_pressure,tested_counts
+bwaves,int,192,192,,192,"192,224"
+bwaves,float,208,208,256,,"208,256"

@@ -1,0 +1,742 @@
+{
+  "ok": true,
+  "identity": {
+    "binary_sha256": "e382453a2ec19d1adeb83d7a133385a505c934a4b0623586dff06088879a25b7",
+    "reference_sha256": "3650e3ce267e333593c5a04f69640ee27e83d8a8352bdebaa0e1ac2e54bc8df9",
+    "source_sha256": "ccf0b3441f5afdb8b2afc6b35e7aec3bd35ceffefed54155f005b6c352a65072"
+  },
+  "cases": [
+    {
+      "case": "single-off",
+      "program": "single",
+      "ok": true,
+      "instructions": 100.0,
+      "cycles": 1295.0,
+      "chain_trace": {
+        "int": {
+          "instructions": 64,
+          "reused": 0,
+          "fresh_allocations": 64,
+          "versions": [
+            0
+          ],
+          "witnesses": [
+            {
+              "chain": "int",
+              "seq": 13,
+              "pc": "0x80000030",
+              "old_tag": 38,
+              "new_tag": 41,
+              "trace_line": 1288,
+              "old": {
+                "reg_class": "IntRegClass",
+                "base_slot": 38,
+                "version": 0
+              },
+              "new": {
+                "reg_class": "IntRegClass",
+                "base_slot": 41,
+                "version": 0
+              }
+            },
+            {
+              "chain": "int",
+              "seq": 14,
+              "pc": "0x80000034",
+              "old_tag": 41,
+              "new_tag": 42,
+              "trace_line": 1293,
+              "old": {
+                "reg_class": "IntRegClass",
+                "base_slot": 41,
+                "version": 0
+              },
+              "new": {
+                "reg_class": "IntRegClass",
+                "base_slot": 42,
+                "version": 0
+              }
+            }
+          ]
+        },
+        "fp": {
+          "instructions": 16,
+          "reused": 0,
+          "fresh_allocations": 16,
+          "versions": [
+            0
+          ],
+          "witnesses": [
+            {
+              "chain": "fp",
+              "seq": 77,
+              "pc": "0x80000130",
+              "old_tag": 256,
+              "new_tag": 257,
+              "trace_line": 3227,
+              "old": {
+                "reg_class": "FloatRegClass",
+                "base_slot": 32,
+                "version": 0
+              },
+              "new": {
+                "reg_class": "FloatRegClass",
+                "base_slot": 33,
+                "version": 0
+              }
+            },
+            {
+              "chain": "fp",
+              "seq": 78,
+              "pc": "0x80000134",
+              "old_tag": 257,
+              "new_tag": 258,
+              "trace_line": 3234,
+              "old": {
+                "reg_class": "FloatRegClass",
+                "base_slot": 33,
+                "version": 0
+              },
+              "new": {
+                "reg_class": "FloatRegClass",
+                "base_slot": 34,
+                "version": 0
+              }
+            }
+          ]
+        }
+      },
+      "reuse_stats": {
+        "allocatedSlots": 0.0,
+        "sharedVersions": 0.0,
+        "deterministicReuses": 0.0,
+        "predictedReuses": 0.0,
+        "predictionMisses": 0.0,
+        "repairCopies": 0.0,
+        "repairWaitCycles": 0.0,
+        "aliasRejects": 0.0,
+        "versionLimitRejects": 0.0,
+        "squashEvents": 0.0,
+        "restoredGroups": 0.0,
+        "returnedSlots": 0.0
+      },
+      "full_program_ipc_ratio_to_off": 1.0
+    },
+    {
+      "case": "single-one-shadow",
+      "program": "single",
+      "ok": true,
+      "instructions": 100.0,
+      "cycles": 1295.0,
+      "chain_trace": {
+        "int": {
+          "instructions": 64,
+          "reused": 32,
+          "fresh_allocations": 32,
+          "versions": [
+            0,
+            1
+          ],
+          "witnesses": [
+            {
+              "chain": "int",
+              "seq": 13,
+              "pc": "0x80000030",
+              "old_tag": 37,
+              "new_tag": 1165,
+              "trace_line": 1288,
+              "old": {
+                "reg_class": "IntRegClass",
+                "base_slot": 37,
+                "version": 0
+              },
+              "new": {
+                "reg_class": "IntRegClass",
+                "base_slot": 37,
+                "version": 1
+              }
+            },
+            {
+              "chain": "int",
+              "seq": 15,
+              "pc": "0x80000038",
+              "old_tag": 39,
+              "new_tag": 1167,
+              "trace_line": 1298,
+              "old": {
+                "reg_class": "IntRegClass",
+                "base_slot": 39,
+                "version": 0
+              },
+              "new": {
+                "reg_class": "IntRegClass",
+                "base_slot": 39,
+                "version": 1
+              }
+            },
+            {
+              "chain": "int",
+              "seq": 17,
+              "pc": "0x80000040",
+              "old_tag": 40,
+              "new_tag": 1168,
+              "trace_line": 1312,
+              "old": {
+                "reg_class": "IntRegClass",
+                "base_slot": 40,
+                "version": 0
+              },
+              "new": {
+                "reg_class": "IntRegClass",
+                "base_slot": 40,
+                "version": 1
+              }
+            },
+            {
+              "chain": "int",
+              "seq": 19,
+              "pc": "0x80000048",
+              "old_tag": 41,
+              "new_tag": 1169,
+              "trace_line": 1322,
+              "old": {
+                "reg_class": "IntRegClass",
+                "base_slot": 41,
+                "version": 0
+              },
+              "new": {
+                "reg_class": "IntRegClass",
+                "base_slot": 41,
+                "version": 1
+              }
+            }
+          ]
+        },
+        "fp": {
+          "instructions": 16,
+          "reused": 8,
+          "fresh_allocations": 8,
+          "versions": [
+            0,
+            1
+          ],
+          "witnesses": [
+            {
+              "chain": "fp",
+              "seq": 77,
+              "pc": "0x80000130",
+              "old_tag": 256,
+              "new_tag": 1384,
+              "trace_line": 3227,
+              "old": {
+                "reg_class": "FloatRegClass",
+                "base_slot": 32,
+                "version": 0
+              },
+              "new": {
+                "reg_class": "FloatRegClass",
+                "base_slot": 32,
+                "version": 1
+              }
+            },
+            {
+              "chain": "fp",
+              "seq": 79,
+              "pc": "0x80000138",
+              "old_tag": 257,
+              "new_tag": 1385,
+              "trace_line": 3241,
+              "old": {
+                "reg_class": "FloatRegClass",
+                "base_slot": 33,
+                "version": 0
+              },
+              "new": {
+                "reg_class": "FloatRegClass",
+                "base_slot": 33,
+                "version": 1
+              }
+            },
+            {
+              "chain": "fp",
+              "seq": 81,
+              "pc": "0x80000140",
+              "old_tag": 258,
+              "new_tag": 1386,
+              "trace_line": 3816,
+              "old": {
+                "reg_class": "FloatRegClass",
+                "base_slot": 34,
+                "version": 0
+              },
+              "new": {
+                "reg_class": "FloatRegClass",
+                "base_slot": 34,
+                "version": 1
+              }
+            },
+            {
+              "chain": "fp",
+              "seq": 83,
+              "pc": "0x80000148",
+              "old_tag": 259,
+              "new_tag": 1387,
+              "trace_line": 3830,
+              "old": {
+                "reg_class": "FloatRegClass",
+                "base_slot": 35,
+                "version": 0
+              },
+              "new": {
+                "reg_class": "FloatRegClass",
+                "base_slot": 35,
+                "version": 1
+              }
+            }
+          ]
+        }
+      },
+      "reuse_stats": {
+        "allocatedSlots": 51.0,
+        "sharedVersions": 43.0,
+        "deterministicReuses": 43.0,
+        "predictedReuses": 0.0,
+        "predictionMisses": 0.0,
+        "repairCopies": 0.0,
+        "repairWaitCycles": 0.0,
+        "aliasRejects": 0.0,
+        "versionLimitRejects": 48.0,
+        "squashEvents": 1.0,
+        "restoredGroups": 0.0,
+        "returnedSlots": 45.0
+      },
+      "full_program_ipc_ratio_to_off": 1.0
+    },
+    {
+      "case": "single-three-shadows",
+      "program": "single",
+      "ok": true,
+      "instructions": 100.0,
+      "cycles": 1295.0,
+      "chain_trace": {
+        "int": {
+          "instructions": 64,
+          "reused": 48,
+          "fresh_allocations": 16,
+          "versions": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "witnesses": [
+            {
+              "chain": "int",
+              "seq": 13,
+              "pc": "0x80000030",
+              "old_tag": 37,
+              "new_tag": 1165,
+              "trace_line": 1288,
+              "old": {
+                "reg_class": "IntRegClass",
+                "base_slot": 37,
+                "version": 0
+              },
+              "new": {
+                "reg_class": "IntRegClass",
+                "base_slot": 37,
+                "version": 1
+              }
+            },
+            {
+              "chain": "int",
+              "seq": 14,
+              "pc": "0x80000034",
+              "old_tag": 1165,
+              "new_tag": 1645,
+              "trace_line": 1293,
+              "old": {
+                "reg_class": "IntRegClass",
+                "base_slot": 37,
+                "version": 1
+              },
+              "new": {
+                "reg_class": "IntRegClass",
+                "base_slot": 37,
+                "version": 2
+              }
+            },
+            {
+              "chain": "int",
+              "seq": 15,
+              "pc": "0x80000038",
+              "old_tag": 1645,
+              "new_tag": 2125,
+              "trace_line": 1298,
+              "old": {
+                "reg_class": "IntRegClass",
+                "base_slot": 37,
+                "version": 2
+              },
+              "new": {
+                "reg_class": "IntRegClass",
+                "base_slot": 37,
+                "version": 3
+              }
+            },
+            {
+              "chain": "int",
+              "seq": 17,
+              "pc": "0x80000040",
+              "old_tag": 39,
+              "new_tag": 1167,
+              "trace_line": 1312,
+              "old": {
+                "reg_class": "IntRegClass",
+                "base_slot": 39,
+                "version": 0
+              },
+              "new": {
+                "reg_class": "IntRegClass",
+                "base_slot": 39,
+                "version": 1
+              }
+            }
+          ]
+        },
+        "fp": {
+          "instructions": 16,
+          "reused": 12,
+          "fresh_allocations": 4,
+          "versions": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "witnesses": [
+            {
+              "chain": "fp",
+              "seq": 77,
+              "pc": "0x80000130",
+              "old_tag": 256,
+              "new_tag": 1384,
+              "trace_line": 3227,
+              "old": {
+                "reg_class": "FloatRegClass",
+                "base_slot": 32,
+                "version": 0
+              },
+              "new": {
+                "reg_class": "FloatRegClass",
+                "base_slot": 32,
+                "version": 1
+              }
+            },
+            {
+              "chain": "fp",
+              "seq": 78,
+              "pc": "0x80000134",
+              "old_tag": 1384,
+              "new_tag": 1864,
+              "trace_line": 3234,
+              "old": {
+                "reg_class": "FloatRegClass",
+                "base_slot": 32,
+                "version": 1
+              },
+              "new": {
+                "reg_class": "FloatRegClass",
+                "base_slot": 32,
+                "version": 2
+              }
+            },
+            {
+              "chain": "fp",
+              "seq": 79,
+              "pc": "0x80000138",
+              "old_tag": 1864,
+              "new_tag": 2344,
+              "trace_line": 3241,
+              "old": {
+                "reg_class": "FloatRegClass",
+                "base_slot": 32,
+                "version": 2
+              },
+              "new": {
+                "reg_class": "FloatRegClass",
+                "base_slot": 32,
+                "version": 3
+              }
+            },
+            {
+              "chain": "fp",
+              "seq": 81,
+              "pc": "0x80000140",
+              "old_tag": 257,
+              "new_tag": 1385,
+              "trace_line": 3816,
+              "old": {
+                "reg_class": "FloatRegClass",
+                "base_slot": 33,
+                "version": 0
+              },
+              "new": {
+                "reg_class": "FloatRegClass",
+                "base_slot": 33,
+                "version": 1
+              }
+            }
+          ]
+        }
+      },
+      "reuse_stats": {
+        "allocatedSlots": 31.0,
+        "sharedVersions": 63.0,
+        "deterministicReuses": 63.0,
+        "predictedReuses": 0.0,
+        "predictionMisses": 0.0,
+        "repairCopies": 0.0,
+        "repairWaitCycles": 0.0,
+        "aliasRejects": 0.0,
+        "versionLimitRejects": 24.0,
+        "squashEvents": 1.0,
+        "restoredGroups": 0.0,
+        "returnedSlots": 25.0
+      },
+      "full_program_ipc_ratio_to_off": 1.0
+    },
+    {
+      "case": "multi-off",
+      "program": "multi",
+      "ok": true,
+      "instructions": 187.0,
+      "cycles": 2207.0,
+      "chain_trace": {
+        "int": {
+          "instructions": 64,
+          "reused": 0,
+          "fresh_allocations": 64,
+          "versions": [
+            0
+          ],
+          "witnesses": [
+            {
+              "chain": "int",
+              "seq": 14,
+              "pc": "0x80000034",
+              "old_tag": 38,
+              "new_tag": 41,
+              "trace_line": 1293,
+              "old": {
+                "reg_class": "IntRegClass",
+                "base_slot": 38,
+                "version": 0
+              },
+              "new": {
+                "reg_class": "IntRegClass",
+                "base_slot": 41,
+                "version": 0
+              }
+            },
+            {
+              "chain": "int",
+              "seq": 16,
+              "pc": "0x8000003c",
+              "old_tag": 41,
+              "new_tag": 42,
+              "trace_line": 1303,
+              "old": {
+                "reg_class": "IntRegClass",
+                "base_slot": 41,
+                "version": 0
+              },
+              "new": {
+                "reg_class": "IntRegClass",
+                "base_slot": 42,
+                "version": 0
+              }
+            }
+          ]
+        },
+        "fp": {
+          "instructions": 16,
+          "reused": 0,
+          "fresh_allocations": 16,
+          "versions": [
+            0
+          ],
+          "witnesses": [
+            {
+              "chain": "fp",
+              "seq": 142,
+              "pc": "0x80000234",
+              "old_tag": 256,
+              "new_tag": 257,
+              "trace_line": 5768,
+              "old": {
+                "reg_class": "FloatRegClass",
+                "base_slot": 32,
+                "version": 0
+              },
+              "new": {
+                "reg_class": "FloatRegClass",
+                "base_slot": 33,
+                "version": 0
+              }
+            },
+            {
+              "chain": "fp",
+              "seq": 144,
+              "pc": "0x8000023c",
+              "old_tag": 257,
+              "new_tag": 258,
+              "trace_line": 5780,
+              "old": {
+                "reg_class": "FloatRegClass",
+                "base_slot": 33,
+                "version": 0
+              },
+              "new": {
+                "reg_class": "FloatRegClass",
+                "base_slot": 34,
+                "version": 0
+              }
+            }
+          ]
+        }
+      },
+      "reuse_stats": {
+        "allocatedSlots": 0.0,
+        "sharedVersions": 0.0,
+        "deterministicReuses": 0.0,
+        "predictedReuses": 0.0,
+        "predictionMisses": 0.0,
+        "repairCopies": 0.0,
+        "repairWaitCycles": 0.0,
+        "aliasRejects": 0.0,
+        "versionLimitRejects": 0.0,
+        "squashEvents": 0.0,
+        "restoredGroups": 0.0,
+        "returnedSlots": 0.0
+      },
+      "full_program_ipc_ratio_to_off": 1.0
+    },
+    {
+      "case": "multi-three-shadows",
+      "program": "multi",
+      "ok": true,
+      "instructions": 187.0,
+      "cycles": 2207.0,
+      "chain_trace": {
+        "int": {
+          "instructions": 64,
+          "reused": 0,
+          "fresh_allocations": 64,
+          "versions": [
+            0
+          ],
+          "witnesses": [
+            {
+              "chain": "int",
+              "seq": 14,
+              "pc": "0x80000034",
+              "old_tag": 37,
+              "new_tag": 39,
+              "trace_line": 1293,
+              "old": {
+                "reg_class": "IntRegClass",
+                "base_slot": 37,
+                "version": 0
+              },
+              "new": {
+                "reg_class": "IntRegClass",
+                "base_slot": 39,
+                "version": 0
+              }
+            },
+            {
+              "chain": "int",
+              "seq": 16,
+              "pc": "0x8000003c",
+              "old_tag": 39,
+              "new_tag": 40,
+              "trace_line": 1303,
+              "old": {
+                "reg_class": "IntRegClass",
+                "base_slot": 39,
+                "version": 0
+              },
+              "new": {
+                "reg_class": "IntRegClass",
+                "base_slot": 40,
+                "version": 0
+              }
+            }
+          ]
+        },
+        "fp": {
+          "instructions": 16,
+          "reused": 0,
+          "fresh_allocations": 16,
+          "versions": [
+            0
+          ],
+          "witnesses": [
+            {
+              "chain": "fp",
+              "seq": 142,
+              "pc": "0x80000234",
+              "old_tag": 256,
+              "new_tag": 257,
+              "trace_line": 5768,
+              "old": {
+                "reg_class": "FloatRegClass",
+                "base_slot": 32,
+                "version": 0
+              },
+              "new": {
+                "reg_class": "FloatRegClass",
+                "base_slot": 33,
+                "version": 0
+              }
+            },
+            {
+              "chain": "fp",
+              "seq": 144,
+              "pc": "0x8000023c",
+              "old_tag": 257,
+              "new_tag": 258,
+              "trace_line": 5780,
+              "old": {
+                "reg_class": "FloatRegClass",
+                "base_slot": 33,
+                "version": 0
+              },
+              "new": {
+                "reg_class": "FloatRegClass",
+                "base_slot": 34,
+                "version": 0
+              }
+            }
+          ]
+        }
+      },
+      "reuse_stats": {
+        "allocatedSlots": 95.0,
+        "sharedVersions": 4.0,
+        "deterministicReuses": 4.0,
+        "predictedReuses": 0.0,
+        "predictionMisses": 0.0,
+        "repairCopies": 0.0,
+        "repairWaitCycles": 0.0,
+        "aliasRejects": 0.0,
+        "versionLimitRejects": 0.0,
+        "squashEvents": 1.0,
+        "restoredGroups": 0.0,
+        "returnedSlots": 89.0
+      },
+      "full_program_ipc_ratio_to_off": 1.0
+    }
+  ]
+}

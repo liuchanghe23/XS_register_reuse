@@ -1,0 +1,54 @@
+{
+  "identity": {
+    "binary_sha256": "e382453a2ec19d1adeb83d7a133385a505c934a4b0623586dff06088879a25b7",
+    "reference_sha256": "3650e3ce267e333593c5a04f69640ee27e83d8a8352bdebaa0e1ac2e54bc8df9",
+    "wrapper_sha256": "36c988f5c9abd655c82f60a462b7359c8178c441da3096205db286950d5add79",
+    "warmup": 1000,
+    "measure": 5000,
+    "capacities": "224:256",
+    "no_trace": false,
+    "selected": [
+      [
+        "synthetic",
+        "0",
+        1.0,
+        "/nfs/home/liuchanghe/register_reuse/register_reuse_last_consumer/opportunity.bin"
+      ]
+    ]
+  },
+  "tasks": [
+    {
+      "workload": "synthetic",
+      "point": "0",
+      "weight": 1.0,
+      "int_regs": 224,
+      "float_regs": 256,
+      "warmup": 1000,
+      "measure": 5000,
+      "command": [
+        "/nfs/home/liuchanghe/register_reuse/register_reuse_feature/build/RISCV/gem5.opt",
+        "--debug-file=trace.gz",
+        "--outdir=/nfs/home/liuchanghe/register_reuse/register_reuse_last_consumer/synthetic-validation/synthetic/0/224-256",
+        "/nfs/home/liuchanghe/register_reuse/register_reuse_last_consumer/trace_config.py",
+        "--generic-rv-cpt=/nfs/home/liuchanghe/register_reuse/register_reuse_last_consumer/opportunity.bin",
+        "--difftest-ref-so=/nfs/home/share/gem5_ci/ref/normal/riscv64-nemu-interpreter-so",
+        "--warmup-insts-no-switch=1000",
+        "--maxinsts=6000",
+        "--raw-cpt",
+        "--param",
+        "system.cpu[0].enableRegisterReuse=False",
+        "--param",
+        "system.cpu[0].enableRegPressureStats=True",
+        "--param",
+        "system.cpu[0].regPressureTrace='reg-pressure.csv'",
+        "--param",
+        "system.cpu[0].numPhysIntRegs=224",
+        "--param",
+        "system.cpu[0].numPhysFloatRegs=256",
+        "--param",
+        "system.cpu[0].RobCompressPolicy='none'"
+      ],
+      "out": "/nfs/home/liuchanghe/register_reuse/register_reuse_last_consumer/synthetic-validation/synthetic/0/224-256"
+    }
+  ]
+}

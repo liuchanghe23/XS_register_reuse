@@ -1,0 +1,10 @@
+id,state,returncode,elapsed_seconds,hostname,difftest_error_text
+capacity/mcf/12253/int160,timeout,-15,7200.875,node021.bosccluster.com,False
+capacity/mcf/12253/int176,timeout,-15,7200.927,node021.bosccluster.com,False
+capacity/mcf/12253/int320,timeout,-15,7201.096,node020.bosccluster.com,False
+capacity/mcf/12253/fp160,timeout,-15,7200.745,node021.bosccluster.com,False
+capacity/mcf/12253/fp192,timeout,-15,7201.123,node022.bosccluster.com,False
+capacity/mcf/12253/fp272,timeout,-15,7200.795,node020.bosccluster.com,False
+capacity/mcf/12253/fp320,timeout,-15,7200.863,node021.bosccluster.com,False
+reuse/mcf/12253/mixed192_208-off,timeout,-15,7200.631,node021.bosccluster.com,False
+reuse/mcf/12253/mixed192_208-certain,timeout,-15,7200.797,node021.bosccluster.com,False

@@ -1,0 +1,30 @@
+[
+  {
+    "workload": "bwaves",
+    "point": "37801",
+    "weight": 0.706046,
+    "selected_workload_coverage": 0.706046,
+    "variant": "baseline",
+    "int_regs": 224,
+    "float_regs": 256,
+    "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bwaves/37801/_37801_0.706046_.zstd",
+    "warmup": 10000,
+    "measure": 20000,
+    "command": [
+      "/nfs/home/liuchanghe/register_reuse/build/RISCV/gem5.opt",
+      "--outdir=/nfs/home/liuchanghe/register_reuse/register_reuse_analysis/large-launcher-smoke/bwaves/37801/baseline",
+      "/nfs/home/liuchanghe/register_reuse/GEM5/configs/example/kmhv3.py",
+      "--generic-rv-cpt=/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bwaves/37801/_37801_0.706046_.zstd",
+      "--warmup-insts-no-switch=10000",
+      "--maxinsts=30000",
+      "--difftest-ref-so=/nfs/home/share/gem5_ci/ref/normal/riscv64-nemu-interpreter-so",
+      "--param",
+      "system.cpu[0].enableRegPressureStats=True",
+      "--param",
+      "system.cpu[0].numPhysIntRegs=224",
+      "--param",
+      "system.cpu[0].numPhysFloatRegs=256"
+    ],
+    "out": "/nfs/home/liuchanghe/register_reuse/register_reuse_analysis/large-launcher-smoke/bwaves/37801/baseline"
+  }
+]

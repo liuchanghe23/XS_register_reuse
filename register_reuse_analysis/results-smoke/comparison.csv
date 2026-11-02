@@ -1,0 +1,2 @@
+workload,point,variant,ipc_speedup,baseline_regfull_fraction,variant_regfull_fraction
+mcf,12253,large,1.0081424199244433,0.0,0.0

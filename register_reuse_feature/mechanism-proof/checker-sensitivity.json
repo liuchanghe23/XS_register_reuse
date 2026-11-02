@@ -1,0 +1,6 @@
+{
+  "ok": true,
+  "manipulation": "Keep ON config/counters, substitute OFF rename trace",
+  "rejected": true,
+  "error": "single-three-shadows/int: expected 48 trace-proven reuses; got 0"
+}

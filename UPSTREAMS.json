@@ -1,0 +1,27 @@
+{
+  "description": "Workspace source provenance at initial project import; GEM5 includes local register-pressure and register-reuse modifications. External reference checkouts are excluded.",
+  "repositories": {
+    "GEM5": {
+      "upstream": "https://github.com/OpenXiangShan/GEM5",
+      "revision": "9c35c169c9b6acba4605f73861ef5d4ef2009a77",
+      "included_as_source": true
+    },
+    "XiangShan-RTL": {
+      "upstream": "https://github.com/OpenXiangShan/XiangShan",
+      "revision": "a0c2a26cbe3c862175174bad03a1a23c406315ed",
+      "included_as_source": false
+    },
+    "XiangShan-IntER": {
+      "upstream": "https://github.com/OpenXiangShan/XiangShan",
+      "revision": "673bc98a11a7e5357b65292cd3c38ca202db60ce",
+      "included_as_source": false
+    },
+    "xs-env": {
+      "upstream": "https://github.com/OpenXiangShan/xs-env",
+      "revision": "822e3581a2757d4a9848b065fd2a3057957b401e",
+      "included_as_source": false
+    }
+  },
+  "measured_feature_manifest": "register_reuse_feature/source-manifest.json",
+  "distributed_plan": "register_reuse_distributed/batch-6servers/plan.json"
+}

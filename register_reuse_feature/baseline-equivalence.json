@@ -1,0 +1,17 @@
+{
+  "simInsts": {
+    "old": 10639.0,
+    "new_off": 10639.0,
+    "equal": true
+  },
+  "system.cpu.numCycles": {
+    "old": 12569.0,
+    "new_off": 12569.0,
+    "equal": true
+  },
+  "system.cpu.commit.opsCommitted": {
+    "old": 10331.0,
+    "new_off": 10331.0,
+    "equal": true
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "checked_date": "2026-11-01",
+  "remote": "https://github.com/OpenXiangShan/XiangShan",
+  "remote_default_branch": "kunminghu-v3",
+  "heads": [
+    {
+      "branch": "kunminghu-v3",
+      "commit": "a0c2a26cbe3c862175174bad03a1a23c406315ed",
+      "committer_date": "2026-10-30 17:46:44 +0800",
+      "subject": "misc(gsim): bump difftest & enable CI lightSSS (#6802)"
+    },
+    {
+      "branch": "fix-gsim-compile",
+      "commit": "673bc98a11a7e5357b65292cd3c38ca202db60ce",
+      "committer_date": "2026-08-05 09:37:27 +0800",
+      "subject": "performance 224 base"
+    },
+    {
+      "branch": "agentic-new-er-try",
+      "commit": "0ff7a1886c4dd04610a94d12b680a424b8206da5",
+      "committer_date": "2026-06-27 19:41:40 +0800",
+      "subject": "Cover IntER UCA 64x8 early-free lanes"
+    },
+    {
+      "branch": "new-er",
+      "commit": "d3c358867d849719b99f712b99fa80eacf7a5c9c",
+      "committer_date": "2026-05-24 20:14:05 +0800",
+      "subject": "fix: preserve store queue early release owner"
+    }
+  ],
+  "documented_feature_commit": "3f395c6f9dbdf69a9d73262153a64e63d1bf0af8",
+  "default_snapshot_path": "/nfs/home/liuchanghe/register_reuse/XiangShan-RTL",
+  "experiment_snapshot_path": "/nfs/home/liuchanghe/register_reuse/XiangShan-IntER",
+  "submodules_initialized": false,
+  "rtl_compilation_performed": false,
+  "prior_xs_env_head": "16ae9ddcda54fc9a2fddffad73174cf793ac7814",
+  "prior_xs_env_unchanged": true
+}

@@ -1,0 +1,356 @@
+name: gem5 Full Test (Tier 2 - Post-Merge)
+
+on:
+  push:
+    branches: [ xs-dev ]
+  # Run the full functional suite before merge when the `regression` label is added.
+  pull_request_target:
+    types: [labeled]
+  workflow_dispatch:
+    inputs:
+      test_job:
+        description: 'Run all functional jobs or select one for targeted validation'
+        type: choice
+        default: all
+        options:
+          - all
+          - paralel_cpt_h_test
+          - sanitizer_check
+          - new_sim_script_test_gcb_multi_core
+          - new_sim_script_test_gcbh
+          - raw_linux_boot_test
+          - trace_micro_corpus_test
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+
+  paralel_cpt_h_test:
+    if: |
+      (github.event_name != 'workflow_dispatch' ||
+       inputs.test_job == 'all' || inputs.test_job == 'paralel_cpt_h_test') &&
+      (github.event_name != 'pull_request_target' ||
+      (github.event.label.name == 'regression' &&
+       github.event.pull_request.base.ref == 'xs-dev' &&
+       github.event.pull_request.head.repo.full_name == github.repository))
+    # 使用 open runner 可见的固定 H/V NEMU reference
+    runs-on: [self-hosted, open]
+    timeout-minutes: 720
+    continue-on-error: false
+    name: XS-GEM5 - Running h test checkpoints
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event_name == 'pull_request_target' && github.event.pull_request.head.sha || github.sha }}
+      - uses: ./.github/actions/build-dramsim
+
+      - name: Build GEM5 opt
+        run: |
+          CC=gcc CXX=g++ scons build/RISCV/gem5.opt --linker=gold -j64
+
+      - name: Verify H NEMU reference
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          REF="$(python3 util/nemu_ref/resolve.py h)"
+
+          echo "===== runner information ====="
+          hostname
+          id
+          findmnt -T "$REF" || true
+
+          echo "===== fixed H NEMU reference ====="
+          test -f "$REF"
+          test -r "$REF"
+
+          ls -lh "$REF"
+          file "$REF"
+
+          sha256sum "$REF"
+
+          echo "===== compiled configuration ====="
+          grep -qx '#define CONFIG_TVAL_EX_II 1' \
+            "${REF}.autoconf.h"
+
+          grep -qx '#define CONFIG_GUIDED_TVAL 1' \
+            "${REF}.autoconf.h"
+
+          grep -qx '#define CONFIG_GUIDED_EXEC 1' \
+            "${REF}.autoconf.h"
+
+          echo "===== dependency check ====="
+          if ldd "$REF" | grep -i 'not found'; then
+            echo "ERROR: missing dynamic dependency"
+            exit 1
+          fi
+
+          echo "===== Difftest symbols ====="
+          nm -D "$REF" |
+            grep -E 'difftest_(init|exec|regcpy)' |
+            head -30
+
+          echo "===== gem5-h.cfg reference ====="
+          grep -n -B2 -A3 \
+            'GCBH_REF_SO\|GCBV_REF_SO' \
+            .github/workflows/autotest/gem5-h.cfg
+
+      - name: Run paralel h autotest script
+        shell: bash
+        run: |
+          python3 .github/workflows/autotest/script/autotest.py \
+            -f .github/workflows/autotest/gem5-h.cfg
+
+      - name: Dump H failure details
+        if: ${{ failure() }}
+        shell: bash
+        run: |
+          set -uo pipefail
+
+          for case_dir in \
+            "./log_root_h/rungem5/checkpoint/astar_biglakes" \
+            "./log_root_h/rungem5/checkpoint/wrf"
+          do
+            echo
+            echo "=================================================="
+            echo "CASE: $case_dir"
+            echo "=================================================="
+
+            if [[ ! -d "$case_dir" ]]; then
+              echo "Directory not found"
+              continue
+            fi
+
+            find "$case_dir" \
+              -type f \
+              \( \
+                -name 'taskerr.txt' -o \
+                -name 'taskout.txt' -o \
+                -name 'other.txt' -o \
+                -name 'gem5.log' -o \
+                -name 'simerr' -o \
+                -name 'simout' \
+              \) \
+              -print \
+              -exec sh -c '
+                echo "---------- $1 ----------"
+                tail -n 500 "$1" || true
+              ' sh {} \;
+          done
+
+          echo "===== important errors across H tests ====="
+
+          grep -RniE \
+            'fatal|panic|difftest|mismatch|assert|segmentation|undefined symbol|dlopen|cannot open shared object|error' \
+            ./log_root_h/rungem5 \
+            2>/dev/null |
+            head -1000 || true
+
+  sanitizer_check:
+    if: |
+      (github.event_name != 'workflow_dispatch' ||
+       inputs.test_job == 'all' || inputs.test_job == 'sanitizer_check') &&
+      (github.event_name != 'pull_request_target' ||
+      (github.event.label.name == 'regression' &&
+       github.event.pull_request.base.ref == 'xs-dev' &&
+       github.event.pull_request.head.repo.full_name == github.repository))
+    runs-on: [self-hosted, open]
+    continue-on-error: false
+    name: XS-GEM5 - ASan + UBSan smoke test
+    env:
+      ASAN_OPTIONS: detect_leaks=0
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event_name == 'pull_request_target' && github.event.pull_request.head.sha || github.sha }}
+      - uses: ./.github/actions/build-dramsim
+      - name: Build GEM5 with ASan and UBSan
+        run: |
+          CC=clang CXX=clang++ scons build/RISCV/gem5.opt \
+            --linker=gold --without-tcmalloc --with-asan --with-ubsan -j64
+      - name: Run CoreMark sanitizer smoke test
+        shell: bash
+        env:
+          ASAN_OPTIONS: detect_leaks=0:halt_on_error=1:abort_on_error=1:log_path=sanitizer-test/asan
+          UBSAN_OPTIONS: halt_on_error=1:print_stacktrace=1:log_path=sanitizer-test/ubsan
+        run: |
+          set -euo pipefail
+
+          mkdir -p sanitizer-test/m5out
+          ./build/RISCV/gem5.opt \
+            --listener-mode=off \
+            -d sanitizer-test/m5out \
+            ./configs/example/kmhv3.py \
+            --raw-cpt \
+            --generic-rv-cpt=/nfs/home/share/gem5_ci/checkpoints/coremark-riscv64-xs.bin \
+            --disable-difftest \
+            --maxinsts=10000
+      - name: Upload sanitizer diagnostics
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: sanitizer-diagnostics
+          path: |
+            sanitizer-test/asan.*
+            sanitizer-test/ubsan.*
+            sanitizer-test/m5out/config.ini
+            sanitizer-test/m5out/config.json
+          if-no-files-found: ignore
+
+  new_sim_script_test_gcb_multi_core:
+    if: |
+      (github.event_name != 'workflow_dispatch' ||
+       inputs.test_job == 'all' || inputs.test_job == 'new_sim_script_test_gcb_multi_core') &&
+      (github.event_name != 'pull_request_target' ||
+      (github.event.label.name == 'regression' &&
+       github.event.pull_request.base.ref == 'xs-dev' &&
+       github.event.pull_request.head.repo.full_name == github.repository))
+    runs-on: [self-hosted, open]
+    continue-on-error: false
+    name: XS-GEM5 - Test Multi-core + RV64GCB
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event_name == 'pull_request_target' && github.event.pull_request.head.sha || github.sha }}
+      - name: Build GEM5 opt
+        run: |
+          CC=clang CXX=clang++ scons build/RISCV_CHI/gem5.opt -j 48 --gold-linker
+      - name: XS-GEM5 - Test xiangshan.py simulation scripts
+        run: |
+          GCBV_MULTI_CORE_REF_SO="$(python3 util/nemu_ref/resolve.py multi)"
+          export GCBV_MULTI_CORE_REF_SO
+          export GCB_MULTI_CORE_RESTORER="/nfs/home/share/gem5_ci/tools/gcb-2core-restorer.bin"
+          export GEM5_HOME=$(pwd)
+          mkdir -p $GEM5_HOME/util/xs_scripts/test_multi_core
+          cd $GEM5_HOME/util/xs_scripts/test_multi_core
+          bash ../kmh-ruby-dual.sh /nfs/home/share/gem5_ci/checkpoints/multi_core_test.gz --mem-size=16GB --disable-tea
+
+  new_sim_script_test_gcbh:
+    if: |
+      (github.event_name != 'workflow_dispatch' ||
+       inputs.test_job == 'all' || inputs.test_job == 'new_sim_script_test_gcbh') &&
+      (github.event_name != 'pull_request_target' ||
+      (github.event.label.name == 'regression' &&
+       github.event.pull_request.base.ref == 'xs-dev' &&
+       github.event.pull_request.head.repo.full_name == github.repository))
+    runs-on: [self-hosted, open]
+    continue-on-error: false
+    name: XS-GEM5 - Test new simulation script on RV64GCBH
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event_name == 'pull_request_target' && github.event.pull_request.head.sha || github.sha }}
+      - uses: ./.github/actions/build-dramsim
+      - name: Build GEM5 opt
+        run: CC=gcc CXX=g++ scons build/RISCV/gem5.opt --linker=gold -j64
+      - name: XS-GEM5 - Test xiangshan.py simulation scripts
+        run: |
+          GCBH_REF_SO="$(python3 util/nemu_ref/resolve.py h)"
+          export GCBH_REF_SO
+          export GCBH_RESTORER="/nfs/home/share/gem5_ci/tools/gcpt.bin"
+          export GEM5_HOME=$(pwd)
+          mkdir -p $GEM5_HOME/util/xs_scripts/test_h
+          cd $GEM5_HOME/util/xs_scripts/test_h
+          bash ../kmh_6wide_h.sh /nfs/home/share/gem5_ci/checkpoints/gcbh_test.zstd
+
+  trace_micro_corpus_test:
+    if: |
+      (github.event_name != 'workflow_dispatch' ||
+       inputs.test_job == 'all' || inputs.test_job == 'trace_micro_corpus_test') &&
+      (github.event_name != 'pull_request_target' ||
+      (github.event.label.name == 'regression' &&
+       github.event.pull_request.base.ref == 'xs-dev' &&
+       github.event.pull_request.head.repo.full_name == github.repository))
+    runs-on: [self-hosted, open]
+    continue-on-error: false
+    timeout-minutes: 30
+    name: XS-GEM5 - Trace micro-corpus regression
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event_name == 'pull_request_target' && github.event.pull_request.head.sha || github.sha }}
+      - uses: ./.github/actions/build-dramsim
+      - name: Build GEM5 opt
+        run: |
+          CC=gcc CXX=g++ scons build/RISCV/gem5.opt --linker=gold -j64
+      - name: Run trace micro-corpus regression
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          # Generate the synthetic corpora and sweep them through trace
+          # mode. Each corpus is <100 records except the long-stride pair,
+          # so the sweep finishes in seconds-to-minutes on the already
+          # built binary. fetch-stall-2000 is pinned as known-failing
+          # (pre-existing commit-watchdog liveness defect; see the corpus
+          # generator comments) and reports XFAIL; an XPASS line prompts
+          # flipping its expectation in run_micro_corpus.sh.
+          mkdir -p /tmp/trace_micro_corpus_ci
+          python3 util/xs_scripts/trace/gen_micro_corpus.py \
+            --out-dir /tmp/trace_micro_corpus_ci
+
+          bash util/xs_scripts/trace/run_micro_corpus.sh \
+            ./build/RISCV/gem5.opt \
+            /tmp/trace_micro_corpus_ci \
+            /tmp/trace_micro_corpus_ci/out
+      - name: Dump trace corpus failure details
+        if: ${{ failure() }}
+        shell: bash
+        run: |
+          set -uo pipefail
+
+          echo "===== per-corpus logs ====="
+          for log in /tmp/trace_micro_corpus_ci/out/*.log; do
+            echo
+            echo "---------- $log ----------"
+            tail -n 200 "$log" || true
+          done
+
+          echo "===== panics across corpora ====="
+          grep -RniE 'panic|fatal|abort|mismatch' \
+            /tmp/trace_micro_corpus_ci/out \
+            2>/dev/null | head -100 || true
+
+  raw_linux_boot_test:
+    if: |
+      (github.event_name != 'workflow_dispatch' ||
+       inputs.test_job == 'all' || inputs.test_job == 'raw_linux_boot_test') &&
+      (github.event_name != 'pull_request_target' ||
+      (github.event.label.name == 'regression' &&
+       github.event.pull_request.base.ref == 'xs-dev' &&
+       github.event.pull_request.head.repo.full_name == github.repository))
+    runs-on: [self-hosted, open]
+    continue-on-error: false
+    timeout-minutes: 30
+    name: XS-GEM5 - Boot raw Linux
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event_name == 'pull_request_target' && github.event.pull_request.head.sha || github.sha }}
+      - uses: ./.github/actions/build-dramsim
+      - name: Build GEM5 opt
+        run: |
+          CC=gcc CXX=g++ scons build/RISCV/gem5.opt --linker=gold -j64
+      - name: Boot Xiangshan raw Linux
+        run: |
+          export RAW_LINUX_BIN="${XS_LINUX_BIN:-/nfs/home/share/gem5_ci/ready-to-run/linux.bin}"
+          if [ ! -r "$RAW_LINUX_BIN" ]; then
+            echo "Missing raw linux image: $RAW_LINUX_BIN"
+            echo "Please provision the image at the default path or set XS_LINUX_BIN on the runner."
+            exit 1
+          fi
+
+          mkdir -p debug/raw_linux_ci
+          ./build/RISCV/gem5.opt -r -d debug/raw_linux_ci \
+            ./configs/example/kmhv3.py \
+            --raw-cpt \
+            --generic-rv-cpt "$RAW_LINUX_BIN" \
+            --disable-difftest
+      - name: Check boot result
+        run: |
+          test -f debug/raw_linux_ci/simout
+          tail -n 200 debug/raw_linux_ci/simout
+          grep -q "Hello, XiangShan!" debug/raw_linux_ci/simout
+          grep -q "m5_exit instruction encountered" debug/raw_linux_ci/simout

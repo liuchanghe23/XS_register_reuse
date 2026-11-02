@@ -1,0 +1,53 @@
+{
+  "batches": [
+    {
+      "path": "register_reuse_analysis/capacity-axes-1m",
+      "runs": 21,
+      "all_ok": true
+    },
+    {
+      "path": "register_reuse_analysis/capacity-fp-refine-1m",
+      "runs": 6,
+      "all_ok": true
+    },
+    {
+      "path": "register_reuse_analysis/capacity-fp-upper-1m",
+      "runs": 6,
+      "all_ok": true
+    },
+    {
+      "path": "register_reuse_analysis/capacity-int-crosscheck-1m",
+      "runs": 4,
+      "all_ok": true
+    },
+    {
+      "path": "register_reuse_analysis/capacity-int-refine-1m",
+      "runs": 20,
+      "all_ok": true
+    },
+    {
+      "path": "register_reuse_analysis/capacity-int-upper-1m",
+      "runs": 8,
+      "all_ok": true
+    },
+    {
+      "path": "register_reuse_analysis/capacity-joint-1m",
+      "runs": 56,
+      "all_ok": true
+    }
+  ],
+  "total_runs": 121,
+  "workloads": 8,
+  "warmup_instructions": 1000000,
+  "measured_instructions": 1000000,
+  "observer_schema": 2,
+  "timing_validation": {
+    "workload": "bwaves/37801",
+    "same_simInsts": true,
+    "same_cycles": true,
+    "cycles": 62976.0,
+    "instructions": 200005.0
+  },
+  "all_normal_exit_and_difftest": true,
+  "binary_sha256": "e02bb0357d99cbb178ba2fa6f51ec3523e4167d54994b2e94fe7e18b7c1b8a37"
+}

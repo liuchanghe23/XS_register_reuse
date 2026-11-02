@@ -1,0 +1,72 @@
+{
+  "profile": "baseline",
+  "paths": {
+    "repo": "/nfs/home/liuchanghe/register_reuse/GEM5",
+    "gem5": "/nfs/home/liuchanghe/register_reuse/build/RISCV/gem5.opt",
+    "checkpoints": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0",
+    "out": "/nfs/home/liuchanghe/register_reuse/register_reuse_analysis/large-launcher-smoke"
+  },
+  "settings": {
+    "warmup": 10000,
+    "measure": 20000,
+    "jobs": 2,
+    "timeout": 400
+  },
+  "coverage": null,
+  "top": 1,
+  "difftest": true,
+  "trace": false,
+  "reference": "/nfs/home/share/gem5_ci/ref/normal/riscv64-nemu-interpreter-so",
+  "capacity_points": [
+    [
+      "baseline",
+      224,
+      256
+    ]
+  ],
+  "workloads": [
+    {
+      "workload": "bwaves",
+      "slices": 1,
+      "selected_weight": 0.706046
+    }
+  ],
+  "selected": [
+    {
+      "workload": "bwaves",
+      "point": "37801",
+      "weight": 0.706046,
+      "checkpoint": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/bwaves/37801/_37801_0.706046_.zstd"
+    }
+  ],
+  "selected_slices": 1,
+  "total_runs": 1,
+  "command": [
+    "/usr/bin/python3",
+    "/nfs/home/liuchanghe/register_reuse/register_reuse_analysis/run.py",
+    "--repo",
+    "/nfs/home/liuchanghe/register_reuse/GEM5",
+    "--gem5",
+    "/nfs/home/liuchanghe/register_reuse/build/RISCV/gem5.opt",
+    "--checkpoints",
+    "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0",
+    "--out",
+    "/nfs/home/liuchanghe/register_reuse/register_reuse_analysis/large-launcher-smoke",
+    "--workloads",
+    "bwaves",
+    "--reg-points",
+    "baseline:224:256",
+    "--top",
+    "1",
+    "--warmup",
+    "10000",
+    "--measure",
+    "20000",
+    "--jobs",
+    "2",
+    "--timeout",
+    "400",
+    "--no-trace"
+  ],
+  "metadata_path": "/nfs/home/liuchanghe/register_reuse/zstd-checkpoint-0-0-0/cluster-0-0.json"
+}

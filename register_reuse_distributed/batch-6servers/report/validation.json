@@ -1,0 +1,71 @@
+{
+  "plan_id": "e37c5c85366b7d9e4020ae4941520605fb134aa2a5ca162995363e30b5bb59b6",
+  "suite": "both",
+  "complete": false,
+  "capacity_runs": 11673,
+  "reuse_runs": 2334,
+  "missing": [],
+  "invalid": [
+    {
+      "id": "capacity/mcf/12253/int160",
+      "error": "not complete or metadata differs from plan"
+    },
+    {
+      "id": "capacity/mcf/12253/int176",
+      "error": "not complete or metadata differs from plan"
+    },
+    {
+      "id": "capacity/mcf/12253/int320",
+      "error": "not complete or metadata differs from plan"
+    },
+    {
+      "id": "capacity/mcf/12253/fp160",
+      "error": "not complete or metadata differs from plan"
+    },
+    {
+      "id": "capacity/mcf/12253/fp192",
+      "error": "not complete or metadata differs from plan"
+    },
+    {
+      "id": "capacity/mcf/12253/fp272",
+      "error": "not complete or metadata differs from plan"
+    },
+    {
+      "id": "capacity/mcf/12253/fp320",
+      "error": "not complete or metadata differs from plan"
+    },
+    {
+      "id": "reuse/mcf/12253/mixed192_208-off",
+      "error": "not complete or metadata differs from plan"
+    },
+    {
+      "id": "reuse/mcf/12253/mixed192_208-certain",
+      "error": "not complete or metadata differs from plan"
+    }
+  ],
+  "reuse_geomean": [
+    {
+      "int_regs": 192,
+      "float_regs": 208,
+      "workloads": 55,
+      "complete": false,
+      "speedup": 1.0123532352228992
+    },
+    {
+      "int_regs": 224,
+      "float_regs": 256,
+      "workloads": 55,
+      "complete": true,
+      "speedup": 1.005275273071453
+    }
+  ],
+  "reuse_pairs": 1167,
+  "components": {
+    "reference": "3650e3ce267e333593c5a04f69640ee27e83d8a8352bdebaa0e1ac2e54bc8df9",
+    "checkpoint_metadata": "02b9351b8ca867cf001073869c5fcaa9f01fced3d943da225ffddbbd060b5806",
+    "config": "636c3df544d6dbd397207bf6fb83879a67f1ab90f87e8c0d983a43b9861cdbbf",
+    "capacity_binary": "e02bb0357d99cbb178ba2fa6f51ec3523e4167d54994b2e94fe7e18b7c1b8a37",
+    "reuse_binary": "e382453a2ec19d1adeb83d7a133385a505c934a4b0623586dff06088879a25b7"
+  },
+  "generated": "2026-11-02T10:30:35+08:00"
+}

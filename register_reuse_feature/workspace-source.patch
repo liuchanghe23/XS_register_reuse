@@ -1,0 +1,1571 @@
+diff --git a/src/cpu/o3/BaseO3CPU.py b/src/cpu/o3/BaseO3CPU.py
+index f4c0e21b7e..88bf461745 100644
+--- a/src/cpu/o3/BaseO3CPU.py
++++ b/src/cpu/o3/BaseO3CPU.py
+@@ -307,6 +307,23 @@ class BaseO3CPU(BaseCPU):
+     EnableMDPStrictWait = Param.Bool(False,
+         "Enable StoreSet strict-wait in mem dep prediction (checkInstStrict)")
+ 
++    enableRegisterReuse = Param.Bool(False,
++        "Share scalar INT/FP physical slots using bounded version tags")
++    regReuseShadowCopies = Param.Unsigned(3,
++        "Uniform shadow copies per INT/FP slot (1..3); not full register ports")
++    regReusePrediction = Param.Bool(True,
++        "Predict cross-architectural-register single-use opportunities")
++    regReusePredictorEntries = Param.Unsigned(512, "PC-indexed 2-bit reuse predictor entries")
++    regReuseRepairLatency = Param.Unsigned(2,
++        "Rename cycles for each shadow-to-fresh-slot prediction repair")
++    regReuseRecoveryLatency = Param.Unsigned(2,
++        "Additional rename recovery cycles after shared-version squash")
++
++    enableRegPressureStats = Param.Bool(False,
++        "Passively track single-thread INT/FP value lifetimes and RegFull overlap")
++    regPressureTrace = Param.String("",
++        "Optional compact CSV of shortage intervals and overlapping single-use values")
++
+     numPhysIntRegs = Param.Unsigned(224,
+             "Number of physical integer registers")
+     numPhysFloatRegs = Param.Unsigned(192, "Number of physical floating point "
+diff --git a/src/cpu/o3/SConscript b/src/cpu/o3/SConscript
+index 84e07730b1..29661f0da9 100755
+--- a/src/cpu/o3/SConscript
++++ b/src/cpu/o3/SConscript
+@@ -54,6 +54,8 @@ if env['CONF']['TARGET_ISA'] != 'null':
+     Source('mem_dep_unit.cc')
+     Source('phast.cc')
+     Source('regfile.cc')
++    Source('register_pressure.cc')
++    Source('register_reuse.cc')
+     Source('rename.cc')
+     Source('rename_map.cc')
+     Source('rob.cc')
+@@ -265,3 +267,5 @@ else:
+           # Stats Root is required when constructing statistics::Group in tests
+           '../../sim/root.cc',
+           with_tag('gem5 trace'))
++
++GTest('register_reuse_state.test', 'register_reuse_state.test.cc')
+diff --git a/src/cpu/o3/commit.cc b/src/cpu/o3/commit.cc
+index 3e26388b88..e8662898e9 100644
+--- a/src/cpu/o3/commit.cc
++++ b/src/cpu/o3/commit.cc
+@@ -1813,6 +1813,8 @@ Commit::commitInsts()
+                     ++num_committed;
+                     ++num_committed_per_thread[tid];
+                     stats.committedInstType[tid][head_inst->opClass()]++;
++                    cpu->getRename()->regReuse.commit(head_inst->seqNum);
++                    cpu->getRename()->regPressure.commit(*head_inst);
+                     ppCommit->notify(head_inst);
+ 
+                     // hardware transactional memory
+diff --git a/src/cpu/o3/cpu.cc b/src/cpu/o3/cpu.cc
+index 8e2bc166aa..4128475345 100644
+--- a/src/cpu/o3/cpu.cc
++++ b/src/cpu/o3/cpu.cc
+@@ -104,7 +104,8 @@ CPU::CPU(const BaseO3CPUParams &params)
+               params.numPhysVecPredRegs,
+               params.numPhysCCRegs,
+               params.numPhysRMiscRegs,
+-              params.isa[0]->regClasses()),
++              params.isa[0]->regClasses(),
++              params.enableRegisterReuse ? params.regReuseShadowCopies : 0),
+ 
+       freeList(name() + ".freelist", &regFile, params),
+ 
+diff --git a/src/cpu/o3/cpu.hh b/src/cpu/o3/cpu.hh
+index 9a0f505ba4..7d11d451c7 100644
+--- a/src/cpu/o3/cpu.hh
++++ b/src/cpu/o3/cpu.hh
+@@ -447,6 +447,7 @@ class CPU : public BaseCPU
+     Fetch *getFetch() { return &fetch; }
+     Decode *getDecode() { return &decode; }
+     Rename *getRename() { return &rename; }
++    PhysRegFile *getRegFile() { return &regFile; }
+     IEW *getIEW() { return &iew; }
+     Commit *getCommit() { return &commit; }
+     Tea *getTea() const { return tea.get(); }
+diff --git a/src/cpu/o3/dyn_inst.hh b/src/cpu/o3/dyn_inst.hh
+index 8f1589e910..e030240c69 100644
+--- a/src/cpu/o3/dyn_inst.hh
++++ b/src/cpu/o3/dyn_inst.hh
+@@ -1603,6 +1603,9 @@ class DynInst : public ExecContext, public RefCounted
+     uint64_t htmDepth = 0;
+ 
+   public:
++    RegisterPressure::ReadPoint regPressureRead;
++    std::vector<PhysRegIdPtr> regPressureSources;
++
+     Tick fetchTick = -1;      // instruction fetch is completed.
+ #if TRACING_ON
+     // Value -1 indicates that particular phase
+diff --git a/src/cpu/o3/iew.cc b/src/cpu/o3/iew.cc
+index d27f1cbe5c..2f0dad510e 100644
+--- a/src/cpu/o3/iew.cc
++++ b/src/cpu/o3/iew.cc
+@@ -2161,6 +2161,7 @@ IEW::executeInsts()
+             continue;
+         }
+ 
++        cpu->getRename()->regPressure.execute(*inst);
+         Fault fault = NoFault;
+ 
+         // Execute instruction.
+diff --git a/src/cpu/o3/inst_queue.cc b/src/cpu/o3/inst_queue.cc
+index 1c83b2976e..9e33f024f8 100644
+--- a/src/cpu/o3/inst_queue.cc
++++ b/src/cpu/o3/inst_queue.cc
+@@ -160,6 +160,9 @@ InstructionQueue::InstructionQueue(CPU *cpu_ptr, IEW *iew_ptr,
+                     params.numPhysVecPredRegs +
+                     params.numPhysCCRegs +
+                     params.numPhysRMiscRegs;
++    if (params.enableRegisterReuse)
++        numPhysRegs += params.regReuseShadowCopies *
++            (params.numPhysIntRegs + params.numPhysFloatRegs);
+ 
+     //Initialize Mem Dependence Units
+     for (ThreadID tid = 0; tid < MaxThreads; tid++) {
+diff --git a/src/cpu/o3/regfile.cc b/src/cpu/o3/regfile.cc
+index ffbebd65bf..9b95b491be 100644
+--- a/src/cpu/o3/regfile.cc
++++ b/src/cpu/o3/regfile.cc
+@@ -56,9 +56,9 @@ PhysRegFile::PhysRegFile(unsigned _numPhysicalIntRegs,
+                          unsigned _numPhysicalVecPredRegs,
+                          unsigned _numPhysicalCCRegs,
+                          unsigned _numPhysicalRMiscRegs,
+-                         const BaseISA::RegClasses &reg_classes)
+-    : intRegFile(reg_classes.at(IntRegClass), _numPhysicalIntRegs),
+-      floatRegFile(reg_classes.at(FloatRegClass), _numPhysicalFloatRegs),
++                         const BaseISA::RegClasses &reg_classes, unsigned shadows)
++    : intRegFile(reg_classes.at(IntRegClass), _numPhysicalIntRegs * (shadows + 1)),
++      floatRegFile(reg_classes.at(FloatRegClass), _numPhysicalFloatRegs * (shadows + 1)),
+       vectorRegFile(reg_classes.at(VecRegClass), _numPhysicalVecRegs),
+       vectorElemRegFile(reg_classes.at(VecElemClass), _numPhysicalVecRegs * (
+                   reg_classes.at(VecElemClass).numRegs() /
+@@ -81,7 +81,9 @@ PhysRegFile::PhysRegFile(unsigned _numPhysicalIntRegs,
+                    + numPhysicalVecElemRegs
+                    + _numPhysicalVecPredRegs
+                    + _numPhysicalCCRegs
+-                   + numPhysicalRMiscRegs)
++                   + numPhysicalRMiscRegs
++                   + shadows * (_numPhysicalIntRegs + _numPhysicalFloatRegs)),
++      reuseShadows(shadows)
+ {
+     RegIndex phys_reg;
+     RegIndex flat_reg_idx = 0;
+@@ -132,6 +134,24 @@ PhysRegFile::PhysRegFile(unsigned _numPhysicalIntRegs,
+         miscRegIds.emplace_back(MiscRegClass, phys_reg, 0);
+     }
+ 
++    // Shadow versions have independent dependency tags, but are never put
++    // on the free list. The original counts remain the allocatable slots.
++    reuseIntIds.reserve(shadows * numPhysicalIntRegs);
++    reuseFloatIds.reserve(shadows * numPhysicalFloatRegs);
++    for (unsigned version = 1; version <= shadows; ++version) {
++        for (unsigned index = 0; index < numPhysicalIntRegs; ++index) {
++            reuseIntIds.emplace_back(IntRegClass,
++                version * numPhysicalIntRegs + index, flat_reg_idx++);
++            reuseIntIds.back().setReuseIdentity(&intRegIds[index], version);
++        }
++        for (unsigned index = 0; index < numPhysicalFloatRegs; ++index) {
++            reuseFloatIds.emplace_back(FloatRegClass,
++                version * numPhysicalFloatRegs + index, flat_reg_idx++);
++            reuseFloatIds.back().setReuseIdentity(&floatRegIds[index], version);
++        }
++    }
++    assert(flat_reg_idx == totalNumRegs);
++
+     // must clear with zero
+     rMiscRegFile.clear();
+ 
+diff --git a/src/cpu/o3/regfile.hh b/src/cpu/o3/regfile.hh
+index f160c57291..767e615924 100644
+--- a/src/cpu/o3/regfile.hh
++++ b/src/cpu/o3/regfile.hh
+@@ -230,6 +230,8 @@ class PhysRegFile
+ 
+     /** Total number of physical registers. */
+     unsigned totalNumRegs;
++    PhysIds reuseIntIds, reuseFloatIds;
++    unsigned reuseShadows;
+ 
+   public:
+     /**
+@@ -242,7 +244,8 @@ class PhysRegFile
+                 unsigned _numPhysicalVecPredRegs,
+                 unsigned _numPhysicalCCRegs,
+                 unsigned _numPhysicalRMiscRegs,
+-                const BaseISA::RegClasses &classes);
++                const BaseISA::RegClasses &classes,
++                unsigned shadows = 0);
+ 
+     /**
+      * Destructor to free resources
+@@ -255,6 +258,17 @@ class PhysRegFile
+     /** @return the total number of physical registers. */
+     unsigned totalNumPhysRegs() const { return totalNumRegs; }
+ 
++    PhysRegIdPtr reuseId(PhysRegIdPtr base, unsigned version)
++    {
++        assert(version <= reuseShadows);
++        base = base->getReuseBase();
++        if (!version) return base;
++        if (base->is(IntRegClass))
++            return &reuseIntIds.at((version - 1) * numPhysicalIntRegs + base->index());
++        assert(base->is(FloatRegClass));
++        return &reuseFloatIds.at((version - 1) * numPhysicalFloatRegs + base->index());
++    }
++
+     /** Gets a misc register PhysRegIdPtr. */
+     PhysRegIdPtr getMiscRegId(RegIndex reg_idx) {
+         return &miscRegIds[reg_idx];
+diff --git a/src/cpu/o3/rename.cc b/src/cpu/o3/rename.cc
+index 95372dd3b8..66e5457eab 100644
+--- a/src/cpu/o3/rename.cc
++++ b/src/cpu/o3/rename.cc
+@@ -60,7 +60,8 @@ namespace o3
+ {
+ 
+ Rename::Rename(CPU *_cpu, const BaseO3CPUParams &params)
+-    : ratSnapshotActive(params.robWalkPolicy == ROBWalkPolicy::NaiveCpt),
++    : regPressure(_cpu, params), regReuse(_cpu, params),
++      ratSnapshotActive(params.robWalkPolicy == ROBWalkPolicy::NaiveCpt),
+       numMaxRatSnapshot(params.numMaxRatSnapshot),
+       ratSnapshotDistance(params.ratSnapshotDistance),
+       cpu(_cpu),
+@@ -452,6 +453,9 @@ Rename::tick()
+     regFullThisCycle = false;
+     for (int i = 0; i < numThreads; i++) {
+         bool can_rename = canRename(i);
++        // Observe capacity independently of downstream root-cause attribution.
++        if (!can_rename)
++            recordPressureStall(i);
+         bool block = stallSig->blockRename[i] || !can_rename;
+         bool active = !block && !fixedbuffer[i].empty();
+         StallReason block_reason = StallReason::NoStall;
+@@ -642,6 +646,7 @@ Rename::releasePhysRegs()
+ bool
+ Rename::canRename(ThreadID tid)
+ {
++    if (regReuse.recovering()) return false;
+     std::vector<int> demand_phy_regs(RMiscRegClass + 1, 0);
+     auto& insts_to_rename = fixedbuffer[tid];
+     int num_insts = std::min<unsigned>(insts_to_rename.size(), renameWidth);
+@@ -683,12 +688,53 @@ Rename::canRename(ThreadID tid)
+                     "registers is %i, but only %i are free.\n",
+                     tid, RegId((RegClassType)i, 0).className(), demand_phy_regs[i],
+                     renameMap[tid]->numFreeEntries((RegClassType)i));
++            // A reusable head may progress without another free slot. Other
++            // classes must retain the baseline reserve; later instructions
++            // are rechecked individually before leaving the rename buffer.
++            if (regReuse.enabled && !insts_to_rename.empty()) {
++                auto source = regReuse.candidate(insts_to_rename.front(), *renameMap[tid]);
++                if (source) {
++                    bool other_ready = true;
++                    for (int rc = 0; rc <= RMiscRegClass; ++rc) {
++                        if (rc != source->classValue() && demand_phy_regs[rc] >
++                            renameMap[tid]->numFreeEntries((RegClassType)rc))
++                            other_ready = false;
++                    }
++                    if (other_ready) return true;
++                }
++            }
+             return false;
+         }
+     }
+     return true;
+ }
+ 
++void
++Rename::recordPressureStall(ThreadID tid)
++{
++    if (!regPressure.enabled || fixedbuffer[tid].empty())
++        return;
++    if (std::none_of(fixedbuffer[tid].begin(), fixedbuffer[tid].end(),
++                     [](const DynInstPtr &inst) { return !inst->isSquashed(); }))
++        return;
++    constexpr RegClassType classes[] = {
++        IntRegClass, FloatRegClass, VecRegClass, RMiscRegClass};
++    std::array<unsigned, 4> free{}, demand{};
++    for (unsigned c = 0; c < 4; ++c) {
++        free[c] = renameMap[tid]->numFreeEntries(classes[c]);
++        demand[c] = renameWidth;
++        unsigned actual = 0;
++        for (unsigned i = 0; i < std::min<unsigned>(
++                 fixedbuffer[tid].size(), renameWidth); ++i) {
++            const auto &inst = fixedbuffer[tid][i];
++            if (!inst->isSquashed())
++                actual += inst->numDestRegs(classes[c]);
++        }
++        demand[c] = std::max(demand[c], actual);
++    }
++    regPressure.stall(free, demand, stallSig->blockRename[tid]);
++}
++
+ void
+ Rename::markTeaStoreQueueStall(ThreadID tid)
+ {
+@@ -752,6 +798,19 @@ Rename::renameInsts(ThreadID tid, unsigned max_insts)
+ 
+         DynInstPtr inst = insts_to_rename.front();
+ 
++        if (regReuse.enabled && !inst->isSquashed()) {
++            auto reused = regReuse.candidate(inst, *renameMap[tid]);
++            bool enough = true;
++            for (int rc = 0; rc <= RMiscRegClass; ++rc) {
++                unsigned demand = inst->numDestRegs((RegClassType)rc);
++                if (reused && rc == reused->classValue()) --demand;
++                enough &= demand <= renameMap[tid]->numFreeEntries((RegClassType)rc);
++            }
++            if (!enough || !regReuse.prepare(inst, *renameMap[tid], *freeList, *scoreboard)) {
++                breakRename = StallReason::RegFull;
++                break;
++            }
++        }
+         insts_to_rename.pop_front();
+         ++processed_insts;
+ 
+@@ -769,7 +828,7 @@ Rename::renameInsts(ThreadID tid, unsigned max_insts)
+             continue;
+         }
+ 
+-        assert(renameMap[tid]->canRename(inst));
++        assert(regReuse.enabled || renameMap[tid]->canRename(inst));
+ 
+         DPRINTF(Rename, "[tid:%i] [sn:%llu] Renaming instruction with PC %s.\n",
+             tid, inst->seqNum, inst->pcState());
+@@ -792,6 +851,8 @@ Rename::renameInsts(ThreadID tid, unsigned max_insts)
+         ++renamed_insts;
+         // Notify potential listeners that source and destination registers for
+         // this instruction have been renamed.
++        regReuse.renamed(inst);
++        regPressure.renamed(*inst);
+         ppRename->notify(inst);
+ 
+         // Put instruction in rename queue.
+@@ -948,7 +1009,9 @@ Rename::tryFreePReg(PhysRegIdPtr preg, ThreadID tid)
+         // Put the renamed physical register back on the free list.
+         DPRINTF(Rename, "Really free up p%i on squash with ref=%i\n", preg_idx,
+                 preg->getRef());
+-        freeList->addReg(preg, tid);
++        regPressure.release(preg);
++        auto released_slot = regReuse.release(preg);
++        if (released_slot) freeList->addReg(released_slot, tid);
+     } else {
+         DPRINTF(Rename, "Not to free up p%i on squash for ref=%i\n",
+                 preg->flatIndex(), preg->getRef());
+@@ -958,6 +1021,7 @@ Rename::tryFreePReg(PhysRegIdPtr preg, ThreadID tid)
+ void
+ Rename::doSquash(const InstSeqNum &squashed_seq_num, ThreadID tid)
+ {
++    regReuse.squash(squashed_seq_num);
+     if (ratSnapshotActive)
+         squashSnapshot(squashed_seq_num, tid);
+ 
+@@ -1131,7 +1195,7 @@ Rename::renameSrcRegs(const DynInstPtr &inst, ThreadID tid)
+         const RegId& src_reg = inst->srcRegIdx(src_idx);
+         VirtRegId renamed_reg;
+ 
+-        renamed_reg = map->lookup(tc->flattenRegId(src_reg));
++        renamed_reg = regReuse.source(inst, map->lookup(tc->flattenRegId(src_reg)));
+         switch (src_reg.classValue()) {
+           case InvalidRegClass:
+             break;
+@@ -1238,7 +1302,27 @@ Rename::renameDestRegs(const DynInstPtr &inst, ThreadID tid)
+             }
+         }
+ 
+-        rename_result = map->rename(flat_dest_regid, bypass_reg);
++        auto reuse_source = bypass_reg.PhyReg() ? nullptr : regReuse.candidate(inst, *map, true);
++        if (reuse_source) {
++            auto previous = map->lookup(flat_dest_regid);
++            auto next = regReuse.reuse(reuse_source, inst);
++            rename_result = {VirtRegId(next), previous};
++            map->setEntry(flat_dest_regid, rename_result.first);
++        } else {
++            rename_result = map->rename(flat_dest_regid, bypass_reg);
++            if (!bypass_reg.PhyReg() && rename_result.first.PhyReg() !=
++                rename_result.second.PhyReg())
++                regReuse.allocated(rename_result.first.PhyReg(), inst);
++        }
++        if (regPressure.enabled) {
++            if (bypass_reg.PhyReg()) {
++                regPressure.alias(rename_result.first.PhyReg());
++            } else if (rename_result.first.PhyReg() !=
++                       rename_result.second.PhyReg()) {
++                regPressure.allocate(rename_result.first.PhyReg(),
++                                     flat_dest_regid, inst->seqNum);
++            }
++        }
+ 
+         inst->flattenedDestIdx(dest_idx, flat_dest_regid);
+ 
+diff --git a/src/cpu/o3/rename.hh b/src/cpu/o3/rename.hh
+index b202d8b00b..09dea8ee0d 100644
+--- a/src/cpu/o3/rename.hh
++++ b/src/cpu/o3/rename.hh
+@@ -52,6 +52,8 @@
+ #include "cpu/o3/free_list.hh"
+ #include "cpu/o3/iew.hh"
+ #include "cpu/o3/limits.hh"
++#include "cpu/o3/register_pressure.hh"
++#include "cpu/o3/register_reuse.hh"
+ #include "cpu/timebuf.hh"
+ #include "cpu/valuepred/valuepred_unit.hh"
+ #include "enums/ROBWalkPolicy.hh"
+@@ -86,6 +88,11 @@ class Rename
+     // queue)
+     typedef std::deque<DynInstPtr> InstQueue;
+ 
++    RegisterPressure regPressure;
++    RegisterReuse regReuse;
++    void releaseReuseTemporary(PhysRegIdPtr reg) { tryFreePReg(reg, 0); }
++    void recordPressureStall(ThreadID tid);
++
+   public:
+     /** Overall rename status. Used to determine if the CPU can
+      * deschedule itself due to a lack of activity.
+diff --git a/src/cpu/reg_class.hh b/src/cpu/reg_class.hh
+index f790ca4223..c29c2fd950 100644
+--- a/src/cpu/reg_class.hh
++++ b/src/cpu/reg_class.hh
+@@ -271,6 +271,8 @@ class PhysRegId : private RegId
+     int numPinnedWritesToComplete;
+     bool pinned;
+     int numRef;
++    PhysRegId *reuseBase = nullptr;
++    unsigned reuseVersion = 0;
+ 
+   public:
+     explicit PhysRegId() : RegId(InvalidRegClass, -1), flatIdx(-1),
+@@ -355,6 +357,10 @@ class PhysRegId : private RegId
+     void incRef() { ++numRef; }
+ 
+     int getRef() const { return numRef; }
++    PhysRegId *getReuseBase() { return reuseBase ? reuseBase : this; }
++    unsigned getReuseVersion() const { return reuseVersion; }
++    void setReuseIdentity(PhysRegId *base, unsigned version)
++    { reuseBase = base; reuseVersion = version; }
+ 
+     bool isPinned() const { return pinned; }
+ 
+
+diff --git a/src/cpu/o3/register_reuse.cc b/src/cpu/o3/register_reuse.cc
+new file mode 100644
+index 0000000000..97f65c4562
+--- /dev/null
++++ b/src/cpu/o3/register_reuse.cc
+@@ -0,0 +1,299 @@
++/* SPDX-License-Identifier: BSD-3-Clause */
++#include "cpu/o3/register_reuse.hh"
++
++#include <algorithm>
++#include <set>
++
++#include "cpu/o3/cpu.hh"
++#include "cpu/o3/dyn_inst.hh"
++#include "cpu/o3/issue_queue.hh"
++#include "cpu/o3/rename_map.hh"
++#include "cpu/o3/scoreboard.hh"
++#include "params/BaseO3CPU.hh"
++
++namespace gem5::o3
++{
++RegisterReuse::RegisterReuse(CPU *cpu, const BaseO3CPUParams &p)
++    : statistics::Group(cpu, "regReuse"), enabled(p.enableRegisterReuse),
++      cpu(cpu), numInt(p.numPhysIntRegs), numFloat(p.numPhysFloatRegs),
++      shadows(p.regReuseShadowCopies), repairLatency(p.regReuseRepairLatency),
++      recoveryLatency(p.regReuseRecoveryLatency), prediction(p.regReusePrediction),
++      slots(enabled ? numInt + numFloat : 0),
++      predictor(p.regReusePredictorEntries, 1),
++      ADD_STAT(allocatedSlots, statistics::units::Count::get(), "Fresh scalar physical slots allocated"),
++      ADD_STAT(sharedVersions, statistics::units::Count::get(), "Destination allocations avoided by source-slot reuse"),
++      ADD_STAT(deterministicReuses, statistics::units::Count::get(), "First consumer redefines the same architectural register"),
++      ADD_STAT(predictedReuses, statistics::units::Count::get(), "Predicted single-consumer cross-register reuses"),
++      ADD_STAT(predictionMisses, statistics::units::Count::get(), "Previously shared versions subsequently encountering another consumer"),
++      ADD_STAT(repairCopies, statistics::units::Count::get(), "Shadow values copied into fresh temporary source slots"),
++      ADD_STAT(repairWaitCycles, statistics::units::Cycle::get(), "Rename waits for repair latency or source readiness"),
++      ADD_STAT(aliasRejects, statistics::units::Count::get(), "Reuse candidates rejected because of register aliases"),
++      ADD_STAT(versionLimitRejects, statistics::units::Count::get(), "First-use candidates with no unused shadow version"),
++      ADD_STAT(squashEvents, statistics::units::Count::get(), "Squashes discarding reuse metadata"),
++      ADD_STAT(restoredGroups, statistics::units::Count::get(), "Shared physical groups requiring old-version recovery"),
++      ADD_STAT(returnedSlots, statistics::units::Count::get(), "Slots returned only after every live version is released")
++{
++    if (!enabled) return;
++    panic_if(p.numThreads != 1, "Register reuse currently supports single-thread CPUs only");
++    panic_if(shadows < 1 || shadows > 3, "Register reuse requires 1..3 shadow copies");
++    panic_if(!p.regReusePredictorEntries, "Register reuse requires a nonempty predictor");
++    panic_if(!repairLatency || !recoveryLatency, "Register reuse repair/recovery latency must be positive");
++    panic_if(p.enableRegPressureStats, "The passive register-pressure observer must be disabled with register reuse");
++    panic_if(p.RobCompressPolicy != ROBCompressPolicy::none,
++             "Register reuse currently requires an uncompressed ROB");
++    panic_if(p.enableConstantFolding || p.enableMovImmElimination || p.valuePred,
++             "Register reuse does not support constant folding, immediate elimination or value prediction");
++}
++
++int
++RegisterReuse::slotIndex(PhysRegIdPtr reg) const
++{
++    if (!reg) return -1;
++    reg = reg->getReuseBase();
++    if (reg->is(IntRegClass)) return reg->index();
++    if (reg->is(FloatRegClass)) return numInt + reg->index();
++    return -1;
++}
++ReuseSlot &RegisterReuse::slot(PhysRegIdPtr reg)
++{ return slots.at(slotIndex(reg)); }
++const ReuseSlot &RegisterReuse::slot(PhysRegIdPtr reg) const
++{ return slots.at(slotIndex(reg)); }
++
++void
++RegisterReuse::allocated(PhysRegIdPtr reg, const DynInstPtr &inst)
++{
++    if (!enabled || slotIndex(reg) < 0) return;
++    assert(!reg->getReuseVersion());
++    slot(reg).allocate(inst->seqNum, inst->getPC());
++    ++allocatedSlots;
++}
++
++PhysRegIdPtr
++RegisterReuse::candidate(const DynInstPtr &inst, UnifiedRenameMap &map,
++                         bool count)
++{
++    if (!enabled || inst->isSquashed() || inst->numDestRegs() != 1 ||
++        inst->isVector() || inst->isMicroop() || inst->isMemRef() ||
++        inst->isControl() || inst->isMov() || inst->isNonSpeculative())
++        return nullptr;
++    const auto dest = inst->tcBase()->flattenRegId(inst->destRegIdx(0));
++    if (!dest.is(IntRegClass) && !dest.is(FloatRegClass)) return nullptr;
++    if (inst->destRegIdx(0).getNumPinnedWrites()) return nullptr;
++    for (unsigned i = 0; i < inst->numSrcRegs(); ++i) {
++        const auto src = inst->tcBase()->flattenRegId(inst->srcRegIdx(i));
++        if (src.classValue() != dest.classValue()) continue;
++        const VirtRegId virt = map.lookup(src);
++        auto reg = virt.PhyReg();
++        if (virt.IEOper() || slotIndex(reg) < 0 || reg->isPinned()) continue;
++        auto &s = slot(reg);
++        const unsigned version = reg->getReuseVersion();
++        if (!s.versions[version].live || s.versions[version].reads ||
++            s.versions[version].committedReads ||
++            version != s.current()) continue;
++        if (reg->getRef() != 1) {
++            if (count) ++aliasRejects;
++            continue;
++        }
++        if (s.highWater >= shadows) {
++            if (count) ++versionLimitRejects;
++            continue;
++        }
++        const bool certain = src == dest;
++        const auto pc = s.versions[version].pc;
++        if (!certain && (!prediction || predictor[(pc >> 2) % predictor.size()] < 2))
++            continue;
++        return reg;
++    }
++    return nullptr;
++}
++
++PhysRegIdPtr
++RegisterReuse::reuse(PhysRegIdPtr source, const DynInstPtr &inst)
++{
++    auto &s = slot(source);
++    assert(s.canReuse(source->getReuseVersion(), shadows));
++    bool certain = false;
++    const auto dest = inst->tcBase()->flattenRegId(inst->destRegIdx(0));
++    for (unsigned i = 0; i < inst->numSrcRegs(); ++i) {
++        const auto src = inst->tcBase()->flattenRegId(inst->srcRegIdx(i));
++        if (src == dest && inst->renamedSrcIdx(i) == source) certain = true;
++    }
++    const unsigned next = s.reuse(inst->seqNum, inst->getPC());
++    auto result = cpu->getRegFile()->reuseId(source, next);
++    assert(!result->getRef());
++    result->incRef();
++    result->setNumPinnedWrites(0);
++    result->setNumPinnedWritesToComplete(1);
++    ++sharedVersions;
++    if (certain) ++deterministicReuses;
++    else ++predictedReuses;
++    return result;
++}
++
++bool
++RegisterReuse::prepare(const DynInstPtr &inst, UnifiedRenameMap &map,
++                       UnifiedFreeList &free, Scoreboard &scoreboard)
++{
++    if (!enabled) return true;
++    std::vector<PhysRegIdPtr> stale;
++    for (unsigned i = 0; i < inst->numSrcRegs(); ++i) {
++        const auto src = inst->tcBase()->flattenRegId(inst->srcRegIdx(i));
++        auto reg = map.lookup(src).PhyReg();
++        if (slotIndex(reg) < 0) continue;
++        const auto &s = slot(reg);
++        if (s.versions[reg->getReuseVersion()].live &&
++            reg->getReuseVersion() < s.current() &&
++            std::find(stale.begin(), stale.end(), reg) == stale.end())
++            stale.push_back(reg);
++    }
++    if (stale.empty()) { waitingSeq = 0; return true; }
++    const uint64_t now = cpu->curCycle();
++    if (waitingSeq != inst->seqNum) {
++        waitingSeq = inst->seqNum;
++        waitingUntil = now + repairLatency * stale.size();
++    }
++    bool ready = now >= waitingUntil;
++    unsigned intNeed = 0, floatNeed = 0;
++    for (auto reg : stale) {
++        ready &= scoreboard.getReg(reg);
++        if (reg->is(IntRegClass)) ++intNeed;
++        else ++floatNeed;
++    }
++    // Preserve enough capacity for the instruction's own normal destinations.
++    ready &= free.numFreeRegs(IntRegClass) >= intNeed + inst->numDestRegs(IntRegClass);
++    ready &= free.numFreeRegs(FloatRegClass) >= floatNeed + inst->numDestRegs(FloatRegClass);
++    if (!ready) { ++repairWaitCycles; return false; }
++    auto &event = events[inst->seqNum];
++    for (auto old : stale) {
++        const auto &v = slot(old).versions[old->getReuseVersion()];
++        predictor[(v.pc >> 2) % predictor.size()] = 0;
++        if (v.reads + v.committedReads <= 1) ++predictionMisses;
++        auto fresh = free.getReg(old->classValue(), inst->threadNumber);
++        allocated(fresh, inst);
++        // A repair is not an ISA producer; do not train the producer-PC
++        // predictor using the temporary's consumer count at release.
++        slot(fresh).versions[0].producer = 0;
++        // Data is copied only after its original producer is ready. The
++        // temporary uses a normal free-list slot and is held until commit or
++        // squash; subsequent consumers each repair independently. This is a
++        // conservative timing model rather than an uncharged shadow read.
++        cpu->setReg(fresh, cpu->peekReg(old));
++        scoreboard.setReg(fresh);
++        cpu->getIEW()->getScheduler()->setAllScoreBoard(fresh);
++        event.repairs.emplace_back(old, fresh);
++        ++repairCopies;
++    }
++    waitingSeq = 0;
++    return true;
++}
++
++VirtRegId
++RegisterReuse::source(const DynInstPtr &inst, VirtRegId original) const
++{
++    if (!enabled) return original;
++    auto event = events.find(inst->seqNum);
++    if (event == events.end()) return original;
++    for (const auto &[old, fresh] : event->second.repairs) {
++        if (old == original.PhyReg()) {
++            original.setPhyReg(fresh);
++            return original;
++        }
++    }
++    return original;
++}
++
++void
++RegisterReuse::renamed(const DynInstPtr &inst)
++{
++    if (!enabled) return;
++    auto &event = events[inst->seqNum];
++    std::set<PhysRegIdPtr> unique;
++    for (unsigned i = 0; i < inst->numSrcRegs(); ++i)
++        unique.insert(inst->renamedSrcIdx(i));
++    for (const auto &[old, fresh] : event.repairs) unique.insert(old);
++    for (auto reg : unique) {
++        if (slotIndex(reg) < 0) continue;
++        auto &v = slot(reg).versions[reg->getReuseVersion()];
++        if (!v.live) continue;
++        ++v.reads;
++        if (v.reads + v.committedReads > 1) predictor[(v.pc >> 2) % predictor.size()] = 0;
++        event.reads.push_back(reg);
++    }
++}
++
++PhysRegIdPtr
++RegisterReuse::release(PhysRegIdPtr reg)
++{
++    if (!enabled || slotIndex(reg) < 0) return reg;
++    auto &s = slot(reg);
++    if (!s.versions[reg->getReuseVersion()].live) {
++        // Initial architectural registers predate tracking.
++        assert(!reg->getReuseVersion());
++        return reg;
++    }
++    s.release(reg->getReuseVersion());
++    if (!s.empty()) return nullptr;
++    for (const auto &version : s.versions) {
++        if (!version.producer) continue;
++        auto &entry = predictor[(version.pc >> 2) % predictor.size()];
++        entry = version.committedReads == 1 ? std::min<unsigned>(3, entry + 1) : 0;
++    }
++    ++returnedSlots;
++    return reg->getReuseBase();
++}
++
++void
++RegisterReuse::returnTemporary(PhysRegIdPtr reg)
++{
++    cpu->getRename()->releaseReuseTemporary(reg);
++}
++
++void
++RegisterReuse::commit(InstSeqNum seq)
++{
++    if (!enabled) return;
++    for (auto it = events.begin(); it != events.end() && it->first <= seq;) {
++        for (auto reg : it->second.reads) {
++            auto &v = slot(reg).versions[reg->getReuseVersion()];
++            if (v.live) {
++                assert(v.reads);
++                --v.reads;
++                v.committedReads = std::min(2u, v.committedReads + 1);
++            }
++        }
++        for (const auto &[old, fresh] : it->second.repairs) returnTemporary(fresh);
++        it = events.erase(it);
++    }
++}
++
++void
++RegisterReuse::squash(InstSeqNum seq)
++{
++    if (!enabled) return;
++    ++squashEvents;
++    for (auto it = events.upper_bound(seq); it != events.end();) {
++        for (auto reg : it->second.reads) {
++            auto &v = slot(reg).versions[reg->getReuseVersion()];
++            // Destination ownership is released later by rename history walk.
++            if (v.live) { assert(v.reads); --v.reads; }
++        }
++        for (const auto &[old, fresh] : it->second.repairs) returnTemporary(fresh);
++        it = events.erase(it);
++    }
++    for (unsigned i = 0; i < slots.size(); ++i) {
++        const auto &s = slots[i];
++        for (unsigned v = 1; v <= s.highWater; ++v) {
++            if (s.versions[v].live && s.versions[v].producer > seq) {
++                ++restoredGroups;
++                recoveryUntil = std::max(recoveryUntil,
++                    uint64_t(cpu->curCycle()) + recoveryLatency);
++                break;
++            }
++        }
++    }
++    waitingSeq = 0;
++}
++
++bool RegisterReuse::recovering() const
++{ return enabled && uint64_t(cpu->curCycle()) < recoveryUntil; }
++} // namespace gem5::o3
+
+diff --git a/src/cpu/o3/register_reuse.hh b/src/cpu/o3/register_reuse.hh
+new file mode 100644
+index 0000000000..f351aa8f92
+--- /dev/null
++++ b/src/cpu/o3/register_reuse.hh
+@@ -0,0 +1,74 @@
++/* SPDX-License-Identifier: BSD-3-Clause */
++#ifndef __CPU_O3_REGISTER_REUSE_HH__
++#define __CPU_O3_REGISTER_REUSE_HH__
++#include <map>
++#include <vector>
++#include "base/statistics.hh"
++#include "cpu/inst_seq.hh"
++#include "cpu/o3/dyn_inst_ptr.hh"
++#include "cpu/o3/register_reuse_state.hh"
++#include "cpu/o3/regfile.hh"
++
++namespace gem5
++{
++struct BaseO3CPUParams;
++namespace o3
++{
++class CPU;
++class UnifiedRenameMap;
++class UnifiedFreeList;
++class Scoreboard;
++
++/** Bounded scalar INT/FP sharing with version tags and shadow values. */
++class RegisterReuse : public statistics::Group
++{
++  public:
++    RegisterReuse(CPU *cpu, const BaseO3CPUParams &params);
++    const bool enabled;
++    PhysRegIdPtr candidate(const DynInstPtr &inst, UnifiedRenameMap &map,
++                           bool count = false);
++    PhysRegIdPtr reuse(PhysRegIdPtr source, const DynInstPtr &inst);
++    void allocated(PhysRegIdPtr reg, const DynInstPtr &inst);
++    void renamed(const DynInstPtr &inst);
++    PhysRegIdPtr release(PhysRegIdPtr reg);
++    bool prepare(const DynInstPtr &inst, UnifiedRenameMap &map,
++                 UnifiedFreeList &free, Scoreboard &scoreboard);
++    VirtRegId source(const DynInstPtr &inst, VirtRegId original) const;
++    void commit(InstSeqNum seq);
++    void squash(InstSeqNum seq);
++    bool recovering() const;
++
++  private:
++    struct Event {
++        std::vector<PhysRegIdPtr> reads;
++        std::vector<std::pair<PhysRegIdPtr, PhysRegIdPtr>> repairs;
++    };
++    CPU *cpu;
++    unsigned numInt, numFloat, shadows, repairLatency, recoveryLatency;
++    bool prediction;
++    std::vector<ReuseSlot> slots;
++    std::vector<uint8_t> predictor;
++    std::map<InstSeqNum, Event> events;
++    InstSeqNum waitingSeq = 0;
++    uint64_t waitingUntil = 0, recoveryUntil = 0;
++    int slotIndex(PhysRegIdPtr reg) const;
++    ReuseSlot &slot(PhysRegIdPtr reg);
++    const ReuseSlot &slot(PhysRegIdPtr reg) const;
++    void returnTemporary(PhysRegIdPtr reg);
++
++    statistics::Scalar allocatedSlots;
++    statistics::Scalar sharedVersions;
++    statistics::Scalar deterministicReuses;
++    statistics::Scalar predictedReuses;
++    statistics::Scalar predictionMisses;
++    statistics::Scalar repairCopies;
++    statistics::Scalar repairWaitCycles;
++    statistics::Scalar aliasRejects;
++    statistics::Scalar versionLimitRejects;
++    statistics::Scalar squashEvents;
++    statistics::Scalar restoredGroups;
++    statistics::Scalar returnedSlots;
++};
++} // namespace o3
++} // namespace gem5
++#endif
+
+diff --git a/src/cpu/o3/register_reuse_state.hh b/src/cpu/o3/register_reuse_state.hh
+new file mode 100644
+index 0000000000..536af6d300
+--- /dev/null
++++ b/src/cpu/o3/register_reuse_state.hh
+@@ -0,0 +1,62 @@
++/* SPDX-License-Identifier: BSD-3-Clause */
++#ifndef __CPU_O3_REGISTER_REUSE_STATE_HH__
++#define __CPU_O3_REGISTER_REUSE_STATE_HH__
++#include <array>
++#include <cassert>
++#include <cstdint>
++
++namespace gem5::o3
++{
++/** Monotonic version numbers: a squash cannot cause tag ABA within a slot. */
++struct ReuseSlot
++{
++    struct Version {
++        bool live = false;
++        unsigned reads = 0;
++        uint64_t producer = 0;
++        uint64_t pc = 0;
++        unsigned committedReads = 0; // Saturates at two; reads counts in-flight tokens only.
++    };
++    std::array<Version, 4> versions{};
++    unsigned highWater = 0;
++
++    void allocate(uint64_t producer, uint64_t pc)
++    {
++        assert(empty());
++        *this = ReuseSlot{};
++        versions[0] = {true, 0, producer, pc};
++    }
++    bool empty() const
++    {
++        for (const auto &v : versions)
++            if (v.live) return false;
++        return true;
++    }
++    unsigned current() const
++    {
++        for (unsigned v = highWater; v > 0; --v)
++            if (versions[v].live) return v;
++        return 0;
++    }
++    bool canReuse(unsigned version, unsigned shadows) const
++    {
++        return versions[version].live && !versions[version].reads &&
++               !versions[version].committedReads &&
++               version == current() && highWater < shadows;
++    }
++    unsigned reuse(uint64_t producer, uint64_t pc)
++    {
++        assert(highWater < 3);
++        const unsigned v = ++highWater;
++        assert(!versions[v].live);
++        versions[v] = {true, 0, producer, pc};
++        return v;
++    }
++    void release(unsigned version)
++    {
++        assert(versions[version].live);
++        versions[version].live = false;
++    }
++};
++} // namespace gem5::o3
++#endif
+
+diff --git a/src/cpu/o3/register_reuse_state.test.cc b/src/cpu/o3/register_reuse_state.test.cc
+new file mode 100644
+index 0000000000..aa39490d5d
+--- /dev/null
++++ b/src/cpu/o3/register_reuse_state.test.cc
+@@ -0,0 +1,74 @@
++/* SPDX-License-Identifier: BSD-3-Clause */
++#include <gtest/gtest.h>
++#include "cpu/o3/register_reuse_state.hh"
++using gem5::o3::ReuseSlot;
++
++TEST(RegisterReuseState, DistinctVersionsAndBoundedShadows)
++{
++    ReuseSlot s;
++    s.allocate(10, 0x8000);
++    EXPECT_TRUE(s.canReuse(0, 3));
++    EXPECT_EQ(s.reuse(11, 0x8004), 1);
++    EXPECT_FALSE(s.canReuse(0, 3));
++    EXPECT_EQ(s.reuse(12, 0x8008), 2);
++    EXPECT_EQ(s.reuse(13, 0x800c), 3);
++    EXPECT_FALSE(s.canReuse(3, 3));
++    EXPECT_EQ(s.versions[0].producer, 10);
++    EXPECT_EQ(s.versions[3].producer, 13);
++}
++
++TEST(RegisterReuseState, SquashNeverReusesDependencyTag)
++{
++    ReuseSlot s;
++    s.allocate(10, 0x8000);
++    s.reuse(11, 0x8004);
++    s.release(1);
++    EXPECT_EQ(s.current(), 0);
++    EXPECT_TRUE(s.canReuse(0, 3));
++    EXPECT_EQ(s.reuse(12, 0x8008), 2);
++    EXPECT_EQ(s.highWater, 2);
++}
++
++TEST(RegisterReuseState, SlotCannotBeReturnedWithAnOlderLiveVersion)
++{
++    ReuseSlot s;
++    s.allocate(10, 0x8000);
++    s.reuse(11, 0x8004);
++    s.release(1);
++    EXPECT_FALSE(s.empty());
++    s.release(0);
++    EXPECT_TRUE(s.empty());
++    s.allocate(12, 0x9000);
++    EXPECT_EQ(s.highWater, 0);
++}
++
++TEST(RegisterReuseState, PriorConsumerDisqualifiesReuse)
++{
++    ReuseSlot s;
++    s.allocate(10, 0x8000);
++    ++s.versions[0].reads;
++    EXPECT_FALSE(s.canReuse(0, 3));
++    --s.versions[0].reads;
++    EXPECT_TRUE(s.canReuse(0, 3));
++}
++
++TEST(RegisterReuseState, OneShadowIsAHardCapacityLimit)
++{
++    ReuseSlot s;
++    s.allocate(10, 0x8000);
++    s.reuse(11, 0x8004);
++    EXPECT_FALSE(s.canReuse(1, 1));
++    s.release(0);
++    EXPECT_FALSE(s.canReuse(1, 1));
++}
++
++TEST(RegisterReuseState, CommittedReadPreventsReuseAfterSpeculativeTokenRetires)
++{
++    ReuseSlot s;
++    s.allocate(10, 0x8000);
++    s.versions[0].committedReads = 1;
++    EXPECT_FALSE(s.canReuse(0, 3));
++    ++s.versions[0].reads;
++    --s.versions[0].reads;
++    EXPECT_FALSE(s.canReuse(0, 3));
++}
+
+diff --git a/src/cpu/o3/register_pressure.cc b/src/cpu/o3/register_pressure.cc
+new file mode 100644
+index 0000000000..15b7e841e6
+--- /dev/null
++++ b/src/cpu/o3/register_pressure.cc
+@@ -0,0 +1,311 @@
++/*
++ * Copyright (c) 2026
++ * All rights reserved.
++ * SPDX-License-Identifier: BSD-3-Clause
++ */
++#include "cpu/o3/register_pressure.hh"
++
++#include <algorithm>
++
++#include "base/output.hh"
++#include "cpu/o3/cpu.hh"
++#include "cpu/o3/dyn_inst.hh"
++#include "params/BaseO3CPU.hh"
++
++namespace gem5
++{
++namespace o3
++{
++
++RegisterPressure::RegisterPressure(CPU *cpu, const BaseO3CPUParams &params)
++    : statistics::Group(cpu, "regPressure"),
++      enabled(params.enableRegPressureStats), cpu(cpu),
++      numIntRegs(params.numPhysIntRegs),
++      values(params.numPhysIntRegs + params.numPhysFloatRegs),
++      ADD_STAT(epoch, statistics::units::Count::get(), "Measurement epoch"),
++      ADD_STAT(schemaVersion, statistics::units::Count::get(),
++               "Observer schema: 2 counts capacity failures independently of attribution"),
++      ADD_STAT(demandStallCycles, statistics::units::Cycle::get(),
++               "Capacity-check failures with waiting instructions, including other-block overlap"),
++      ADD_STAT(standaloneStallCycles, statistics::units::Cycle::get(),
++               "Capacity-check failures with demand and no explicit downstream rename block"),
++      ADD_STAT(otherBlockedStallCycles, statistics::units::Cycle::get(),
++               "Capacity-check failures with demand and simultaneous downstream rename block"),
++      ADD_STAT(standaloneShortageCycles, statistics::units::Cycle::get(),
++               "Standalone capacity-check failures by deficient register class"),
++      ADD_STAT(shortageCycles, statistics::units::Cycle::get(),
++               "Capacity-check failures deficient by register class; classes can overlap"),
++      ADD_STAT(freeAtShortage, statistics::units::Count::get(),
++               "Sum of free registers on class-shortage cycles"),
++      ADD_STAT(allocations, statistics::units::Count::get(), "Fresh physical value allocations"),
++      ADD_STAT(completedValues, statistics::units::Count::get(),
++               "Committed-producer physical values actually freed in this epoch"),
++      ADD_STAT(unaliasedValues, statistics::units::Count::get(), "Completed values never aliased"),
++      ADD_STAT(aliasedValues, statistics::units::Count::get(), "Completed values ever aliased; excluded from single-use classification"),
++      ADD_STAT(zeroConsumerValues, statistics::units::Count::get(), "Unaliased completed values with no committed consumers"),
++      ADD_STAT(singleConsumerValues, statistics::units::Count::get(), "Unaliased completed values with one distinct committed consumer"),
++      ADD_STAT(multiConsumerValues, statistics::units::Count::get(), "Unaliased completed values with multiple committed consumers"),
++      ADD_STAT(eligibleSingleValues, statistics::units::Count::get(), "Single-use values whose consumer freshly allocates a destination of the same class"),
++      ADD_STAT(selfRedefSingleValues, statistics::units::Count::get(), "Eligible single-use values whose consumer redefines the producer architectural register"),
++      ADD_STAT(singleHoldCycles, statistics::units::Cycle::get(), "Register-cycles from unique consumer last execute proxy to actual release"),
++      ADD_STAT(singleStallExposure, statistics::units::Cycle::get(), "Single-use register-cycles overlapping same-class demand RegFull; NOT a cycle fraction"),
++      ADD_STAT(eligibleStallExposure, statistics::units::Cycle::get(), "Eligible single-use register-cycles overlapping same-class demand RegFull"),
++      ADD_STAT(selfRedefStallExposure, statistics::units::Cycle::get(), "Self-redefining single-use register-cycles overlapping same-class demand RegFull"),
++      ADD_STAT(singleValuesOverlappingStall, statistics::units::Count::get(), "Single-use values held through at least one same-class shortage cycle"),
++      ADD_STAT(squashedValues, statistics::units::Count::get(), "Fresh values freed without their producer committing"),
++      ADD_STAT(liveValues, statistics::units::Count::get(), "Tracked values still allocated at dump; right censored")
++{
++    panic_if(enabled && params.numThreads != 1,
++             "Register-pressure lifetime tracking currently requires one thread");
++    const char *names[] = {"int", "float", "vector", "misc"};
++    for (auto *v : {&shortageCycles, &freeAtShortage,
++                    &standaloneShortageCycles}) {
++        v->init(4);
++        for (unsigned i = 0; i < 4; ++i)
++            v->subname(i, names[i]);
++    }
++    for (auto *v : {&allocations, &completedValues, &unaliasedValues,
++                   &aliasedValues, &zeroConsumerValues, &singleConsumerValues,
++                   &multiConsumerValues, &eligibleSingleValues,
++                   &selfRedefSingleValues, &singleHoldCycles,
++                   &singleStallExposure, &eligibleStallExposure,
++                   &selfRedefStallExposure, &singleValuesOverlappingStall,
++                   &squashedValues, &liveValues}) {
++        v->init(2);
++        for (unsigned i = 0; i < 2; ++i)
++            v->subname(i, names[i]);
++    }
++    if (enabled && !params.regPressureTrace.empty()) {
++        trace = simout.create(params.regPressureTrace)->stream();
++        *trace << "kind,epoch,class,start_cycle,end_cycle,eligible,self_redef\n";
++    }
++}
++
++int
++RegisterPressure::valueClass(PhysRegIdPtr reg)
++{
++    if (reg && reg->is(IntRegClass))
++        return 0;
++    if (reg && reg->is(FloatRegClass))
++        return 1;
++    return -1;
++}
++
++void
++RegisterPressure::allocate(PhysRegIdPtr reg, const RegId &arch,
++                           InstSeqNum producer)
++{
++    if (!enabled || valueClass(reg) < 0)
++        return;
++    auto &v = values.at(reg->flatIndex());
++    v = Value{};
++    v.active = true;
++    v.producer = producer;
++    v.archIndex = arch.index();
++    ++allocations[valueClass(reg)];
++}
++
++void
++RegisterPressure::alias(PhysRegIdPtr reg)
++{
++    if (enabled && valueClass(reg) >= 0)
++        values.at(reg->flatIndex()).aliased = true;
++}
++
++void
++RegisterPressure::renamed(DynInst &inst)
++{
++    if (!enabled)
++        return;
++    // Store-address/data splitting subsequently replaces one source with an
++    // invalid ID. Preserve the architectural instruction's original sources.
++    for (unsigned i = 0; i < inst.numSrcRegs(); ++i)
++        inst.regPressureSources.push_back(inst.renamedSrcIdx(i));
++}
++
++void
++RegisterPressure::execute(DynInst &inst)
++{
++    if (!enabled)
++        return;
++    // Last execution attempt is a conservative operand-use proxy for replayed
++    // instructions. Elided instructions without Execute use commit instead.
++    const ReadPoint point{currentEpoch, uint64_t(cpu->curCycle()), stallPrefix};
++    inst.regPressureRead = point;
++    if (inst.isSplitStoreData())
++        inst.sqIt->instruction()->regPressureRead = point;
++}
++
++void
++RegisterPressure::commit(const DynInst &inst)
++{
++    if (!enabled)
++        return;
++    for (unsigned i = 0; i < inst.regPressureSources.size(); ++i) {
++        auto reg = inst.regPressureSources[i];
++        const int cls = valueClass(reg);
++        if (cls < 0)
++            continue;
++        bool duplicate = false;
++        for (unsigned j = 0; j < i; ++j)
++            duplicate |= reg == inst.regPressureSources[j];
++        if (duplicate)
++            continue;
++        auto &v = values.at(reg->flatIndex());
++        if (!v.active)
++            continue;
++        // Saturation preserves zero/one/many classification.
++        v.consumers = std::min(v.consumers + 1, 2u);
++        if (v.consumers != 1)
++            continue;
++        v.read = inst.regPressureRead;
++        if (v.read.epoch != currentEpoch)
++            v.read = {currentEpoch, uint64_t(cpu->curCycle()), stallPrefix};
++        for (unsigned d = 0; d < inst.numDestRegs(); ++d) {
++            auto dst = inst.renamedDestIdx(d);
++            if (valueClass(dst) != cls)
++                continue;
++            const auto &dv = values.at(dst->flatIndex());
++            if (!dv.active || dv.producer != inst.seqNum)
++                continue;
++            v.eligible = true;
++            v.selfRedef |= inst.flattenedDestIdx(d).index() == v.archIndex;
++        }
++    }
++    for (unsigned d = 0; d < inst.numDestRegs(); ++d) {
++        auto reg = inst.renamedDestIdx(d);
++        if (valueClass(reg) < 0)
++            continue;
++        auto &v = values.at(reg->flatIndex());
++        if (v.active && v.producer == inst.seqNum)
++            v.committed = true;
++    }
++}
++
++void
++RegisterPressure::release(PhysRegIdPtr reg)
++{
++    if (!enabled || valueClass(reg) < 0)
++        return;
++    const int cls = valueClass(reg);
++    auto &v = values.at(reg->flatIndex());
++    if (!v.active)
++        return;
++    v.active = false;
++    if (!v.committed) {
++        ++squashedValues[cls];
++        return;
++    }
++    ++completedValues[cls];
++    if (v.aliased) {
++        ++aliasedValues[cls];
++        return;
++    }
++    ++unaliasedValues[cls];
++    if (v.consumers == 0) {
++        ++zeroConsumerValues[cls];
++        return;
++    }
++    if (v.consumers != 1) {
++        ++multiConsumerValues[cls];
++        return;
++    }
++    ++singleConsumerValues[cls];
++    const uint64_t now = cpu->curCycle();
++    const uint64_t overlap = stallPrefix[cls] - v.read.stalls[cls];
++    singleHoldCycles[cls] += now - v.read.cycle;
++    singleStallExposure[cls] += overlap;
++    if (v.eligible) {
++        ++eligibleSingleValues[cls];
++        eligibleStallExposure[cls] += overlap;
++    }
++    if (v.selfRedef) {
++        ++selfRedefSingleValues[cls];
++        selfRedefStallExposure[cls] += overlap;
++    }
++    if (overlap) {
++        ++singleValuesOverlappingStall[cls];
++        if (trace) {
++            *trace << "value," << currentEpoch << ',' << cls << ','
++                   << v.read.cycle << ',' << now << ','
++                   << v.eligible << ',' << v.selfRedef << '\n';
++        }
++    }
++}
++
++void
++RegisterPressure::flushInterval(unsigned cls)
++{
++    if (trace && intervalEnd[cls] > intervalStart[cls]) {
++        *trace << "stall," << currentEpoch << ',' << cls << ','
++               << intervalStart[cls] << ',' << intervalEnd[cls]
++               << ",0,0\n";
++    }
++    intervalStart[cls] = intervalEnd[cls] = 0;
++}
++
++void
++RegisterPressure::stall(const std::array<unsigned, 4> &free,
++                        const std::array<unsigned, 4> &demand,
++                        bool other_block)
++{
++    if (!enabled)
++        return;
++    const uint64_t now = cpu->curCycle();
++    if (lastStallCycle == now)
++        return;
++    lastStallCycle = now;
++    ++demandStallCycles;
++    if (other_block)
++        ++otherBlockedStallCycles;
++    else
++        ++standaloneStallCycles;
++    for (unsigned cls = 0; cls < 4; ++cls) {
++        if (free[cls] >= demand[cls])
++            continue;
++        ++shortageCycles[cls];
++        if (!other_block)
++            ++standaloneShortageCycles[cls];
++        freeAtShortage[cls] += free[cls];
++        if (cls < 2)
++            ++stallPrefix[cls];
++        if (intervalEnd[cls] != now) {
++            flushInterval(cls);
++            intervalStart[cls] = now;
++        }
++        intervalEnd[cls] = now + 1;
++    }
++}
++
++void
++RegisterPressure::resetStats()
++{
++    statistics::Group::resetStats();
++    ++currentEpoch;
++    std::fill(values.begin(), values.end(), Value{});
++    stallPrefix = {};
++    intervalStart = intervalEnd = {};
++    lastStallCycle = UINT64_MAX;
++}
++
++void
++RegisterPressure::preDumpStats()
++{
++    statistics::Group::preDumpStats();
++    epoch = currentEpoch;
++    schemaVersion = 2;
++    for (unsigned c = 0; c < 4; ++c)
++        flushInterval(c);
++    for (unsigned c = 0; c < 2; ++c)
++        liveValues[c] = 0;
++    // INT and FP occupy consecutive flat-index ranges in PhysRegFile.
++    for (unsigned i = 0; i < values.size(); ++i) {
++        if (values[i].active)
++            ++liveValues[i < numIntRegs ? 0 : 1];
++    }
++    if (trace)
++        trace->flush();
++}
++
++} // namespace o3
++} // namespace gem5
+
+diff --git a/src/cpu/o3/register_pressure.hh b/src/cpu/o3/register_pressure.hh
+new file mode 100644
+index 0000000000..bff06604d3
+--- /dev/null
++++ b/src/cpu/o3/register_pressure.hh
+@@ -0,0 +1,103 @@
++/*
++ * Copyright (c) 2026
++ * All rights reserved.
++ * SPDX-License-Identifier: BSD-3-Clause
++ */
++#ifndef __CPU_O3_REGISTER_PRESSURE_HH__
++#define __CPU_O3_REGISTER_PRESSURE_HH__
++
++#include <array>
++#include <cstdint>
++#include <iosfwd>
++#include <vector>
++
++#include "base/statistics.hh"
++#include "cpu/inst_seq.hh"
++#include "cpu/reg_class.hh"
++
++namespace gem5
++{
++struct BaseO3CPUParams;
++namespace o3
++{
++class CPU;
++class DynInst;
++
++/** Passive, single-thread physical-value lifetime measurements. */
++class RegisterPressure : public statistics::Group
++{
++  public:
++    struct ReadPoint
++    {
++        uint64_t epoch = 0;
++        uint64_t cycle = 0;
++        std::array<uint64_t, 2> stalls{};
++    };
++
++    RegisterPressure(CPU *cpu, const BaseO3CPUParams &params);
++    const bool enabled;
++    void allocate(PhysRegIdPtr reg, const RegId &arch, InstSeqNum producer);
++    void alias(PhysRegIdPtr reg);
++    void renamed(DynInst &inst);
++    void execute(DynInst &inst);
++    void commit(const DynInst &inst);
++    void release(PhysRegIdPtr reg);
++    void stall(const std::array<unsigned, 4> &free,
++               const std::array<unsigned, 4> &demand,
++               bool other_block);
++    void resetStats() override;
++    void preDumpStats() override;
++
++  private:
++    struct Value
++    {
++        bool active = false;
++        bool committed = false;
++        bool aliased = false;
++        bool eligible = false;
++        bool selfRedef = false;
++        unsigned consumers = 0;
++        unsigned archIndex = 0;
++        InstSeqNum producer = 0;
++        ReadPoint read;
++    };
++    CPU *cpu;
++    const unsigned numIntRegs;
++    std::vector<Value> values;
++    uint64_t currentEpoch = 1;
++    uint64_t lastStallCycle = UINT64_MAX;
++    std::array<uint64_t, 2> stallPrefix{};
++    std::array<uint64_t, 4> intervalStart{};
++    std::array<uint64_t, 4> intervalEnd{};
++    std::ostream *trace = nullptr;
++    static int valueClass(PhysRegIdPtr reg);
++    void flushInterval(unsigned cls);
++
++    statistics::Scalar epoch;
++    statistics::Scalar schemaVersion;
++    statistics::Scalar demandStallCycles;
++    statistics::Scalar standaloneStallCycles;
++    statistics::Scalar otherBlockedStallCycles;
++    statistics::Vector standaloneShortageCycles;
++    statistics::Vector shortageCycles;
++    statistics::Vector freeAtShortage;
++    statistics::Vector allocations;
++    statistics::Vector completedValues;
++    statistics::Vector unaliasedValues;
++    statistics::Vector aliasedValues;
++    statistics::Vector zeroConsumerValues;
++    statistics::Vector singleConsumerValues;
++    statistics::Vector multiConsumerValues;
++    statistics::Vector eligibleSingleValues;
++    statistics::Vector selfRedefSingleValues;
++    statistics::Vector singleHoldCycles;
++    statistics::Vector singleStallExposure;
++    statistics::Vector eligibleStallExposure;
++    statistics::Vector selfRedefStallExposure;
++    statistics::Vector singleValuesOverlappingStall;
++    statistics::Vector squashedValues;
++    statistics::Vector liveValues;
++};
++} // namespace o3
++} // namespace gem5
++#endif
+
+diff --git a/tests/test-progs/register-reuse/reuse.S b/tests/test-progs/register-reuse/reuse.S
+new file mode 100644
+index 0000000000..294f6fb518
+--- /dev/null
++++ b/tests/test-progs/register-reuse/reuse.S
+@@ -0,0 +1,149 @@
++/* Scalar version, alias, replay-source, branch and precise-trap regression. */
++.option norvc
++.section .text
++.global _start
++_start:
++    la t0, trap
++    csrw mtvec, t0
++    csrw medeleg, zero
++    li t0, -1
++    csrw pmpaddr0, t0
++    li t0, 0xf
++    csrw pmpcfg0, t0
++    li t0, 0x6000
++    csrs mstatus, t0
++    li s10, 0
++    li s9, 64
++again:
++    /* Reuse more than the two-bit version limit. */
++    li s1, 17
++    .rept 12
++    addi s1, s1, 1
++    .endr
++    li t0, 29
++    bne s1, t0, fail
++
++    /* Train a stable single-use producer, then add an unexpected consumer. */
++    li s8, 8
++train_prediction:
++    li s1, 17
++    addi s2, s1, 3
++    beqz s8, extra_consumer
++    li s1, 0
++    addi s8, s8, -1
++    j train_prediction
++extra_consumer:
++    add s3, s1, s2
++    li t0, 37
++    bne s3, t0, fail
++
++    /* A second consumer must recover the old source, including duplicate src. */
++    li s1, 17
++    addi s2, s1, 3
++    add s3, s1, s2
++    li t0, 37
++    bne s3, t0, fail
++    li t0, 17
++    bne s1, t0, fail
++
++    /* Move aliases must not permit destructive sharing. */
++    li s1, 29
++    mv s2, s1
++    addi s1, s1, 1
++    li t0, 29
++    bne s2, t0, fail
++    li t0, 30
++    bne s1, t0, fail
++
++    /* Store data and load-address source lifetimes survive split/replay. */
++    li s0, 0x80010000
++    li s1, 41
++    addi s2, s1, 1
++    sd s1, 0(s0)
++    ld s3, 0(s0)
++    li t0, 41
++    bne s3, t0, fail
++    addi s4, s0, 8
++    ld s5, 0(s0)
++    bne s5, t0, fail
++
++    /* A delayed older store aliases a younger speculative load result. */
++    li t0, 11
++    sd t0, 0(s0)
++    fence rw, rw
++    li t2, 0x880110000
++    li t1, 17
++    li t4, 19
++    div t3, t2, t1
++    sd t4, 0(t3)
++    ld s1, 0(s0)
++    addi s1, s1, 1
++    li t0, 20
++    bne s1, t0, fail
++
++    /* An unresolved branch lets younger instructions overwrite speculatively. */
++    li s1, 57
++    li t0, 1234567
++    li t1, 17
++    div t2, t0, t1
++    li t3, 72621
++    beq t2, t3, taken
++    addi s1, s1, 100
++    addi s1, s1, 100
++    j fail
++ taken:
++    li t0, 57
++    bne s1, t0, fail
++
++    /* Preserve the producer's value at an older precise exception boundary. */
++    li s1, 71
++    li s11, 71
++    li t0, 0x3ff0000000000000
++    fmv.d.x f10, t0
++fault_pc:
++    .word 0xffffffff
++    addi s1, s1, 1
++    fadd.d f10, f10, f10
++    li t0, 72
++    bne s1, t0, fail
++
++    /* FP versions, cross-register repair, and same-instruction source dedup. */
++    li t0, 0x3ff0000000000000
++    fmv.d.x f0, t0
++    .rept 4
++    fadd.d f0, f0, f0
++    .endr
++    fmv.x.d t1, f0
++    li t2, 0x4030000000000000
++    bne t1, t2, fail
++    fmv.d.x f4, t0
++    fadd.d f5, f4, f4
++    fadd.d f6, f4, f5
++    fmv.x.d t1, f6
++    li t2, 0x4008000000000000
++    bne t1, t2, fail
++
++    addi s9, s9, -1
++    bnez s9, again
++    li t0, 64
++    bne s10, t0, fail
++    li a0, 0
++    .word 0x0000006b
++fail:
++    j fail
++.balign 4
++trap:
++    bne s1, s11, fail
++    fmv.x.d t2, f10
++    li t1, 0x3ff0000000000000
++    bne t2, t1, fail
++    csrr t0, mcause
++    li t1, 2
++    bne t0, t1, fail
++    csrr t0, mepc
++    la t1, fault_pc
++    bne t0, t1, fail
++    addi t0, t0, 4
++    csrw mepc, t0
++    addi s10, s10, 1
++    mret
